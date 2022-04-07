@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "798408453919",
+    "project_id": "guk-mobile",
+    "storage_bucket": "guk-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798408453919:android:2904ba50cf43fd0e078a2a",
+        "android_client_info": {
+          "package_name": "edu.bluejack21_2.guk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz5ncUg3f0X9wP33Jsh232SuAM00vPavo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
