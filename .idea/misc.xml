@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/font/fonts.xml" value="0.25462962962962965" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/font/poppins.xml" value="0.24564102564102563" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_main.xml" value="0.18" />
       </map>
     </option>
   </component>
