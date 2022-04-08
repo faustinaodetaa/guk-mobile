@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,15 +20,51 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.bluejack21_2.guk.model.User;
 import util.Crypt;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText emailTxt, passwordTxt;
+    private Button loginBtn;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        emailTxt = findViewById(R.id.email_txt);
+        passwordTxt = findViewById(R.id.password_txt);
+        loginBtn = findViewById(R.id.login_btn);
+
+        loginBtn.setOnClickListener(view -> {
+            String email = emailTxt.getText().toString();
+            String password = passwordTxt.getText().toString();
+
+            db.collection("users").whereEqualTo("email", email).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Log.d("cobacoba", document.getId() + " => " + document.getData());
+                                User u = document.toObject(User.class);
+                                Log.d("cobacoba-pass", u.getPassword());
+                                boolean isValid = Crypt.check(password, u.getPassword());
+                                if(isValid){
+                                    Log.d("cobacoba-pass", "password bener");
+                                } else {
+                                    Log.d("cobacoba-pass", "salah");
+
+                                }
+                            }
+                        } else {
+                            Log.w("cobacoba", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        });
 
 //        db.collection("users")
 //                .get()
