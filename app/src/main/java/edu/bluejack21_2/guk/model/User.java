@@ -12,6 +12,8 @@ import util.Crypt;
 import util.Database;
 
 public class User {
+    public static User CURRENT_USER = null;
+
     public static final String COLLECTION_NAME = "users";
 
     private String email, name, password, address, phone, profilePicture;

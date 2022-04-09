@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.User;
 import util.Crypt;
 
@@ -44,28 +46,13 @@ public class MainActivity extends AppCompatActivity {
             String email = emailTxt.getText().toString();
             String password = passwordTxt.getText().toString();
 
-            db.collection("users").whereEqualTo("email", email).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                Log.d("cobacoba", document.getId() + " => " + document.getData());
-                                User u = document.toObject(User.class);
-                                Log.d("cobacoba-pass", u.getPassword());
-                                boolean isValid = Crypt.check(password, u.getPassword());
-                                if(isValid){
-                                    Log.d("cobacoba-pass", "password bener");
-                                } else {
-                                    Log.d("cobacoba-pass", "salah");
-
-                                }
-                            }
-                        } else {
-                            Log.w("cobacoba", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+            User.CURRENT_USER = UserController.auth(this, email, password);
+            if(User.CURRENT_USER != null){
+                Intent i = new Intent(this, HomeActivity.class);
+                startActivity(i);
+            } else {
+                Toast.makeText(this, "Login fail!", Toast.LENGTH_SHORT).show();
+            }
         });
 
 //        db.collection("users")
