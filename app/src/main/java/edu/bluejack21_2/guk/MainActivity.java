@@ -3,10 +3,12 @@ package edu.bluejack21_2.guk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +27,7 @@ import util.Crypt;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView registerLink;
     private EditText emailTxt, passwordTxt;
     private Button loginBtn;
 
@@ -37,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         emailTxt = findViewById(R.id.email_txt);
         passwordTxt = findViewById(R.id.password_txt);
         loginBtn = findViewById(R.id.login_btn);
+        registerLink = findViewById(R.id.register_link);
+
+        registerLink.setOnClickListener(view -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
 
         loginBtn.setOnClickListener(view -> {
             String email = emailTxt.getText().toString();
