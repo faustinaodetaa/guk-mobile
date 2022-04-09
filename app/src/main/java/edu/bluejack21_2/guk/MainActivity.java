@@ -11,16 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import edu.bluejack21_2.guk.model.User;
 import util.Crypt;
@@ -37,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        emailTxt = findViewById(R.id.email_txt);
-        passwordTxt = findViewById(R.id.password_txt);
+        emailTxt = findViewById(R.id.login_email_txt);
+        passwordTxt = findViewById(R.id.login_password_txt);
         loginBtn = findViewById(R.id.login_btn);
         registerLink = findViewById(R.id.register_link);
 
