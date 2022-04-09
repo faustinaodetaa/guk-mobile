@@ -1,10 +1,23 @@
 package edu.bluejack21_2.guk.model;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+
+import java.util.HashMap;
+
+import util.Crypt;
+import util.Database;
+
 public class User {
+    public static final String COLLECTION_NAME = "users";
+
     private String email, name, password, address, phone, profilePicture;
     private int point;
 
-    public User(){
+    public User() {
 
     }
 
@@ -16,6 +29,19 @@ public class User {
         this.phone = phone;
         this.profilePicture = profilePicture;
         this.point = point;
+    }
+
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("name", name);
+        user.put("address", address);
+        user.put("email", email);
+        user.put("password", Crypt.hash(password));
+        user.put("phone", phone);
+        user.put("point", point);
+        user.put("profile_picture", profilePicture);
+
+        return user;
     }
 
     public String getEmail() {

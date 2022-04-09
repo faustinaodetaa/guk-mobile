@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,6 +29,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.UUID;
 
+import edu.bluejack21_2.guk.controller.UserController;
+import util.Database;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private Button registerBtn;
@@ -36,10 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Uri filePath;
 
-    private final int PICK_IMAGE_REQUEST = 22;
-
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private EditText nameTxt, emailTxt, passwordTxt, confirmPasswordTxt, phoneTxt, addressTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +51,21 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.register_btn);
         imageView = findViewById(R.id.register_profile_picture);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+        nameTxt = findViewById(R.id.register_name_txt);
+        emailTxt = findViewById(R.id.register_email_txt);
+        passwordTxt = findViewById(R.id.register_password_txt);
+        confirmPasswordTxt = findViewById(R.id.register_confirm_password_txt);
+        phoneTxt = findViewById(R.id.register_phone_txt);
+        addressTxt = findViewById(R.id.register_address_txt);
 
         ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK
-                            && result.getData() != null
-                            && result.getData().getData() != null) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null && result.getData().getData() != null) {
                         filePath = result.getData().getData();
                         try {
-                            Bitmap bitmap = MediaStore
-                                    .Images
-                                    .Media
-                                    .getBitmap(
-                                            getContentResolver(),
-                                            filePath);
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                             imageView.setImageBitmap(bitmap);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -80,72 +78,22 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            resultLauncher.launch(Intent.createChooser(
-                    intent,
-                    "Select Image from here..."));
+            resultLauncher.launch(Intent.createChooser(intent,"Select Image from here..."));
         });
 
         registerBtn.setOnClickListener(view -> {
-            uploadImage();
+            String name = nameTxt.getText().toString();
+            String email = emailTxt.getText().toString();
+            String password = passwordTxt.getText().toString();
+            String confirmPassword = confirmPasswordTxt.getText().toString();
+            String phoneNumber = phoneTxt.getText().toString();
+            String address = addressTxt.getText().toString();
+
+            if(UserController.insertUser(this, name, email, password, confirmPassword, phoneNumber, address, filePath)){
+                startActivity(new Intent(this, MainActivity.class));
+            }
         });
     }
 
-    private void uploadImage() {
-        if (filePath != null) {
-            ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
 
-            StorageReference ref
-                    = storageReference
-                    .child(
-                            "images/"
-                                    + UUID.randomUUID().toString());
-
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    progressDialog.dismiss();
-                                    Toast
-                                            .makeText(RegisterActivity.this,
-                                                    "Image Uploaded!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(RegisterActivity.this,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
-                            });
-        }
-    }
 }

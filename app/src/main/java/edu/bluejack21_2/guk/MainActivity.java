@@ -93,19 +93,6 @@ public class MainActivity extends AppCompatActivity {
 //        user.put("profile_picture", "path");
 //
 //
-//        db.collection("users")
-//                .add(user)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d("cobacoba", "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("cobacoba", "Error adding document", e);
-//                    }
-//                });
+
     }
 }
