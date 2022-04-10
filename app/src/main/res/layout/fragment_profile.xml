@@ -29,6 +29,7 @@
                 android:layout_gravity="center"
                 app:cardCornerRadius="200dp">
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:id="@+id/profile_picture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -46,6 +47,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/profile_user_name"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textFontWeight="600"
@@ -59,6 +62,8 @@
                         android:src="@drawable/ic_badge_crown"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/profile_user_points"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="_ Points"/>
@@ -76,6 +81,7 @@
             android:layout_height="400dp"/>
 
         <Button
+            android:id="@+id/logout_btn"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,6 +90,7 @@
             android:backgroundTint="@color/white"
             android:text="LOGOUT"/>
         <Button
+            android:id="@+id/delete_account_btn"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

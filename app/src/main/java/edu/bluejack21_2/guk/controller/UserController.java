@@ -94,7 +94,8 @@ public class UserController {
             return false;
         }
 
-        String fileName = "images/user/" + UUID.randomUUID().toString();
+        String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
+        String fileName = "images/user/" + UUID.randomUUID().toString() + "." + extension;
 
         User user = new User(email, name, password, address, phone, fileName, 0);
 

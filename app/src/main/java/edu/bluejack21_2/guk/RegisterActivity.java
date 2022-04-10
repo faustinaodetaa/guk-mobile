@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null && result.getData().getData() != null) {
                         filePath = result.getData().getData();
+//                        Log.d("coba", "onActivityResult: " + filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1));
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                             imageView.setImageBitmap(bitmap);

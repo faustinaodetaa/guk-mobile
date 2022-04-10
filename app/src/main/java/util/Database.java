@@ -1,7 +1,12 @@
 package util;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.DisplayMetrics;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +36,20 @@ public class Database {
 
     public static FirebaseStorage getStorage(){
         return storage;
+    }
+
+    public static void showImage(String reference, Activity ctx, ImageView imageView){
+        StorageReference ref = Database.getStorage().getReference(reference);
+        ref.getBytes(1024 * 1024 * 10).addOnSuccessListener(bytes -> {
+            Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            DisplayMetrics dm = new DisplayMetrics();
+
+            ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            imageView.setMinimumHeight(dm.heightPixels);
+            imageView.setMinimumWidth(dm.widthPixels);
+            imageView.setImageBitmap(bm);
+        }).addOnFailureListener(e -> {});
     }
 
     public static void uploadImage(Uri filePath, String fileName, AppCompatActivity ctx) {

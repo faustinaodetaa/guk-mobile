@@ -1,14 +1,29 @@
 package edu.bluejack21_2.guk;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import edu.bluejack21_2.guk.model.User;
+import util.Database;
 
 public class ProfileFragment extends Fragment {
+
+    private TextView nameTxt, pointTxt;
+    private ImageView profilePic;
+    private Button logoutBtn, deleteAccountBtn;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -23,6 +38,30 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        nameTxt = view.findViewById(R.id.profile_user_name);
+        pointTxt = view.findViewById(R.id.profile_user_points);
+        profilePic = view.findViewById(R.id.profile_picture);
+
+        logoutBtn = view.findViewById(R.id.logout_btn);
+        deleteAccountBtn = view.findViewById(R.id.delete_account_btn);
+
+        nameTxt.setText(User.CURRENT_USER.getName());
+        pointTxt.setText(User.CURRENT_USER.getPoint() + " Points");
+//        Log.d("coba", "onCreateView: " + User.CURRENT_USER.getProfilePicture());
+        Database.showImage(User.CURRENT_USER.getProfilePicture(), ((Activity)view.getContext()), profilePic);
+
+        logoutBtn.setOnClickListener(v -> {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.commit();
+            Intent i = new Intent(view.getContext(), MainActivity.class);
+            startActivity(i);
+            getActivity().finish();
+        });
+
+        return view;
     }
 }

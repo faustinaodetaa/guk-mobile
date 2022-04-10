@@ -70,17 +70,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
         }
 
-        StorageReference ref = Database.getStorage().getReference(dog.getPicture());
-        ref.getBytes(1024 * 1024 * 10).addOnSuccessListener(bytes -> {
-            Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            DisplayMetrics dm = new DisplayMetrics();
-
-            ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-            holder.picture.setMinimumHeight(dm.heightPixels);
-            holder.picture.setMinimumWidth(dm.widthPixels);
-            holder.picture.setImageBitmap(bm);
-        }).addOnFailureListener(e -> {});
+        Database.showImage(dog.getPicture(), ((Activity)context), holder.picture);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class User {
         user.put("password", Crypt.hash(password));
         user.put("phone", phone);
         user.put("point", point);
-        user.put("profile_picture", profilePicture);
+        user.put("profilePicture", profilePicture);
 
         return user;
     }
