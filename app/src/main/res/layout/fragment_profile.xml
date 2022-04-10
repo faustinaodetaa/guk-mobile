@@ -55,6 +55,7 @@
                         android:textSize="18dp"
                         android:text="User Name"/>
                     <ImageView
+                        android:id="@+id/profile_badge"
                         android:layout_marginLeft="5dp"
                         android:layout_width="22dp"
                         android:layout_height="wrap_content"

@@ -8,6 +8,7 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
 
+import edu.bluejack21_2.guk.R;
 import util.Crypt;
 import util.Database;
 
@@ -45,6 +46,18 @@ public class User {
         user.put("profilePicture", profilePicture);
 
         return user;
+    }
+
+    public int getBadgeColor(){
+        if(point < 500){
+            return R.color.bronze;
+        } else if(point < 1000){
+            return R.color.silver;
+        } else if(point < 3000){
+            return R.color.primary;
+        } else {
+            return R.color.diamond;
+        }
     }
 
     public String getRole() {

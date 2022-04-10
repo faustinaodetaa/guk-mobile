@@ -3,8 +3,11 @@ package edu.bluejack21_2.guk;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
@@ -22,7 +25,7 @@ import util.Database;
 public class ProfileFragment extends Fragment {
 
     private TextView nameTxt, pointTxt;
-    private ImageView profilePic;
+    private ImageView profilePic, profileBadge;
     private Button logoutBtn, deleteAccountBtn;
 
     public ProfileFragment() {
@@ -43,12 +46,16 @@ public class ProfileFragment extends Fragment {
         nameTxt = view.findViewById(R.id.profile_user_name);
         pointTxt = view.findViewById(R.id.profile_user_points);
         profilePic = view.findViewById(R.id.profile_picture);
+        profileBadge = view.findViewById(R.id.profile_badge);
 
         logoutBtn = view.findViewById(R.id.logout_btn);
         deleteAccountBtn = view.findViewById(R.id.delete_account_btn);
 
         nameTxt.setText(User.CURRENT_USER.getName());
         pointTxt.setText(User.CURRENT_USER.getPoint() + " Points");
+
+        ImageViewCompat.setImageTintList(profileBadge, ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), User.CURRENT_USER.getBadgeColor())));
+
 //        Log.d("coba", "onCreateView: " + User.CURRENT_USER.getProfilePicture());
         Database.showImage(User.CURRENT_USER.getProfilePicture(), ((Activity)view.getContext()), profilePic);
 
