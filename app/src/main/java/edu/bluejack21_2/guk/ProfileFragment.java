@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.User;
 import util.Database;
 
@@ -60,13 +61,12 @@ public class ProfileFragment extends Fragment {
         Database.showImage(User.CURRENT_USER.getProfilePicture(), ((Activity)view.getContext()), profilePic);
 
         logoutBtn.setOnClickListener(v -> {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.clear();
-            editor.commit();
-            Intent i = new Intent(view.getContext(), MainActivity.class);
-            startActivity(i);
-            getActivity().finish();
+            UserController.logout(view.getContext());
+        });
+
+        deleteAccountBtn.setOnClickListener(v -> {
+            UserController.deleteAccount(User.CURRENT_USER.getId());
+            UserController.logout(view.getContext());
         });
 
         return view;

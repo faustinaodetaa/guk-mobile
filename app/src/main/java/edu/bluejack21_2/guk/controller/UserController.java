@@ -1,7 +1,12 @@
 package edu.bluejack21_2.guk.controller;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,12 +21,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
 import java.util.UUID;
 
+import edu.bluejack21_2.guk.MainActivity;
 import edu.bluejack21_2.guk.RegisterActivity;
 import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
@@ -51,7 +59,7 @@ public class UserController {
                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             User u = document.toObject(User.class);
-                            boolean isValid = Crypt.check(password, u.getPassword());
+                            boolean isValid = !u.getIsDeleted() && Crypt.check(password, u.getPassword());
                             if(isValid){
                                 u.setId(document.getId());
                                 User.CURRENT_USER = u;
@@ -118,15 +126,35 @@ public class UserController {
         Database.getDB().collection(User.COLLECTION_NAME).document(id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
-                User.CURRENT_USER = document.toObject(User.class);
-                User.CURRENT_USER.setId(id);
-                if(listener != null)
-                    listener.onFinish(User.CURRENT_USER, null);
+                User u = document.toObject(User.class);
+                Log.d("coba", "getUserById: " + u.getIsDeleted());
+                if(!u.getIsDeleted()){
+                    User.CURRENT_USER = u;
+                    User.CURRENT_USER.setId(id);
+                    if(listener != null)
+                        listener.onFinish(User.CURRENT_USER, null);
+                }
             }
 
         });
 
         return User.CURRENT_USER;
+    }
+
+    public static void logout(Context ctx){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+        Intent i = new Intent(ctx, MainActivity.class);
+        ctx.startActivity(i);
+        ((Activity)ctx).finish();
+    }
+
+    public static void deleteAccount(String id){
+        HashMap<String, Object> data =  new HashMap<String, Object>();
+        data.put("isDeleted", true);
+        Database.getDB().collection(User.COLLECTION_NAME).document(id).set(data, SetOptions.merge());
     }
 
 }

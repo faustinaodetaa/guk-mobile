@@ -19,6 +19,7 @@ public class User {
 
     private String id, email, name, password, address, phone, profilePicture;
     private String role = "";
+    private boolean isDeleted = false;
     private int point;
 
     public User() {
@@ -58,6 +59,14 @@ public class User {
         } else {
             return R.color.diamond;
         }
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public String getRole() {
