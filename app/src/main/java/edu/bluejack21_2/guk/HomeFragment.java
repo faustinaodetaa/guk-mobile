@@ -13,20 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.adapter.DogAdapter;
+import edu.bluejack21_2.guk.model.Breed;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
 import util.Database;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     private TextView welcomeTxt;
@@ -61,16 +58,25 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         dogList = new ArrayList<>();
-        dogAdapter = new DogAdapter(view.getContext(),dogList);
+        dogAdapter = new DogAdapter(view.getContext(), dogList);
         recyclerView.setAdapter(dogAdapter);
 
         Database.getDB().collection("dogs").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Dog dog = document.toObject(Dog.class);
-//                    Log.d("test", dog.getName());
+                    dog.setId(document.getId());
+
                     dogList.add(dog);
-                    dogAdapter.notifyDataSetChanged();
+                    document.getDocumentReference("breed").get().addOnCompleteListener(t -> {
+                        if (t.isSuccessful()) {
+                            Breed b = t.getResult().toObject(Breed.class);
+                            dog.setBreedByClass(b);
+//                            Log.d("coba", "setBreed:  masuk " + this.breed.getName());
+                            dogAdapter.notifyDataSetChanged();
+                        }
+                    });
+
                 }
             }
         });

@@ -1,15 +1,19 @@
 package edu.bluejack21_2.guk.model;
 
+import android.util.Log;
+
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class Dog {
-    private String name, description, gender, status, picture;
+    private String id, name, description, gender, status, picture;
     private Timestamp dob, rescuedDate;
-    private Breed breed;
+    private Breed b;
 
     public Dog(String name, Breed breed, String description, Timestamp dob, String gender, Timestamp rescuedDate, String status, String picture) {
         this.name = name;
-        this.breed = breed;
+        this.b = breed;
         this.description = description;
         this.dob = dob;
         this.gender = gender;
@@ -30,7 +34,32 @@ public class Dog {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Breed getBreed() {
+        return b;
+    }
+
+//    public void setBreed(DocumentReference ref) {
+//        ref.get().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                DocumentSnapshot document = task.getResult();
+//                Breed b = document.toObject(Breed.class);
+//                this.breed = b;
+//                Log.d("coba", "setBreed:  masuk " + this.breed.getName());
+//            }
+//        });
+//    }
+
+    public void setBreedByClass(Breed breed) {
+        this.b = breed;
+    }
 
     public String getDescription() {
         return description;

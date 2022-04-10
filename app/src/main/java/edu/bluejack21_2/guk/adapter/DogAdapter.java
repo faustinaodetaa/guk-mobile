@@ -55,7 +55,10 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         holder.name.setText(dog.getName());
         holder.gender.setText(dog.getGender());
         holder.dob.setText(age + " years old");
-//        holder.breed.setText(dog.getBreed());
+//        try{
+            holder.breed.setText(dog.getBreed().getName());
+//        }catch(Exception e){
+//        }
 //        Glide.with(context).load(dog.getPicture()).into(holder.picture);
         Picasso.get().load(dog.getPicture()).into(holder.picture);
     }
