@@ -1,6 +1,7 @@
 package edu.bluejack21_2.guk.model;
 
 public class Breed {
+    public static final String COLLECTION_NAME = "breeds";
 
     private String name;
 

@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.adapter.DogAdapter;
+import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Breed;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
@@ -28,9 +29,7 @@ public class HomeFragment extends Fragment {
 
     private TextView welcomeTxt;
 
-    private RecyclerView recyclerView;
-    private DogAdapter dogAdapter;
-    private ArrayList<Dog> dogList;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,6 +51,9 @@ public class HomeFragment extends Fragment {
         String txt = "Hello, <b>" + User.CURRENT_USER.getName() + "</b> !";
         welcomeTxt.setText(Html.fromHtml(txt));
 
+        RecyclerView recyclerView;
+        DogAdapter dogAdapter;
+        ArrayList<Dog> dogList;
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler1);
         recyclerView.setHasFixedSize(true);
@@ -61,27 +63,11 @@ public class HomeFragment extends Fragment {
         dogAdapter = new DogAdapter(view.getContext(), dogList);
         recyclerView.setAdapter(dogAdapter);
 
-        Database.getDB().collection("dogs").get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                for (QueryDocumentSnapshot document : task.getResult()){
-                    Dog dog = document.toObject(Dog.class);
-                    dog.setId(document.getId());
-
-                    dogList.add(dog);
-                    document.getDocumentReference("breed").get().addOnCompleteListener(t -> {
-                        if (t.isSuccessful()) {
-                            Breed b = t.getResult().toObject(Breed.class);
-                            dog.setBreedByClass(b);
-                            Log.d("coba", "setBreed:  masuk " + dog.getBreed().getName());
-                            dogAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-                }
-            }
-        });
+        DogController.showAllDogs(dogAdapter, dogList);
 
 
         return view;
     }
+
+
 }

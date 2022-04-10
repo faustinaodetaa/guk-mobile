@@ -7,6 +7,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 public class Dog {
+    public static final String COLLECTION_NAME = "dogs";
+
     private String id, name, description, gender, status, picture;
     private Timestamp dob, rescuedDate;
     private Breed b;
