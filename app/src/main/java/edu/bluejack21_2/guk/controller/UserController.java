@@ -22,13 +22,14 @@ import com.google.firebase.storage.UploadTask;
 import java.util.UUID;
 
 import edu.bluejack21_2.guk.RegisterActivity;
+import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
 import util.Crypt;
 import util.Database;
 
 public class UserController {
 
-    public static User auth(AppCompatActivity ctx, String email, String password){
+    public static User auth(FinishListener<User> listener, String email, String password){
         String errorMsg = "";
 
         if(email.isEmpty()){
@@ -38,23 +39,32 @@ public class UserController {
         }
 
         if(!errorMsg.isEmpty()){
-            Toast.makeText(ctx,errorMsg, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ctx,errorMsg, Toast.LENGTH_SHORT).show();
+            listener.onFinish(null, errorMsg);
+
             return null;
         }
 
         Database.getDB().collection(User.COLLECTION_NAME).whereEqualTo("email", email).limit(1).get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             User u = document.toObject(User.class);
                             boolean isValid = Crypt.check(password, u.getPassword());
                             if(isValid){
+                                u.setId(document.getId());
                                 User.CURRENT_USER = u;
-                                Toast.makeText(ctx, "Login Success!", Toast.LENGTH_SHORT).show();
-                                return;
+                                if(listener != null)
+                                    listener.onFinish(u, "Login Success");
+//                                Toast.makeText(ctx, "Login Success!", Toast.LENGTH_SHORT).show();
                             } else {
+                                if(listener != null)
+                                    listener.onFinish(null, "Incorrect Credential!");
                             }
                         }
+                    } else {
+                        if(listener != null)
+                            listener.onFinish(null, "Incorrect Credential!");
                     }
                 });
         return User.CURRENT_USER;

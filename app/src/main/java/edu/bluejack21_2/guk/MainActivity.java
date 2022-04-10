@@ -1,27 +1,23 @@
 package edu.bluejack21_2.guk;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import edu.bluejack21_2.guk.controller.UserController;
+import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
-import util.Crypt;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FinishListener<User> {
 
     private TextView registerLink;
     private EditText emailTxt, passwordTxt;
@@ -47,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
             String password = passwordTxt.getText().toString();
 
             User.CURRENT_USER = UserController.auth(this, email, password);
-            if(User.CURRENT_USER != null){
-                Intent i = new Intent(this, HomeActivity.class);
-                startActivity(i);
-            } else {
-                Toast.makeText(this, "Login fail!", Toast.LENGTH_SHORT).show();
-            }
+//            if(User.CURRENT_USER != null){
+//                Intent i = new Intent(this, HomeActivity.class);
+//                startActivity(i);
+//            } else {
+//                Toast.makeText(this, "Login fail!", Toast.LENGTH_SHORT).show();
+//            }
         });
 
 //        db.collection("users")
@@ -81,5 +77,20 @@ public class MainActivity extends AppCompatActivity {
 //
 //
 
+    }
+
+    @Override
+    public void onFinish(User data, String message) {
+        if(data == null){
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        } else {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("user_id", data.getId());
+            editor.commit();
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 }

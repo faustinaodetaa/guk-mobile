@@ -16,7 +16,7 @@ public class User {
 
     public static final String COLLECTION_NAME = "users";
 
-    private String email, name, password, address, phone, profilePicture;
+    private String id, email, name, password, address, phone, profilePicture;
     private int point;
 
     public User() {
@@ -44,6 +44,14 @@ public class User {
         user.put("profile_picture", profilePicture);
 
         return user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
