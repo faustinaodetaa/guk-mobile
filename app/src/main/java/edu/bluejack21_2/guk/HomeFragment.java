@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                         if (t.isSuccessful()) {
                             Breed b = t.getResult().toObject(Breed.class);
                             dog.setBreedByClass(b);
-//                            Log.d("coba", "setBreed:  masuk " + this.breed.getName());
+                            Log.d("coba", "setBreed:  masuk " + dog.getBreed().getName());
                             dogAdapter.notifyDataSetChanged();
                         }
                     });

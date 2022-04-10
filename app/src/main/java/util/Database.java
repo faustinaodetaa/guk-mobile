@@ -22,17 +22,19 @@ import edu.bluejack21_2.guk.RegisterActivity;
 public class Database {
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private static FirebaseStorage storage = FirebaseStorage.getInstance();
+//    private static
 
     public static FirebaseFirestore getDB(){
         return db;
     }
 
-    public static StorageReference getStorageReference(){
-        return storageReference;
+    public static FirebaseStorage getStorage(){
+        return storage;
     }
 
     public static void uploadImage(Uri filePath, String fileName, AppCompatActivity ctx) {
+        StorageReference storageReference = storage.getReference();
         if (filePath != null) {
             ProgressDialog progressDialog = new ProgressDialog(ctx);
             progressDialog.setTitle("Uploading...");

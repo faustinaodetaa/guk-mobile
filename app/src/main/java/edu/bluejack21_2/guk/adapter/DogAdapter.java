@@ -1,6 +1,10 @@
 package edu.bluejack21_2.guk.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +15,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
+
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.model.Dog;
+import util.Database;
 
 public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
@@ -53,14 +60,27 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         Log.d("bday", mon+dd+yyyy);
         Log.d("bday", dog.getDob().toDate().toString());
         holder.name.setText(dog.getName());
-        holder.gender.setText(dog.getGender());
+        holder.genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
+
         holder.dob.setText(age + " years old");
-//        try{
+
+        try {
             holder.breed.setText(dog.getBreed().getName());
-//        }catch(Exception e){
-//        }
-//        Glide.with(context).load(dog.getPicture()).into(holder.picture);
-        Picasso.get().load(dog.getPicture()).into(holder.picture);
+        } catch (Exception e){
+
+        }
+
+        StorageReference ref = Database.getStorage().getReference(dog.getPicture());
+        ref.getBytes(1024 * 1024 * 10).addOnSuccessListener(bytes -> {
+            Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            DisplayMetrics dm = new DisplayMetrics();
+
+            ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            holder.picture.setMinimumHeight(dm.heightPixels);
+            holder.picture.setMinimumWidth(dm.widthPixels);
+            holder.picture.setImageBitmap(bm);
+        }).addOnFailureListener(e -> {});
     }
 
     @Override
@@ -70,17 +90,17 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
 
     class DogsViewholder extends RecyclerView.ViewHolder {
-        TextView name, gender, dob, breed;
-        ImageView picture;
+        TextView name, dob, breed;
+        ImageView picture, genderIcon;
         public DogsViewholder(@NonNull View itemView)
         {
             super(itemView);
 
-            name = itemView.findViewById(R.id.name);
-            gender =itemView.findViewById(R.id.gender);
-            dob = itemView.findViewById(R.id.age);
-            breed = itemView.findViewById(R.id.breed);
-            picture = itemView.findViewById(R.id.imageView);
+            name = itemView.findViewById(R.id.home_dog_name);
+            dob = itemView.findViewById(R.id.home_dog_age);
+            breed = itemView.findViewById(R.id.home_dog_breed);
+            picture = itemView.findViewById(R.id.home_dog_image);
+            genderIcon = itemView.findViewById(R.id.home_gender_icon);
         }
     }
 }
