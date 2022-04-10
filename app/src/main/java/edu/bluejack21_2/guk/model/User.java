@@ -17,6 +17,7 @@ public class User {
     public static final String COLLECTION_NAME = "users";
 
     private String id, email, name, password, address, phone, profilePicture;
+    private String role = "";
     private int point;
 
     public User() {
@@ -44,6 +45,14 @@ public class User {
         user.put("profile_picture", profilePicture);
 
         return user;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getId() {

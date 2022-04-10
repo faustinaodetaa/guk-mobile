@@ -27,7 +27,6 @@ import util.Database;
 
 public class HomeFragment extends Fragment {
 
-    private TextView welcomeTxt;
 
 
 
@@ -47,9 +46,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        welcomeTxt = view.findViewById(R.id.home_welcome_txt);
-        String txt = "Hello, <b>" + User.CURRENT_USER.getName() + "</b> !";
-        welcomeTxt.setText(Html.fromHtml(txt));
+
 
         RecyclerView recyclerView;
         DogAdapter dogAdapter;
