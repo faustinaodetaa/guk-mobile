@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,12 +23,17 @@ import edu.bluejack21_2.guk.model.User;
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     private TextView welcomeTxt;
 
+    private LinearLayout topTitleBar;
+
     private BottomNavigationView bottomNavigationView;
 
     private HomeFragment homeFragment = new HomeFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private AddDogFragment addDogFragment = new AddDogFragment();
     private AddStoryFragment addStoryFragment = new AddStoryFragment();
+    private UserDonateFragment userDonateFragment = new UserDonateFragment();
+    private AdminDonatePage adminDonatePage = new AdminDonatePage();
+    private ProfileFragment profileFragment = new ProfileFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         String txt = "Hello, <b>" + User.CURRENT_USER.getName() + "</b> !";
         welcomeTxt.setText(Html.fromHtml(txt));
 
+        topTitleBar = findViewById(R.id.top_title_bar);
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -44,20 +53,44 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.home){
+            toggleTitleBar(false);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
             return true;
         } else if(item.getItemId() == R.id.search){
+            toggleTitleBar(false);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, searchFragment).commit();
             return true;
         } else if(item.getItemId() == R.id.add){
+            toggleTitleBar(false);
             if(User.CURRENT_USER.getRole().equals("admin")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, addDogFragment).commit();
             } else {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, addStoryFragment).commit();
             }
             return true;
+        } else if(item.getItemId() == R.id.donate){
+            toggleTitleBar(false);
+            if(User.CURRENT_USER.getRole().equals("admin")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, adminDonatePage).commit();
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, userDonateFragment).commit();
+            }
+            return true;
+        } else if(item.getItemId() == R.id.profile){
+            toggleTitleBar(true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profileFragment).commit();
+            return true;
         }
 
         return false;
+    }
+
+    private void toggleTitleBar(boolean isProfile) {
+        topTitleBar.setVisibility(isProfile ? View.GONE : View.VISIBLE);
+        if(isProfile){
+            findViewById(R.id.fragment_container).setBackgroundColor(getResources().getColor(R.color.black));
+        } else {
+            findViewById(R.id.fragment_container).setBackground(getResources().getDrawable(R.drawable.rounded_edge));
+        }
     }
 }
