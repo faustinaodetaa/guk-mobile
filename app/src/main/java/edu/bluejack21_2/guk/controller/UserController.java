@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.OnProgressListener;
@@ -113,5 +114,19 @@ public class UserController {
         return true;
     }
 
+    public static User getUserById(String id, FinishListener<User> listener){
+        Database.getDB().collection(User.COLLECTION_NAME).document(id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                User.CURRENT_USER = document.toObject(User.class);
+                User.CURRENT_USER.setId(id);
+                if(listener != null)
+                    listener.onFinish(User.CURRENT_USER, null);
+            }
+
+        });
+
+        return User.CURRENT_USER;
+    }
 
 }

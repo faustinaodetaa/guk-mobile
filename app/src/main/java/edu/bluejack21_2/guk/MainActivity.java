@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        checkIsLoggedIn();
+
         emailTxt = findViewById(R.id.login_email_txt);
         passwordTxt = findViewById(R.id.login_password_txt);
         loginBtn = findViewById(R.id.login_btn);
@@ -43,39 +45,8 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
             String password = passwordTxt.getText().toString();
 
             User.CURRENT_USER = UserController.auth(this, email, password);
-//            if(User.CURRENT_USER != null){
-//                Intent i = new Intent(this, HomeActivity.class);
-//                startActivity(i);
-//            } else {
-//                Toast.makeText(this, "Login fail!", Toast.LENGTH_SHORT).show();
-//            }
         });
 
-//        db.collection("users")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d("cobacoba", document.getId() + " => " + document.getData());
-//                            }
-//                        } else {
-//                            Log.w("cobacoba", "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
-
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("name", "Dummy");
-//        user.put("address", "Dummy Street");
-//        user.put("email", "dummy@mail.com");
-//        user.put("password", Crypt.hash("dummy123"));
-//        user.put("phone", "1234");
-//        user.put("point", "0");
-//        user.put("profile_picture", "path");
-//
-//
 
     }
 
@@ -92,5 +63,24 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
             startActivity(i);
             finish();
         }
+    }
+
+    private void checkIsLoggedIn() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        if (prefs.contains("user_id")) {
+            UserController.getUserById(prefs.getString("user_id", null), (data, message) -> {
+                User.CURRENT_USER = data;
+                if(data != null){
+                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.clear();
+                    editor.commit();
+                }
+            });
+        }
+
     }
 }
