@@ -1,10 +1,13 @@
 package edu.bluejack21_2.guk.model;
 
+import com.google.firebase.Timestamp;
+
 public class Dog {
-    private String name, description, dob, gender, rescuedDate, status, picture;
+    private String name, description, gender, status, picture;
+    private Timestamp dob, rescuedDate;
     private Breed breed;
 
-    public Dog(String name, Breed breed, String description, String dob, String gender, String rescuedDate, String status, String picture) {
+    public Dog(String name, Breed breed, String description, Timestamp dob, String gender, Timestamp rescuedDate, String status, String picture) {
         this.name = name;
         this.breed = breed;
         this.description = description;
@@ -37,11 +40,11 @@ public class Dog {
         this.description = description;
     }
 
-    public String getDob() {
+    public Timestamp getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Timestamp dob) {
         this.dob = dob;
     }
 
@@ -53,11 +56,11 @@ public class Dog {
         this.gender = gender;
     }
 
-    public String getRescuedDate() {
+    public Timestamp getRescuedDate() {
         return rescuedDate;
     }
 
-    public void setRescuedDate(String rescuedDate) {
+    public void setRescuedDate(Timestamp rescuedDate) {
         this.rescuedDate = rescuedDate;
     }
 

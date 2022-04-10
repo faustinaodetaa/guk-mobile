@@ -1,13 +1,18 @@
 package edu.bluejack21_2.guk.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,11 +42,23 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
     @Override
     public void onBindViewHolder(@NonNull DogsViewholder holder, int position) {
+
         Dog dog = dogList.get(position);
+
+        String mon = dog.getDob().toDate().toString().substring(4,7);
+        String dd = dog.getDob().toDate().toString().substring(8,10);
+        String yyyy = dog.getDob().toDate().toString().substring(30,34);
+        Integer age = 2022 - Integer.parseInt(yyyy);
+        Log.d("age", age.toString());
+
+        Log.d("bday", mon+dd+yyyy);
+        Log.d("bday", dog.getDob().toDate().toString());
         holder.name.setText(dog.getName());
         holder.gender.setText(dog.getGender());
-        holder.dob.setText(dog.getDob());
+        holder.dob.setText(age + " years old");
 //        holder.breed.setText(dog.getBreed());
+//        Glide.with(context).load(dog.getPicture()).into(holder.picture);
+        Picasso.get().load(dog.getPicture()).into(holder.picture);
     }
 
     @Override
@@ -52,6 +69,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
     class DogsViewholder extends RecyclerView.ViewHolder {
         TextView name, gender, dob, breed;
+        ImageView picture;
         public DogsViewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -60,6 +78,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             gender =itemView.findViewById(R.id.gender);
             dob = itemView.findViewById(R.id.age);
             breed = itemView.findViewById(R.id.breed);
+            picture = itemView.findViewById(R.id.imageView);
         }
     }
 }
