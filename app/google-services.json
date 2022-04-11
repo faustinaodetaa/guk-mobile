@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "798408453919-ne6sljabp1eha0eepthildg0mndunbdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.bluejack21_2.guk",
+            "certificate_hash": "286195a4d2508cdb670f46a3010280aaa524b914"
+          }
+        },
+        {
           "client_id": "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com",
           "client_type": 3
         }
