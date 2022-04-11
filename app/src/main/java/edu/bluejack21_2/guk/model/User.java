@@ -1,16 +1,9 @@
 package edu.bluejack21_2.guk.model;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-
 import java.util.HashMap;
 
 import edu.bluejack21_2.guk.R;
-import util.Crypt;
-import util.Database;
+import edu.bluejack21_2.guk.util.Crypt;
 
 public class User {
     public static User CURRENT_USER = null;
@@ -45,6 +38,7 @@ public class User {
         user.put("phone", phone);
         user.put("point", point);
         user.put("profilePicture", profilePicture);
+        user.put("isDeleted", isDeleted);
 
         return user;
     }

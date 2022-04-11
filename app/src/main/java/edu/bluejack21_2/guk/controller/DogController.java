@@ -17,7 +17,7 @@ import java.util.UUID;
 
 import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.model.Dog;
-import util.Database;
+import edu.bluejack21_2.guk.util.Database;
 
 public class DogController {
     public static void showAllDogs(DogAdapter dogAdapter, ArrayList<Dog> dogList) {

@@ -24,7 +24,7 @@ import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
-import util.Database;
+import edu.bluejack21_2.guk.util.Database;
 
 public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 

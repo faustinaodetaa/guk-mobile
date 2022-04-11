@@ -38,9 +38,10 @@ import java.io.IOException;
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
+import edu.bluejack21_2.guk.util.Database;
 
 public class MainActivity extends AppCompatActivity implements FinishListener<User> {
-//    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    //    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
 //    private boolean showOneTapUI = true;
     private TextView registerLink;
     private EditText emailTxt, passwordTxt;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
     private GoogleSignInClient googleSignInClient;
 
     String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,25 +79,35 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         });
 
 
-
-
         ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        Log.d("dapet", "onActivityResult: masuk");
-                        if (result.getData() != null){
-                            Log.d("dapet", "onActivityResult: masuk2");
+                        if (result.getData() != null) {
                             try {
                                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                                 GoogleSignInAccount account = task.getResult(ApiException.class);
-
-                                Log.d("dapet", account.getEmail());
-                                Log.d("dapet", account.getDisplayName());
-                                Log.d("dapet", account.getPhotoUrl().toString());
                                 Log.d("dapet", account.getServerAuthCode());
+                                String email = account.getEmail();
+                                String name = account.getDisplayName();
+                                String picture = account.getPhotoUrl().toString();
+
+                                UserController.getUserByEmail(email, (data, message) -> {
+                                    if(data == null){
+                                        User user = new User(email, name, "", "", "", "images/user/1df0ae00-694b-4b76-b53e-fc7ed4e21aa9.jpg", 0);
+
+                                        Database.getDB().collection(User.COLLECTION_NAME)
+                                                .add(user.toMap())
+                                                .addOnSuccessListener(documentReference -> {
+                                                    showLoginPageAndSaveData(user);
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                });
+                                    } else {
+                                        showLoginPageAndSaveData(data);
+                                    }
+                                });
                             } catch (ApiException e) {
-                                Log.d("dapet", "onActivityResult fail: " + e.getStatusCode());
                                 e.printStackTrace();
                             }
                         }
@@ -111,17 +123,22 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
 
     @Override
     public void onFinish(User data, String message) {
-        if(data == null){
+        if (data == null) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("user_id", data.getId());
-            editor.commit();
-            Intent i = new Intent(this, HomeActivity.class);
-            startActivity(i);
-            finish();
+            showLoginPageAndSaveData(data);
         }
+    }
+
+    private void showLoginPageAndSaveData(User data) {
+        User.CURRENT_USER = data;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("user_id", data.getId());
+        editor.commit();
+        Intent i = new Intent(this, HomeActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void checkIsLoggedIn() {
@@ -129,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         if (prefs.contains("user_id")) {
             UserController.getUserById(prefs.getString("user_id", null), (data, message) -> {
                 User.CURRENT_USER = data;
-                if(data != null){
+                if (data != null) {
                     Intent i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
                     finish();

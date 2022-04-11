@@ -6,10 +6,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.model.Breed;
-import edu.bluejack21_2.guk.model.Dog;
-import util.Database;
+import edu.bluejack21_2.guk.util.Database;
 
 public class BreedController {
     public static void showAllBreeds(ArrayList<Breed> breedList) {

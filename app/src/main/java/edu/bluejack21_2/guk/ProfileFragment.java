@@ -1,8 +1,6 @@
 package edu.bluejack21_2.guk;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -10,8 +8,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +17,7 @@ import android.widget.TextView;
 
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.User;
-import util.Database;
+import edu.bluejack21_2.guk.util.Database;
 
 public class ProfileFragment extends Fragment {
 

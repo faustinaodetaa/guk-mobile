@@ -1,4 +1,4 @@
-package util;
+package edu.bluejack21_2.guk.util;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,10 +19,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.UUID;
-
-import edu.bluejack21_2.guk.RegisterActivity;
 
 public class Database {
 

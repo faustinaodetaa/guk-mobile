@@ -1,4 +1,4 @@
-package util;
+package edu.bluejack21_2.guk.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 

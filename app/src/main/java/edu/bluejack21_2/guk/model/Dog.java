@@ -2,16 +2,10 @@ package edu.bluejack21_2.guk.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.io.Serializable;
 import java.util.HashMap;
-
-import util.Crypt;
 
 public class Dog implements Parcelable {
 
