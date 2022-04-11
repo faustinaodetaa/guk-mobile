@@ -10,7 +10,8 @@
     android:background="@drawable/card_shape"
     android:scrollbars="vertical"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="12dp"
+    android:id="@+id/dog_card">
 
 
     <LinearLayout

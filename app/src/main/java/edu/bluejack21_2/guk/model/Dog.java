@@ -6,11 +6,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import util.Crypt;
 
-public class Dog {
+public class Dog implements Serializable {
     public static final String COLLECTION_NAME = "dogs";
 
     private String id, name, description, gender, status, picture, breed;

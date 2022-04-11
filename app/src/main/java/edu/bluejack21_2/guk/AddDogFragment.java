@@ -14,11 +14,13 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -45,6 +47,7 @@ public class AddDogFragment extends Fragment {
     private ImageView imageView;
     private RadioGroup genderGroup;
     private String genderTxt;
+    private DatePicker dobPicker;
 
     private Uri filePath;
 
@@ -77,6 +80,8 @@ public class AddDogFragment extends Fragment {
         nameTxt = view.findViewById(R.id.add_dog_name_txt);
         breedTxt = view.findViewById(R.id.add_dog_breed_txt);
         descriptionTxt = view.findViewById(R.id.add_dog_description_txt);
+        dobPicker = view.findViewById(R.id.add_dog_dob);
+
 
         genderGroup = view.findViewById(R.id.gender_rb);
 
@@ -132,6 +137,8 @@ public class AddDogFragment extends Fragment {
                 String status = "Unadopted";
 
                 if(DogController.insertDog(getActivity(), name, breed, description, dob, rescuedDate, gender, status, filePath)){
+                    Log.d("dob anjing", String.valueOf(dobPicker.getDayOfMonth()));
+                    Log.d("dob anjing", "testing");
                     Toast.makeText(getActivity(), "Insert Success", Toast.LENGTH_SHORT).show();
                 }
             });

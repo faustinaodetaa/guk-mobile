@@ -2,9 +2,7 @@ package edu.bluejack21_2.guk.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.DisplayMetrics;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.squareup.picasso.Picasso;
 
-import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 
+import edu.bluejack21_2.guk.DogDetailActivity;
 import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Dog;
@@ -76,6 +74,16 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             }
         });
 
+        holder.dogCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                getAc(new Intent(this, MainActivity.class));
+                Intent intent = new Intent(context, DogDetailActivity.class);
+                intent.putExtra("dog", dog);
+                context.startActivity(intent);
+            }
+        });
+
 
 //        try {
 //            holder.breed.setText(dog.getBreed().getName());
@@ -98,6 +106,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         TextView name, dob, breed;
         ImageView picture, genderIcon;
         Button deleteDogBtn;
+        CardView dogCard;
         public DogsViewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -108,6 +117,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             picture = itemView.findViewById(R.id.home_dog_image);
             genderIcon = itemView.findViewById(R.id.home_gender_icon);
             deleteDogBtn = itemView.findViewById(R.id.delete_dog_btn);
+            dogCard = itemView.findViewById(R.id.dog_card);
 
             if(User.CURRENT_USER.getRole().equals("admin")){
                 deleteDogBtn.setVisibility(View.VISIBLE);
