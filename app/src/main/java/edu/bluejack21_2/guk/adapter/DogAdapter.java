@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.R;
+import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Dog;
+import edu.bluejack21_2.guk.model.User;
 import util.Database;
 
 public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
@@ -63,12 +66,24 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         holder.genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
 
         holder.dob.setText(age + " years old");
+        holder.breed.setText(dog.getBreed());
+        holder.deleteDogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DogController.deleteDog(
+                        dog.getId());
 
-        try {
-            holder.breed.setText(dog.getBreed().getName());
-        } catch (Exception e){
+            }
+        });
 
-        }
+
+//        try {
+//            holder.breed.setText(dog.getBreed().getName());
+//        } catch (Exception e){
+//
+//        }
+
+
 
         Database.showImage(dog.getPicture(), ((Activity)context), holder.picture);
     }
@@ -82,6 +97,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
     class DogsViewholder extends RecyclerView.ViewHolder {
         TextView name, dob, breed;
         ImageView picture, genderIcon;
+        Button deleteDogBtn;
         public DogsViewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -91,6 +107,14 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             breed = itemView.findViewById(R.id.home_dog_breed);
             picture = itemView.findViewById(R.id.home_dog_image);
             genderIcon = itemView.findViewById(R.id.home_gender_icon);
+            deleteDogBtn = itemView.findViewById(R.id.delete_dog_btn);
+
+            if(User.CURRENT_USER.getRole().equals("admin")){
+                deleteDogBtn.setVisibility(View.VISIBLE);
+            }else{
+                deleteDogBtn.setVisibility(View.GONE);
+            }
+
         }
     }
 }

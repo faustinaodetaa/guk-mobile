@@ -2,6 +2,7 @@ package util;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -52,7 +53,7 @@ public class Database {
         }).addOnFailureListener(e -> {});
     }
 
-    public static void uploadImage(Uri filePath, String fileName, AppCompatActivity ctx) {
+    public static void uploadImage(Uri filePath, String fileName, Context ctx) {
         StorageReference storageReference = storage.getReference();
         if (filePath != null) {
             ProgressDialog progressDialog = new ProgressDialog(ctx);

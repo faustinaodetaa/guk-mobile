@@ -6,16 +6,23 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.HashMap;
+
+import util.Crypt;
+
 public class Dog {
     public static final String COLLECTION_NAME = "dogs";
 
-    private String id, name, description, gender, status, picture;
+    private String id, name, description, gender, status, picture, breed;
     private Timestamp dob, rescuedDate;
-    private Breed b;
+//    private Breed b;
+    public Dog(){
 
-    public Dog(String name, Breed breed, String description, Timestamp dob, String gender, Timestamp rescuedDate, String status, String picture) {
+    }
+
+    public Dog(String name, String breed, String description, Timestamp dob, String gender, Timestamp rescuedDate, String status, String picture) {
         this.name = name;
-        this.b = breed;
+        this.breed = breed;
         this.description = description;
         this.dob = dob;
         this.gender = gender;
@@ -24,9 +31,21 @@ public class Dog {
         this.picture = picture;
     }
 
-    public Dog(){
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> dog = new HashMap<>();
+        dog.put("name", name);
+        dog.put("breed", breed);
+        dog.put("description", description);
+        dog.put("dob", dob);
+        dog.put("rescuedDate", rescuedDate);
+        dog.put("gender", gender);
+        dog.put("status", status);
+        dog.put("picture", picture);
 
+        return dog;
     }
+
+
 
     public String getName() {
         return name;
@@ -44,8 +63,12 @@ public class Dog {
         this.id = id;
     }
 
-    public Breed getBreed() {
-        return b;
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
 //    public void setBreed(DocumentReference ref) {
@@ -59,9 +82,9 @@ public class Dog {
 //        });
 //    }
 
-    public void setBreedByClass(Breed breed) {
-        this.b = breed;
-    }
+//    public void setBreedByClass(String breed) {
+//        this.breed = breed;
+//    }
 
     public String getDescription() {
         return description;
