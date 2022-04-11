@@ -38,6 +38,8 @@ import util.Database;
 
 public class UserController {
 
+    public static final String COLLECTION_NAME = "dogs";
+
     public static User auth(FinishListener<User> listener, String email, String password){
         String errorMsg = "";
 

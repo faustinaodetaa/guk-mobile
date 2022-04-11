@@ -1,5 +1,7 @@
 package edu.bluejack21_2.guk.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.firebase.Timestamp;
@@ -11,8 +13,7 @@ import java.util.HashMap;
 
 import util.Crypt;
 
-public class Dog implements Serializable {
-    public static final String COLLECTION_NAME = "dogs";
+public class Dog implements Parcelable {
 
     private String id, name, description, gender, status, picture, breed;
     private Timestamp dob, rescuedDate;
@@ -30,6 +31,17 @@ public class Dog implements Serializable {
         this.rescuedDate = rescuedDate;
         this.status = status;
         this.picture = picture;
+    }
+
+    protected Dog(Parcel in){
+        this.dob = in.readTypedObject(Timestamp.CREATOR);
+        this.rescuedDate = in.readTypedObject(Timestamp.CREATOR);
+        this.name = in.readString();
+        this.breed = in.readString();
+        this.description = in.readString();
+        this.gender = in.readString();
+        this.status = in.readString();
+        this.picture = in.readString();
     }
 
     public HashMap<String, Object> toMap() {
@@ -134,4 +146,34 @@ public class Dog implements Serializable {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeTypedObject(this.dob, i);
+        parcel.writeTypedObject(this.rescuedDate, i);
+        parcel.writeString(this.name);
+        parcel.writeString(this.breed);
+        parcel.writeString(this.description);
+        parcel.writeString(this.gender);
+        parcel.writeString(this.status);
+        parcel.writeString(this.picture);
+
+    }
+
+    public static final Parcelable.Creator<Dog> CREATOR = new Parcelable.Creator<Dog>() {
+        @Override
+        public Dog createFromParcel(Parcel source) {
+            return new Dog(source);
+        }
+
+        @Override
+        public Dog[] newArray(int size) {
+            return new Dog[size];
+        }
+    };
 }

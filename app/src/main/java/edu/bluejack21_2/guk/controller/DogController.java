@@ -3,10 +3,8 @@ package edu.bluejack21_2.guk.controller;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,15 +15,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import edu.bluejack21_2.guk.AddDogFragment;
 import edu.bluejack21_2.guk.adapter.DogAdapter;
-import edu.bluejack21_2.guk.model.Breed;
 import edu.bluejack21_2.guk.model.Dog;
 import util.Database;
 
 public class DogController {
     public static void showAllDogs(DogAdapter dogAdapter, ArrayList<Dog> dogList) {
-        Database.getDB().collection(Dog.COLLECTION_NAME).get().addOnCompleteListener(task -> {
+        Database.getDB().collection(UserController.COLLECTION_NAME).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Dog dog = document.toObject(Dog.class);
@@ -66,7 +62,7 @@ public class DogController {
 
 
         Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, fileName);
-        Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
+        Database.getDB().collection(UserController.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
             Log.d("msg", "success insert");
         }).addOnFailureListener(e -> {
             Log.d("msg", "error insert");
@@ -77,7 +73,7 @@ public class DogController {
 
     public static void deleteDog(String id){
         HashMap<String, Object> data = new HashMap<>();
-        Database.getDB().collection(Dog.COLLECTION_NAME).document(id).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database.getDB().collection(UserController.COLLECTION_NAME).document(id).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){

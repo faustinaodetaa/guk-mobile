@@ -78,7 +78,9 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             @Override
             public void onClick(View view) {
 //                getAc(new Intent(this, MainActivity.class));
+
                 Intent intent = new Intent(context, DogDetailActivity.class);
+                Log.d("coba intent", "onClick: " + dog.getName());
                 intent.putExtra("dog", dog);
                 context.startActivity(intent);
             }
