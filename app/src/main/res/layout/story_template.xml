@@ -9,40 +9,77 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="20dp"
     android:scrollbars="vertical"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    android:id="@+id/story_card">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="12dp">
 
-        <ImageView
-            android:id="@+id/home_dog_image"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:src="@drawable/small"
-            tools:ignore="MissingConstraints"
-            />
+            <ImageView
+                android:id="@+id/story_dog_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image" />
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/story_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="100dp" />
+            android:layout_marginLeft="10dp"
+            android:textFontWeight="1000"
+            />
 
         <TextView
-            android:id="@+id/story"
+            android:id="@+id/story_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="story"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="124dp" />
+            android:layout_marginLeft="30dp"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View All Comments"
+            android:layout_marginLeft="30dp"
+            android:textSize="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/comment"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/like"
+                />
+        </LinearLayout>
+
         
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

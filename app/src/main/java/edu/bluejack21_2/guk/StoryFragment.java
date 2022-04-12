@@ -13,14 +13,17 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.adapter.DogAdapter;
+import edu.bluejack21_2.guk.adapter.StoryAdapter;
 import edu.bluejack21_2.guk.controller.DogController;
-import edu.bluejack21_2.guk.model.Dog;
+import edu.bluejack21_2.guk.controller.StoryController;
+import edu.bluejack21_2.guk.model.Story;
 
-public class HomeFragment extends Fragment {
+public class StoryFragment extends Fragment {
 
-    public HomeFragment() {
+    public StoryFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -32,27 +35,22 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
+        View view = inflater.inflate(R.layout.fragment_story, container, false);
 
         RecyclerView recyclerView;
-        DogAdapter dogAdapter;
-        ArrayList<Dog> dogList;
+        StoryAdapter storyAdapter;
+        ArrayList<Story> storyList;
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.home_recycler);
+        recyclerView = (RecyclerView) view.findViewById(R.id.story_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        dogList = new ArrayList<>();
-        dogAdapter = new DogAdapter(view.getContext(), dogList);
-        recyclerView.setAdapter(dogAdapter);
+        storyList = new ArrayList<>();
+        storyAdapter = new StoryAdapter(view.getContext(), storyList);
+        recyclerView.setAdapter(storyAdapter);
 
-        DogController.showAllDogs(dogAdapter, dogList);
-
+        StoryController.showAllStories(storyAdapter, storyList);
 
         return view;
     }
-
-
 }

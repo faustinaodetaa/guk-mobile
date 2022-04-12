@@ -2,6 +2,7 @@ package edu.bluejack21_2.guk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,7 +57,8 @@ public class UpdateDogActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UpdateDogActivity.this, HomeActivity.class));
+//                Activity.finish();
+//                onBackPressed();
 
             }
         });
@@ -126,7 +128,7 @@ public class UpdateDogActivity extends AppCompatActivity {
 
             DogController.updateDog(dogId, breed, description, dob, gender, name);
             Toast.makeText(this, "Updated dog", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, HomeActivity.class));
+//            UpdateDogActivity.finish();
 
 
         });

@@ -34,6 +34,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     private UserDonateFragment userDonateFragment = new UserDonateFragment();
     private AdminDonatePage adminDonatePage = new AdminDonatePage();
     private ProfileFragment profileFragment = new ProfileFragment();
+    private StoryFragment storyFragment = new StoryFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
