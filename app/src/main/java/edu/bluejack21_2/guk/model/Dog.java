@@ -36,6 +36,7 @@ public class Dog implements Parcelable {
         this.gender = in.readString();
         this.status = in.readString();
         this.picture = in.readString();
+        this.id = in.readString();
     }
 
     public HashMap<String, Object> toMap() {
@@ -156,7 +157,7 @@ public class Dog implements Parcelable {
         parcel.writeString(this.gender);
         parcel.writeString(this.status);
         parcel.writeString(this.picture);
-
+        parcel.writeString(this.id);
     }
 
     public static final Parcelable.Creator<Dog> CREATOR = new Parcelable.Creator<Dog>() {

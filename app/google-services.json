@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "798408453919-o81ia1eg07049mnlhoqoghe004n5nbra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.bluejack21_2.guk",
+            "certificate_hash": "b1e50336eada8057fbd7d336d4ced61ca0c73a0f"
+          }
+        },
+        {
           "client_id": "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -120,6 +120,26 @@
             android:textFontWeight="800"
             android:textSize="10dp"
             android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/update_dog_btn"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:text="UPDATE"
+            android:textColor="@color/black"
+            android:textFontWeight="800"
+            android:textSize="10dp"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/delete_dog_btn"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:text="DELETE"
+            android:textColor="@color/black"
+            android:textFontWeight="800"
+            android:textSize="10dp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>

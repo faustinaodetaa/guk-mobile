@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import edu.bluejack21_2.guk.DogDetailActivity;
 import edu.bluejack21_2.guk.R;
@@ -55,7 +56,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         String mon = dog.getDob().toDate().toString().substring(4,7);
         String dd = dog.getDob().toDate().toString().substring(8,10);
         String yyyy = dog.getDob().toDate().toString().substring(30,34);
-        Integer age = 2022 - Integer.parseInt(yyyy);
+        Integer age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(yyyy);
         Log.d("age", age.toString());
 
         Log.d("bday", mon+dd+yyyy);
@@ -65,14 +66,14 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
         holder.dob.setText(age + " years old");
         holder.breed.setText(dog.getBreed());
-        holder.deleteDogBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DogController.deleteDog(
-                        dog.getId());
-
-            }
-        });
+//        holder.deleteDogBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DogController.deleteDog(
+//                        dog.getId());
+//
+//            }
+//        });
 
         holder.dogCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +108,6 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
     class DogsViewholder extends RecyclerView.ViewHolder {
         TextView name, dob, breed;
         ImageView picture, genderIcon;
-        Button deleteDogBtn;
         CardView dogCard;
         public DogsViewholder(@NonNull View itemView)
         {
@@ -118,14 +118,9 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             breed = itemView.findViewById(R.id.home_dog_breed);
             picture = itemView.findViewById(R.id.home_dog_image);
             genderIcon = itemView.findViewById(R.id.home_gender_icon);
-            deleteDogBtn = itemView.findViewById(R.id.delete_dog_btn);
             dogCard = itemView.findViewById(R.id.dog_card);
 
-            if(User.CURRENT_USER.getRole().equals("admin")){
-                deleteDogBtn.setVisibility(View.VISIBLE);
-            }else{
-                deleteDogBtn.setVisibility(View.GONE);
-            }
+
 
         }
     }

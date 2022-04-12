@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
                                     }
                                 });
                             } catch (ApiException e) {
+                                Log.d("error google", "onActivityResult: " + e.getStatusCode());
                                 e.printStackTrace();
                             }
                         }
