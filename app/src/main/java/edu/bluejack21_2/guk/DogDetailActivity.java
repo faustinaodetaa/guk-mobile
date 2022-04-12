@@ -70,6 +70,14 @@ public class DogDetailActivity extends AppCompatActivity {
             }
         });
 
+        updateDogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DogDetailActivity.this, UpdateDogActivity.class));
+
+            }
+        });
+
         String mon = dog.getDob().toDate().toString().substring(4,7);
         String dd = dog.getDob().toDate().toString().substring(8,10);
         String yyyy = dog.getDob().toDate().toString().substring(30,34);

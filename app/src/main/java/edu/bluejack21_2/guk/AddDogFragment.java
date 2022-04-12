@@ -1,6 +1,7 @@
 package edu.bluejack21_2.guk;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -31,6 +32,8 @@ import com.google.firebase.Timestamp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import edu.bluejack21_2.guk.controller.BreedController;
 import edu.bluejack21_2.guk.controller.DogController;
@@ -131,14 +134,17 @@ public class AddDogFragment extends Fragment {
                 String name = nameTxt.getText().toString();
                 String breed = breedTxt.getText().toString();
                 String description = descriptionTxt.getText().toString();
-                Timestamp dob = Timestamp.now();
+
+                Date date = getDateFromDatePicker(dobPicker);
+                Timestamp dob = new Timestamp(date);
                 Timestamp rescuedDate = Timestamp.now();
                 String gender = genderTxt;
                 String status = "Unadopted";
 
+                Log.d("dob anjing", "gukguk");
                 if(DogController.insertDog(getActivity(), name, breed, description, dob, rescuedDate, gender, status, filePath)){
                     Log.d("dob anjing", String.valueOf(dobPicker.getDayOfMonth()));
-                    Log.d("dob anjing", "testing");
+                    Log.d("dob anjing", "gukguk");
                     Toast.makeText(getActivity(), "Insert Success", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -146,5 +152,16 @@ public class AddDogFragment extends Fragment {
 
 
         return view;
+    }
+
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker){
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year =  datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
     }
 }
