@@ -46,7 +46,7 @@ public class UpdateDogActivity extends AppCompatActivity {
 
         genderGroup = findViewById(R.id.update_gender_rb);
 
-        dobPicker = findViewById(R.id.update_dog_dob);
+        dobPicker = (DatePicker)findViewById(R.id.update_dog_dob);
 
         backIcon = findViewById(R.id.detail_back_icon);
 
@@ -74,9 +74,9 @@ public class UpdateDogActivity extends AppCompatActivity {
         descriptionTxt.setText(dog.getDescription());
 
 
-//        int mon =Integer.parseInt(dog.getDob().toDate().toString().substring(4,7));
-//        int dd = Integer.parseInt(dog.getDob().toDate().toString().substring(8,10));
-//        int yyyy = Integer.parseInt(dog.getDob().toDate().toString().substring(30,34));
+        int mon =dog.getDob().toDate().getMonth();
+        int dd = Integer.parseInt(dog.getDob().toDate().toString().substring(8,10));
+        int yyyy = Integer.parseInt(dog.getDob().toDate().toString().substring(30,34));
 //
 //        Calendar cal = Calendar.getInstance();
 //        cal.setTimeInMillis(System.currentTimeMillis());
@@ -88,15 +88,18 @@ public class UpdateDogActivity extends AppCompatActivity {
 //        });
 //        dobPicker.setOnDateChangedListener(dog.getDob());
 
+//        dobPicker.init(2022, 4, 4, null);
+        dobPicker.updateDate(yyyy, mon, dd);
+
 
         genderTxt = dog.getGender().equals("Male") ? "Male" : "Female";
 
         Log.d("gender anjing", genderTxt);
 
         if(genderTxt.equals("Male")){
-            maleRb.setSelected(true);
+            maleRb.setChecked(true);
         }else{
-            femaleRb.setSelected(true);
+            femaleRb.setChecked(true);
         }
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -123,7 +126,7 @@ public class UpdateDogActivity extends AppCompatActivity {
 
             DogController.updateDog(dogId, breed, description, dob, gender, name);
             Toast.makeText(this, "Updated dog", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(UpdateDogActivity.this, HomeActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
 
 
         });
