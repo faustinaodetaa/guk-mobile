@@ -75,6 +75,7 @@ public class UserController {
                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             User u = document.toObject(User.class);
+                            u.setId(document.getId());
                             if(listener != null)
                                 listener.onFinish(u, null);
                         }

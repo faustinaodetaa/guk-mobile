@@ -9,20 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.Identity;
-import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,9 +25,6 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.io.IOException;
 
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.listener.FinishListener;
@@ -93,18 +84,19 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
                                 String picture = account.getPhotoUrl().toString();
 
                                 UserController.getUserByEmail(email, (data, message) -> {
-                                    if(data == null){
+                                    if (data == null) {
                                         User user = new User(email, name, "", "", "", "images/user/1df0ae00-694b-4b76-b53e-fc7ed4e21aa9.jpg", 0);
 
                                         Database.getDB().collection(User.COLLECTION_NAME)
                                                 .add(user.toMap())
                                                 .addOnSuccessListener(documentReference -> {
-                                                    showLoginPageAndSaveData(user);
+                                                    user.setId(documentReference.getId());
+                                                    showHomePageAndSaveData(user);
                                                 })
                                                 .addOnFailureListener(e -> {
                                                 });
                                     } else {
-                                        showLoginPageAndSaveData(data);
+                                        showHomePageAndSaveData(data);
                                     }
                                 });
                             } catch (ApiException e) {
@@ -127,14 +119,15 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         if (data == null) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else {
-            showLoginPageAndSaveData(data);
+            showHomePageAndSaveData(data);
         }
     }
 
-    private void showLoginPageAndSaveData(User data) {
+    private void showHomePageAndSaveData(User data) {
         User.CURRENT_USER = data;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
+        Log.d("user_id", "showHomePageAndSaveData: " + data.getId());
         editor.putString("user_id", data.getId());
         editor.commit();
         Intent i = new Intent(this, HomeActivity.class);
