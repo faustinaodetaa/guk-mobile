@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Guk">
         <activity
+            android:name=".TabActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateDogActivity"
             android:exported="false" />
         <activity
