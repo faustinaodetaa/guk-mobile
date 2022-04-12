@@ -20,7 +20,7 @@ import edu.bluejack21_2.guk.util.Database;
 public class DogDetailActivity extends AppCompatActivity {
 
     private Button adoptDogBtn, deleteDogBtn, updateDogBtn;
-    private TextView nameTxt, breedTxt, dobTxt, descriptionTxt;
+    private TextView nameTxt, breedTxt, dobTxt, descriptionTxt, rescuedDateTxt, statusTxt;
     private ImageView genderIcon, dogIcon, backIcon;
 
     @Override
@@ -35,6 +35,8 @@ public class DogDetailActivity extends AppCompatActivity {
         breedTxt = findViewById(R.id.detail_dog_breed);
         dobTxt = findViewById(R.id.detail_dog_dob);
         descriptionTxt = findViewById(R.id.detail_dog_description);
+        rescuedDateTxt = findViewById(R.id.detail_rescued_date);
+        statusTxt = findViewById(R.id.detail_dog_status);
 
         genderIcon = findViewById(R.id.detail_gender_icon);
         dogIcon = findViewById(R.id.detail_dog_image);
@@ -74,14 +76,22 @@ public class DogDetailActivity extends AppCompatActivity {
 
         String dob = mon + " " + dd + ", " + yyyy;
 
+        String mon2 = dog.getRescuedDate().toDate().toString().substring(4,7);
+        String dd2 = dog.getRescuedDate().toDate().toString().substring(8,10);
+        String yyyy2 = dog.getRescuedDate().toDate().toString().substring(30,34);
+
+        String rescuedDate = mon2 + " " + dd2 + ", " + yyyy2;
+
         genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
 
         nameTxt.setText(dog.getName());
         breedTxt.setText(dog.getBreed());
         dobTxt.setText(dob);
         descriptionTxt.setText(dog.getDescription());
+        rescuedDateTxt.setText(rescuedDate);
+        statusTxt.setText(dog.getStatus());
 
-//        Database.showImage(dog.getPicture(), ((Activity)context), dogIcon);
+        Database.showImage(dog.getPicture(), this, dogIcon);
 
         if(User.CURRENT_USER.getRole().equals("admin")){
             deleteDogBtn.setVisibility(View.VISIBLE);
