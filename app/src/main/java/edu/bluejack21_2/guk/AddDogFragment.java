@@ -131,25 +131,21 @@ public class AddDogFragment extends Fragment {
 
 
             addDogBtn.setOnClickListener(view1 -> {
+                Date date = getDateFromDatePicker(dobPicker);
+
                 String name = nameTxt.getText().toString();
                 String breed = breedTxt.getText().toString();
                 String description = descriptionTxt.getText().toString();
-
-                Date date = getDateFromDatePicker(dobPicker);
                 Timestamp dob = new Timestamp(date);
                 Timestamp rescuedDate = Timestamp.now();
                 String gender = genderTxt;
                 String status = "Unadopted";
 
-                Log.d("dob anjing", "gukguk");
                 if(DogController.insertDog(getActivity(), name, breed, description, dob, rescuedDate, gender, status, filePath)){
-                    Log.d("dob anjing", String.valueOf(dobPicker.getDayOfMonth()));
                     Log.d("dob anjing", "gukguk");
                     Toast.makeText(getActivity(), "Insert Success", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
 
         return view;
     }

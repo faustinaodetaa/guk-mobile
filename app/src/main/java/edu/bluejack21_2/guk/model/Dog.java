@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class Dog implements Parcelable {
 
+    public static final String COLLECTION_NAME = "dogs";
+
     private String id, name, description, gender, status, picture, breed;
     private Timestamp dob, rescuedDate;
 //    private Breed b;

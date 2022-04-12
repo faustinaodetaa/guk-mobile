@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dog Detail"
+                android:text="Adopt Me"
                 android:textColor="@color/primary" />
 
         </LinearLayout>
@@ -59,7 +59,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/register_name_txt"
+                    android:id="@+id/update_dog_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_text"
@@ -77,12 +77,11 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/register_email_txt"
+                    android:id="@+id/update_dog_breed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_text"
                     android:hint="Chihuahua"
-                    android:inputType="textEmailAddress"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
                     android:textColor="@color/black" />
@@ -96,12 +95,11 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/register_password_txt"
+                    android:id="@+id/update_dog_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_text"
                     android:hint="Description"
-                    android:inputType="textPassword"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
                     android:textColor="@color/black" />
@@ -110,19 +108,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Date Of Birth"
+                    android:text="Date of Birth"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/register_confirm_password_txt"
+                <DatePicker
+                    android:id="@+id/update_dog_dob"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input_text"
-                    android:inputType="date"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    android:textColor="@color/black" />
+                    android:layout_height="match_parent"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -133,7 +128,7 @@
                     android:textSize="20dp" />
 
                 <RadioGroup
-                    android:id="@+id/gender_rb"
+                    android:id="@+id/update_gender_rb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -141,13 +136,13 @@
                     android:orientation="vertical">
 
                     <RadioButton
-                        android:id="@+id/dog_gender_female"
+                        android:id="@+id/update_dog_gender_female"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Female" />
 
                     <RadioButton
-                        android:id="@+id/dog_gender_male"
+                        android:id="@+id/update_dog_gender_male"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Male" />
@@ -155,7 +150,7 @@
                 </RadioGroup>
 
                 <Button
-                    android:id="@+id/update_dog_btn"
+                    android:id="@+id/update_dog_value_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/black"

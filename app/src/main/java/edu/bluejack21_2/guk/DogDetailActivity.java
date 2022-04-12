@@ -59,6 +59,7 @@ public class DogDetailActivity extends AppCompatActivity {
         Log.d("coba intent2", "a: " + dog.getId());
 
         String dogId = dog.getId();
+        Dog myObject = dog;
 
         deleteDogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,12 @@ public class DogDetailActivity extends AppCompatActivity {
         updateDogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(DogDetailActivity.this, UpdateDogActivity.class);
+                Log.d("coba intent update", "onClick: " + myObject.getName());
+
+                intent.putExtra("dog", myObject);
+                DogDetailActivity.this.startActivity(intent);
+
                 startActivity(new Intent(DogDetailActivity.this, UpdateDogActivity.class));
 
             }

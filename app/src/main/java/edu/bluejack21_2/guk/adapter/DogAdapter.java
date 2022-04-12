@@ -66,20 +66,10 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
         holder.dob.setText(age + " years old");
         holder.breed.setText(dog.getBreed());
-//        holder.deleteDogBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DogController.deleteDog(
-//                        dog.getId());
-//
-//            }
-//        });
 
         holder.dogCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getAc(new Intent(this, MainActivity.class));
-
                 Intent intent = new Intent(context, DogDetailActivity.class);
                 Log.d("coba intent", "onClick: " + dog.getName());
                 intent.putExtra("dog", dog);
