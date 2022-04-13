@@ -27,7 +27,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     private BottomNavigationView bottomNavigationView;
 
-    private HomeFragment homeFragment = new HomeFragment();
+//    private HomeFragment homeFragment = new HomeFragment();
+    private TabFragment tabFragment = new TabFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private AddDogFragment addDogFragment = new AddDogFragment();
     private AddStoryFragment addStoryFragment = new AddStoryFragment();
@@ -56,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.home){
             toggleTitleBar(false);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, tabFragment).commit();
             return true;
         } else if(item.getItemId() == R.id.search){
             toggleTitleBar(false);

@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         editor.putString("user_id", data.getId());
         editor.commit();
         Intent i = new Intent(this, HomeActivity.class);
+//        Intent i = new Intent(this, TabActivity.class);
         startActivity(i);
         finish();
     }
