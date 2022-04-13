@@ -7,15 +7,33 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
+import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.Donation;
+import edu.bluejack21_2.guk.model.Story;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
 public class DonationController {
+    public static void showAllDonations(DonationAdapter donationAdapter, ArrayList<Donation> donations){
+        Database.getDB().collection(Donation.COLLECTION_NAME).whereEqualTo("status", "pending").get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Donation donation = document.toObject(Donation.class);
+                    donation.setId(document.getId());
+                    donations.add(donation);
+                    donationAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
     public static boolean insertDonation(Context ctx, String bankAccountHolder, String bankAccountNumber, String amountStr, String notes, Uri filePath){
         String errorMsg = "";
 

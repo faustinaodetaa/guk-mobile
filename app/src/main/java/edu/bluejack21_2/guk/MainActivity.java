@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkIsLoggedIn();
+
         setContentView(R.layout.activity_main);
 
-        checkIsLoggedIn();
 //    GoogleSignIn
         googleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestScopes(new Scope(Scopes.DRIVE_APPFOLDER)).requestServerAuthCode(client_webId).requestIdToken(client_webId).build());
         emailTxt = findViewById(R.id.login_email_txt);

@@ -18,10 +18,12 @@
             android:text="Add Dog"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="32dp" />
+            android:textAllCaps="true"
+            android:textFontWeight="600"
+            android:textSize="24dp" />
 
         <ScrollView
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

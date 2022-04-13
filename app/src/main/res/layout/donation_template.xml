@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/donation_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/card_shape"
+    android:scrollbars="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp">
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:alignItems="center"
+        app:justifyContent="space_between">
+
+        <com.google.android.flexbox.FlexboxLayout
+            app:flexWrap="wrap"
+            android:layout_width="150dp"
+
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/donate_title_name_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textFontWeight="800"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="donated"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/donate_title_amount_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textFontWeight="800"
+                android:text="IDR 0"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/donate_view_proof_btn"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/eye_view" />
+
+            <Button
+                android:textSize="12dp"
+                android:id="@+id/donate_approve_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approve" />
+        </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
+</androidx.cardview.widget.CardView>

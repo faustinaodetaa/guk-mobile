@@ -2,11 +2,9 @@ package edu.bluejack21_2.guk;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,10 +12,6 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-
-import edu.bluejack21_2.guk.adapter.DogAdapter;
-import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -33,7 +27,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     private AddDogFragment addDogFragment = new AddDogFragment();
     private AddStoryFragment addStoryFragment = new AddStoryFragment();
     private UserDonateFragment userDonateFragment = new UserDonateFragment();
-    private AdminDonatePage adminDonatePage = new AdminDonatePage();
+    private AdminDonateFragment adminDonateFragment = new AdminDonateFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
     private StoryFragment storyFragment = new StoryFragment();
 
@@ -74,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else if(item.getItemId() == R.id.donate){
             toggleTitleBar(false);
             if(User.CURRENT_USER.getRole().equals("admin")){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, adminDonatePage).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, adminDonateFragment).commit();
             } else {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, userDonateFragment).commit();
             }

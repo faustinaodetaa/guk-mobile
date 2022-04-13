@@ -34,24 +34,35 @@
                 android:textFontWeight="600" />
 
         </LinearLayout>
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edge">
+            android:background="@drawable/rounded_edge"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update Dog"
+                android:textColor="@color/black"
+                android:textAllCaps="true"
+                android:textFontWeight="600"
+                android:textSize="24dp"
+                android:layout_gravity="center"/>
+
+
+        <ScrollView
+            android:paddingTop="10dp"
+            android:paddingHorizontal="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="50dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Update Dog"
-                    android:textColor="@color/black"
-                    android:textSize="32dp"
-                    android:layout_gravity="center"/>
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -177,7 +188,7 @@
 
             </LinearLayout>
         </ScrollView>
-
+        </LinearLayout>
     </LinearLayout>
 
 

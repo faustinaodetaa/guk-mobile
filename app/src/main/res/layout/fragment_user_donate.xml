@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="50dp"
         >
         <TextView
             android:layout_width="match_parent"
@@ -19,7 +19,9 @@
             android:text="Your Donation Matters!"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="32dp" />
+            android:textAllCaps="true"
+            android:textFontWeight="600"
+            android:textSize="24dp" />
 
 
         <ScrollView

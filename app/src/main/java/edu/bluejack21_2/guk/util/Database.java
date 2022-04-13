@@ -41,7 +41,7 @@ public class Database {
     public static void showImage(String url, Activity ctx, ImageView imageView){
         Glide.with(ctx)
                 .load(url)
-                .centerCrop()
+//                .centerCrop()
                 .placeholder(imageView.getDrawable())
                 .into(imageView);
 

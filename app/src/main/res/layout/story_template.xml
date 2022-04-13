@@ -41,7 +41,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:textSize="14dp"
-            android:text="username"
+            android:text="Name"
             android:textColor="@color/black"
             android:textFontWeight="600" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:textSize="12dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dolor eros, vehicula eget lectus a, eleifend euismod augue. Cras gravida commodo nunc, sit amet ultrices quam rhoncus sit amet. Aenean scelerisque purus in convallis bibendum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+            android:text="..."
             android:textColor="@color/black" />
 
         <LinearLayout
