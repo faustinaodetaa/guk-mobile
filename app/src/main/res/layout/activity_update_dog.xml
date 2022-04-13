@@ -113,6 +113,9 @@
                     android:textSize="20dp" />
 
                 <DatePicker
+                    android:theme="@style/Theme.Guk"
+                    android:textColor="@color/black"
+                    android:calendarTextColor="@color/black"
                     android:id="@+id/update_dog_dob"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -136,12 +139,17 @@
                     android:orientation="vertical">
 
                     <RadioButton
+                        android:textColor="@color/black"
+                        android:buttonTint="@color/black"
                         android:id="@+id/update_dog_gender_female"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Female" />
 
                     <RadioButton
+                        android:textColor="@color/black"
+                        android:buttonTint="@color/black"
+
                         android:id="@+id/update_dog_gender_male"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

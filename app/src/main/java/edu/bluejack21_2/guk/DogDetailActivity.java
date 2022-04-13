@@ -45,8 +45,8 @@ public class DogDetailActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DogDetailActivity.this, HomeActivity.class));
-
+//                startActivity(new Intent(DogDetailActivity.this, HomeActivity.class));
+                finish();
             }
         });
 
@@ -78,9 +78,9 @@ public class DogDetailActivity extends AppCompatActivity {
                 Log.d("coba intent update", "onClick: " + myObject.getName());
 
                 intent.putExtra("dog", myObject);
-                DogDetailActivity.this.startActivity(intent);
+                startActivity(intent);
 
-                startActivity(new Intent(DogDetailActivity.this, UpdateDogActivity.class));
+//                startActivity(new Intent(DogDetailActivity.this, UpdateDogActivity.class));
 
             }
         });

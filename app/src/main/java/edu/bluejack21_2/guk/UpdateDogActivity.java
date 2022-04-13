@@ -57,9 +57,7 @@ public class UpdateDogActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Activity.finish();
-//                onBackPressed();
-
+                finish();
             }
         });
 
