@@ -1,6 +1,7 @@
 package edu.bluejack21_2.guk.controller;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import edu.bluejack21_2.guk.MainActivity;
+import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Crypt;
@@ -113,18 +115,20 @@ public class UserController {
         String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
         String fileName = "images/user/" + UUID.randomUUID().toString() + "." + extension;
 
-        User user = new User(email, name, password, address, phone, fileName, 0);
 
-        Database.getDB().collection(User.COLLECTION_NAME)
-                .add(user.toMap())
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(ctx,"Register success!", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ctx,"Register fail!", Toast.LENGTH_SHORT).show();
-                });
+        Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
+            User user = new User(email, name, password, address, phone, data, 0);
 
-        Database.uploadImage(filePath, fileName, ctx);
+            Database.getDB().collection(User.COLLECTION_NAME)
+                    .add(user.toMap())
+                    .addOnSuccessListener(documentReference -> {
+                        Toast.makeText(ctx,"Register success!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(ctx,"Register fail!", Toast.LENGTH_SHORT).show();
+                    });
+
+        });
 
         return true;
     }
@@ -152,7 +156,7 @@ public class UserController {
         editor.clear();
         editor.commit();
         Intent i = new Intent(ctx, MainActivity.class);
-        ctx.startActivity(i);
+        ctx.startActivity(i, ActivityOptions.makeSceneTransitionAnimation(((Activity)ctx), ((Activity)ctx).findViewById(R.id.bottomNavigationView), "rounded-bg").toBundle());
         ((Activity)ctx).finish();
     }
 

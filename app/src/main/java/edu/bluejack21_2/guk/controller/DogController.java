@@ -24,7 +24,7 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class DogController {
     public static void showAllDogs(DogAdapter dogAdapter, ArrayList<Dog> dogList) {
-        Database.getDB().collection(Dog.COLLECTION_NAME).orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+        Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Dog dog = document.toObject(Dog.class);
@@ -64,13 +64,15 @@ public class DogController {
         String fileName = "images/dog/" + UUID.randomUUID().toString() + "." + extension;
 
 
-        Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, fileName);
-        Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
-            Log.d("msg", "success insert");
-        }).addOnFailureListener(e -> {
-            Log.d("msg", "error insert");
+        Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
+            Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, data);
+            Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
+                Log.d("msg", "success insert");
+            }).addOnFailureListener(e -> {
+                Log.d("msg", "error insert");
+            });
+
         });
-        Database.uploadImage(filePath, fileName, ctx);
         return true;
     }
 

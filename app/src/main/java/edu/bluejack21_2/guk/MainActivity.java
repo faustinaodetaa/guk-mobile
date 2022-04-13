@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
 
     private GoogleSignInClient googleSignInClient;
 
+    private LinearLayout roundedBg;
+
     String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
 
     @Override
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         loginBtn = findViewById(R.id.login_btn);
         registerLink = findViewById(R.id.register_link);
         googleLoginBtn = findViewById(R.id.google_login_btn);
+
+        roundedBg = findViewById(R.id.login_rounded_bg);
 
         registerLink.setOnClickListener(view -> {
             startActivity(new Intent(this, RegisterActivity.class));
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
 
                                 UserController.getUserByEmail(email, (data, message) -> {
                                     if (data == null) {
-                                        User user = new User(email, name, "", "", "", "images/user/1df0ae00-694b-4b76-b53e-fc7ed4e21aa9.jpg", 0);
+                                        User user = new User(email, name, "", "", "", picture, 0);
 
                                         Database.getDB().collection(User.COLLECTION_NAME)
                                                 .add(user.toMap())
@@ -127,12 +134,12 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         User.CURRENT_USER = data;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
-        Log.d("user_id", "showHomePageAndSaveData: " + data.getId());
+//        Log.d("user_id", "showHomePageAndSaveData: " + data.getId());
         editor.putString("user_id", data.getId());
         editor.commit();
         Intent i = new Intent(this, HomeActivity.class);
 //        Intent i = new Intent(this, TabActivity.class);
-        startActivity(i);
+        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this, roundedBg, "rounded-bg").toBundle());
         finish();
     }
 
@@ -142,9 +149,10 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
             UserController.getUserById(prefs.getString("user_id", null), (data, message) -> {
                 User.CURRENT_USER = data;
                 if (data != null) {
-                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(i);
-                    finish();
+//                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+//                    startActivity(i);
+//                    finish();
+                    showHomePageAndSaveData(data);
                 } else {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.clear();

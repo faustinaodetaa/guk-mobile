@@ -7,11 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,6 +21,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import edu.bluejack21_2.guk.listener.FinishListener;
 
 public class Database {
 
@@ -34,21 +38,36 @@ public class Database {
         return storage;
     }
 
-    public static void showImage(String reference, Activity ctx, ImageView imageView){
-        StorageReference ref = Database.getStorage().getReference(reference);
-        ref.getBytes(1024 * 1024 * 10).addOnSuccessListener(bytes -> {
-            Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            DisplayMetrics dm = new DisplayMetrics();
+    public static void showImage(String url, Activity ctx, ImageView imageView){
+        Glide.with(ctx)
+                .load(url)
+                .centerCrop()
+                .placeholder(imageView.getDrawable())
+                .into(imageView);
 
-            ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        StorageReference ref = Database.getStorage().getReference(reference);
+//        ref.getDownloadUrl().addOnSuccessListener(uri -> {
+//            Log.d("coba", "showImage: " + uri.toString());
+//            Glide.with(ctx)
+//                    .load(uri.toString())
+//                    .centerCrop()
+//                    .placeholder(imageView.getDrawable())
+//                    .into(imageView);
+//        });
 
-            imageView.setMinimumHeight(dm.heightPixels);
-            imageView.setMinimumWidth(dm.widthPixels);
-            imageView.setImageBitmap(bm);
-        }).addOnFailureListener(e -> {});
+//        ref.getBytes(1024 * 1024 * 10).addOnSuccessListener(bytes -> {
+//            Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//            DisplayMetrics dm = new DisplayMetrics();
+//
+//            ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);
+//
+//            imageView.setMinimumHeight(dm.heightPixels);
+//            imageView.setMinimumWidth(dm.widthPixels);
+//            imageView.setImageBitmap(bm);
+//        }).addOnFailureListener(e -> {});
     }
 
-    public static void uploadImage(Uri filePath, String fileName, Context ctx) {
+    public static void uploadImage(Uri filePath, String fileName, Context ctx, FinishListener<String> listener) {
         StorageReference storageReference = storage.getReference();
         if (filePath != null) {
             ProgressDialog progressDialog = new ProgressDialog(ctx);
@@ -62,6 +81,14 @@ public class Database {
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(uri -> {
+                                        Log.d("cobadownload", "uploadImage: " + uri.toString());
+                                        if(listener != null)
+                                            listener.onFinish(uri.toString(), null);
+                                    }).addOnFailureListener(e -> {
+                                        e.printStackTrace();
+                                        Log.d("cobadownload2", "uploadImage: " + e.getMessage());
+                                    });
                                     progressDialog.dismiss();
 //                                    Toast.makeText(ctx,"Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                 }
@@ -82,6 +109,14 @@ public class Database {
                                     progressDialog.setMessage("Uploaded " + (int) progress + "%");
                                 }
                             });
+//            ref.getDownloadUrl().addOnSuccessListener(uri -> {
+//                Log.d("cobadownload", "uploadImage: " + uri.toString());
+//                if(listener != null)
+//                    listener.onFinish(uri.toString(), null);
+//            }).addOnFailureListener(e -> {
+//                e.printStackTrace();
+//                Log.d("cobadownload2", "uploadImage: " + e.getMessage());
+//            });
         }
     }
 }

@@ -1,6 +1,7 @@
 package edu.bluejack21_2.guk.adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +18,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,7 +79,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
                 Intent intent = new Intent(context, DogDetailActivity.class);
                 Log.d("coba intent", "onClick: " + dog.getName());
                 intent.putExtra("dog", dog);
-                context.startActivity(intent);
+                context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), holder.picture, "image-trans").toBundle());
             }
         });
 
@@ -98,7 +101,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 //        }
 
 
-
+//        Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/guk-mobile.appspot.com/o/images%2Fdog%2F61057a86-10fc-4125-8873-3cdbe92b1523.jpg?alt=media&token=5e6cc727-1148-45b6-b0e0-bbbda309e7ae").centerCrop().placeholder(holder.picture.getDrawable()).into(holder.picture);
         Database.showImage(dog.getPicture(), ((Activity)context), holder.picture);
     }
 
