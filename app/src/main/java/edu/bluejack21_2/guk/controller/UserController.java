@@ -129,23 +129,21 @@ public class UserController {
         return true;
     }
 
-    public static User getUserById(String id, FinishListener<User> listener){
+    public static void getUserById(String id, FinishListener<User> listener){
         Database.getDB().collection(User.COLLECTION_NAME).document(id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 User u = document.toObject(User.class);
                 Log.d("coba", "getUserById: " + u.getIsDeleted());
-                if(!u.getIsDeleted()){
-                    User.CURRENT_USER = u;
-                    User.CURRENT_USER.setId(id);
+//                if(!u.getIsDeleted()){
+//                    User.CURRENT_USER = u;
+                    u.setId(id);
                     if(listener != null)
-                        listener.onFinish(User.CURRENT_USER, null);
-                }
+                        listener.onFinish(u, null);
+//                }
             }
 
         });
-
-        return User.CURRENT_USER;
     }
 
     public static void logout(Context ctx){

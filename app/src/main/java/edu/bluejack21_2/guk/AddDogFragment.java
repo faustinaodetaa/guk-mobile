@@ -35,10 +35,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import edu.bluejack21_2.guk.controller.BreedController;
 import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.controller.UserController;
-import edu.bluejack21_2.guk.model.Breed;
 import edu.bluejack21_2.guk.model.Dog;
 
 public class AddDogFragment extends Fragment {
@@ -73,9 +71,9 @@ public class AddDogFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_dog, container, false);
 
-        ArrayList<Breed> breedList;
-        breedList = new ArrayList<>();
-        String[] items = new String[]{"1", "2", "three"};
+//        ArrayList<Breed> breedList;
+//        breedList = new ArrayList<>();
+//        String[] items = new String[]{"1", "2", "three"};
         choosePicBtn = view.findViewById(R.id.add_dog_choose_btn);
 
         imageView = view.findViewById(R.id.add_dog_profile_picture);

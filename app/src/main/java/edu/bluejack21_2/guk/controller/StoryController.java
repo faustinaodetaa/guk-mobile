@@ -1,5 +1,7 @@
 package edu.bluejack21_2.guk.controller;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class StoryController {
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Story story = document.toObject(Story.class);
                     story.setId(document.getId());
+//                    if(story.getComments().size() > 0)
+//                        Log.d("coba", "showAllStories: " + story.getComments().get(0).get("content"));
 
                     storyList.add(story);
                     storyAdapter.notifyDataSetChanged();

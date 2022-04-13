@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_home);
 
         welcomeTxt = findViewById(R.id.home_welcome_txt);
-        String txt = "Hello, <b>" + User.CURRENT_USER.getName() + "</b> !";
+        String txt = "Hello, <b style=\"font-weight: 800;\">" + User.CURRENT_USER.getName() + "</b> !";
         welcomeTxt.setText(Html.fromHtml(txt));
 
         topTitleBar = findViewById(R.id.top_title_bar);

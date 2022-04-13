@@ -2,8 +2,7 @@ package edu.bluejack21_2.guk.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import com.google.firebase.firestore.DocumentReference;
 
-import edu.bluejack21_2.guk.DogDetailActivity;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import edu.bluejack21_2.guk.R;
-import edu.bluejack21_2.guk.model.Dog;
+import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.Story;
+import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewholder> {
@@ -48,7 +50,37 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
         Story story = storyList.get(position);
 
 //        holder.username.setText(story.get);
-        holder.content.setText(story.getContent());
+        holder.contentTxt.setText(story.getContent());
+
+        UserController.getUserById(story.getUser().getId(), (data, message) -> {
+            if(data != null){
+                holder.userNameTxt.setText(data.getName());
+            }
+        });
+
+        if(story.getComments() != null){
+            AtomicInteger i = new AtomicInteger(0);
+            for(i.get(); i.get() < story.getComments().size() && i.get() < 2; i.incrementAndGet()){
+                Map<String, Object> c = story.getComments().get(i.get());
+                TextView temp = (i.get() == 0) ? holder.topCommentTxt1 : holder.topCommentTxt2;
+                UserController.getUserById(((DocumentReference) c.get("user")).getId(), (data, message) -> {
+                    if(data != null){
+                        String txt = "<b>" + data.getName() + "</b> " + c.get("content");
+
+                        temp.setText(Html.fromHtml(txt));
+                    }
+                });
+            }
+        }
+
+        if(story.getLikes() != null){
+            for(DocumentReference docRef : story.getLikes()){
+                if(docRef.getId().equals(User.CURRENT_USER.getId())){
+                    holder.likeIcon.setImageResource(R.drawable.like_fill);
+                    break;
+                }
+            }
+        }
 
         Database.showImage(story.getPicture(), ((Activity)context), holder.picture );
 
@@ -64,20 +96,28 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
     class StoriesViewholder extends RecyclerView.ViewHolder {
 
-        TextView username, content;
-        ImageView picture;
+        TextView userNameTxt, contentTxt, topCommentTxt1, topCommentTxt2;
+        ImageView picture, commentIcon, likeIcon;
         CardView storyCard;
 
         public StoriesViewholder(@NonNull View itemView)
         {
             super(itemView);
 
-            username = itemView.findViewById(R.id.story_username);
-            content = itemView.findViewById(R.id.story_content);
+            userNameTxt = itemView.findViewById(R.id.story_user_name);
+            contentTxt = itemView.findViewById(R.id.story_content);
 
             picture = itemView.findViewById(R.id.story_dog_image);
 
             storyCard = itemView.findViewById(R.id.story_card);
+
+            commentIcon = itemView.findViewById(R.id.story_comment_icon);
+            likeIcon = itemView.findViewById(R.id.story_like_icon);
+
+            topCommentTxt1 = itemView.findViewById(R.id.story_top_comment_1);
+            topCommentTxt2 = itemView.findViewById(R.id.story_top_comment_2);
+//            topCommentTxt.add(itemView.findViewById(R.id.story_top_comment_1));
+//            topCommentTxt.add(itemView.findViewById(R.id.story_top_comment_2));
 
         }
     }
