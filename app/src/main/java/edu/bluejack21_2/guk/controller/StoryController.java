@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class StoryController {
     public static void showAllStories(StoryAdapter storyAdapter, ArrayList<Story> storyList){
-        Database.getDB().collection(Story.COLLECTION_NAME).get().addOnCompleteListener(task -> {
+        Database.getDB().collection(Story.COLLECTION_NAME).orderBy("createdAt", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Story story = document.toObject(Story.class);

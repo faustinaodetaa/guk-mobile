@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import edu.bluejack21_2.guk.DogDetailActivity;
 import edu.bluejack21_2.guk.R;
@@ -53,14 +55,15 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 
         Dog dog = dogList.get(position);
 
-        String mon = dog.getDob().toDate().toString().substring(4,7);
-        String dd = dog.getDob().toDate().toString().substring(8,10);
-        String yyyy = dog.getDob().toDate().toString().substring(30,34);
+        Date dob = dog.getDob().toDate();
+        String mon = dob.toString().substring(4,7);
+        String dd = dob.toString().substring(8,10);
+        String yyyy = dob.toString().substring(30,34);
         Integer age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(yyyy);
         Log.d("age", age.toString());
 
         Log.d("bday", mon+dd+yyyy);
-        Log.d("bday", dog.getDob().toDate().toString());
+        Log.d("bday", dob.toString());
         holder.name.setText(dog.getName());
         holder.genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
 
@@ -77,6 +80,16 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             }
         });
 
+
+        Date today = Calendar.getInstance().getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -3);
+        Date threeDaysAgo = cal.getTime();
+        Date rescuedDate = dog.getRescuedDate().toDate();
+//        Log.d("datecompare", "onBindViewHolder: "  + threeDaysAgo.toString() + " -> " + today.toString());
+        if(rescuedDate.getTime() <= today.getTime() && threeDaysAgo.getTime() <= rescuedDate.getTime()){
+            holder.recentTag.setVisibility(View.VISIBLE);
+        }
 
 //        try {
 //            holder.breed.setText(dog.getBreed().getName());
@@ -99,6 +112,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         TextView name, dob, breed;
         ImageView picture, genderIcon;
         CardView dogCard;
+        LinearLayout recentTag;
         public DogsViewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -109,7 +123,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             picture = itemView.findViewById(R.id.home_dog_image);
             genderIcon = itemView.findViewById(R.id.home_gender_icon);
             dogCard = itemView.findViewById(R.id.dog_card);
-
+            recentTag = itemView.findViewById(R.id.dog_recent_tag);
 
 
         }

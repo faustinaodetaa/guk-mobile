@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
@@ -23,7 +24,7 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class DogController {
     public static void showAllDogs(DogAdapter dogAdapter, ArrayList<Dog> dogList) {
-        Database.getDB().collection(Dog.COLLECTION_NAME).get().addOnCompleteListener(task -> {
+        Database.getDB().collection(Dog.COLLECTION_NAME).orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Dog dog = document.toObject(Dog.class);

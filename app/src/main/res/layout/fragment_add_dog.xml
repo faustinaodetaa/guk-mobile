@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="50dp"
+        android:layout_marginTop="10dp"
         >
         <TextView
             android:layout_width="match_parent"
@@ -21,6 +21,7 @@
             android:textSize="32dp" />
 
         <ScrollView
+            android:paddingHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -135,12 +136,14 @@
                         android:id="@+id/dog_gender_female"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="Female" />
 
                     <RadioButton
                         android:id="@+id/dog_gender_male"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="Male" />
 
                 </RadioGroup>
