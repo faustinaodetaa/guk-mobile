@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.R;
+import edu.bluejack21_2.guk.controller.DonationController;
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.Donation;
 import edu.bluejack21_2.guk.util.Database;
@@ -47,7 +48,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
             holder.titleNameTxt.setText(data.getName() + " ");
         });
 
-        holder.titleAmountTxt.setText(" IDR " + donation.getAmount());
+        holder.titleAmountTxt.setText(String.format("IDR %,d", donation.getAmount()));
 
         holder.viewProofBtn.setOnClickListener(view -> {
             final Dialog dialog = new Dialog(context);
@@ -67,7 +68,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
         });
 
         holder.approveBtn.setOnClickListener(view -> {
-
+            DonationController.approveDonation(context, donation);
         });
     }
 

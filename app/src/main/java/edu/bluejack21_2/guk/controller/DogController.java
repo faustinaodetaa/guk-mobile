@@ -25,6 +25,7 @@ import edu.bluejack21_2.guk.MainActivity;
 import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
+import edu.bluejack21_2.guk.util.ActivityHelper;
 import edu.bluejack21_2.guk.util.Database;
 
 public class DogController {
@@ -72,10 +73,7 @@ public class DogController {
         Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
             Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, data);
             Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
-                ((Activity)ctx).finish();
-                ((Activity)ctx).overridePendingTransition(0, 0);
-                ((Activity)ctx).startActivity(((Activity)ctx).getIntent());
-                ((Activity)ctx).overridePendingTransition(0, 0);
+                ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, "Dog added successfully!", Toast.LENGTH_SHORT).show();
 
             }).addOnFailureListener(e -> {
@@ -85,6 +83,8 @@ public class DogController {
         });
         return true;
     }
+
+
 
     public static void deleteDog(String id){
         HashMap<String, Object> data = new HashMap<>();

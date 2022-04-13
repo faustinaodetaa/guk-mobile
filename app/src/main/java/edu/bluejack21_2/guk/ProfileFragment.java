@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
         deleteAccountBtn = view.findViewById(R.id.delete_account_btn);
 
         nameTxt.setText(User.CURRENT_USER.getName());
-        pointTxt.setText(User.CURRENT_USER.getPoint() + " Points");
+        pointTxt.setText(String.format("%,d Points", User.CURRENT_USER.getPoint()));
 
         ImageViewCompat.setImageTintList(profileBadge, ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), User.CURRENT_USER.getBadgeColor())));
 
