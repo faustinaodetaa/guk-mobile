@@ -108,7 +108,6 @@ public class AddDogFragment extends Fragment {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null && result.getData().getData() != null) {
                             filePath = result.getData().getData();
-//                        Log.d("coba", "onActivityResult: " + filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1));
                             try {
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                                 imageView.setImageBitmap(bitmap);
@@ -140,8 +139,7 @@ public class AddDogFragment extends Fragment {
                 String status = "Unadopted";
 
                 if(DogController.insertDog(getActivity(), name, breed, description, dob, rescuedDate, gender, status, filePath)){
-                    Log.d("dob anjing", "gukguk");
-                    Toast.makeText(getActivity(), "Insert Success", Toast.LENGTH_SHORT).show();
+//                    Log.d("dob anjing", "gukguk");
                 }
             });
 

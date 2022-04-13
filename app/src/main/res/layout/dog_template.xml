@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp">
+            android:paddingHorizontal="10dp">
 
             <com.google.android.flexbox.FlexboxLayout
                 app:justifyContent="space_between"

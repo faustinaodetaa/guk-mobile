@@ -1,8 +1,11 @@
 package edu.bluejack21_2.guk.controller;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import edu.bluejack21_2.guk.HomeActivity;
+import edu.bluejack21_2.guk.MainActivity;
 import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
@@ -67,7 +72,12 @@ public class DogController {
         Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
             Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, data);
             Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
-                Log.d("msg", "success insert");
+                ((Activity)ctx).finish();
+                ((Activity)ctx).overridePendingTransition(0, 0);
+                ((Activity)ctx).startActivity(((Activity)ctx).getIntent());
+                ((Activity)ctx).overridePendingTransition(0, 0);
+                Toast.makeText(ctx, "Dog added successfully!", Toast.LENGTH_SHORT).show();
+
             }).addOnFailureListener(e -> {
                 Log.d("msg", "error insert");
             });
@@ -88,13 +98,17 @@ public class DogController {
         });
     }
 
-    public static void updateDog(String id, String breed, String description, Timestamp dob, String gender, String name){
+    public static void updateDog(Context ctx, String id, String breed, String description, Timestamp dob, String gender, String name){
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("breed", breed);
         data.put("description", description);
         data.put("dob", dob);
         data.put("gender", gender);
         data.put("name", name);
-        Database.getDB().collection(Dog.COLLECTION_NAME).document(id).set(data, SetOptions.merge());
+        Database.getDB().collection(Dog.COLLECTION_NAME).document(id).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+            ((Activity)ctx).finish();
+            ((Activity)ctx).startActivity(new Intent(((Activity)ctx), HomeActivity.class));
+            Toast.makeText(ctx, "Dog updated successfully!", Toast.LENGTH_SHORT).show();
+        });
     }
 }

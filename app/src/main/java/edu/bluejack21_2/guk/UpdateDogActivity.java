@@ -124,8 +124,7 @@ public class UpdateDogActivity extends AppCompatActivity {
             Timestamp dob = new Timestamp(date);
             String gender = genderTxt;
 
-            DogController.updateDog(dogId, breed, description, dob, gender, name);
-            Toast.makeText(this, "Updated dog", Toast.LENGTH_SHORT).show();
+            DogController.updateDog(this, dogId, breed, description, dob, gender, name);
 //            UpdateDogActivity.finish();
 
 

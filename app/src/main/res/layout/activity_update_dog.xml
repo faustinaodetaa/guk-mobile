@@ -101,10 +101,12 @@
                 <EditText
                     android:id="@+id/update_dog_description"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:background="@drawable/input_text"
-                    android:hint="Description"
+                    android:gravity="top"
+                    android:hint="This dog is so cute"
                     android:textColorHint="@color/grey"
+                    android:inputType="text|textMultiLine"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
                     android:textColor="@color/black" />
