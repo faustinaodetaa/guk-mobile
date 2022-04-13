@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import edu.bluejack21_2.guk.R;
+import edu.bluejack21_2.guk.controller.StoryController;
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.Story;
 import edu.bluejack21_2.guk.model.User;
@@ -81,6 +82,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
                 }
             }
         }
+
+        holder.likeIcon.setOnClickListener(view -> {
+            StoryController.toggleLike(holder.likeIcon, story.getId());
+        });
 
         Database.showImage(story.getPicture(), ((Activity)context), holder.picture );
 
