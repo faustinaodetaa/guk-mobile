@@ -10,6 +10,7 @@
     android:layout_marginBottom="20dp"
     android:scrollbars="vertical"
     app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="@color/white"
     android:id="@+id/story_card">
 
 
@@ -39,6 +40,7 @@
             android:id="@+id/story_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="username"
             android:layout_marginLeft="10dp"
             android:textFontWeight="1000"
@@ -49,9 +51,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="story"
+            android:textColor="@color/black"
+
             android:layout_marginLeft="30dp"
             />
         <TextView
+            android:textColor="@color/black"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

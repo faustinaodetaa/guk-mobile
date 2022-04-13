@@ -14,12 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/tab_layout"
+            android:background="@null"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabIndicatorGravity="stretch"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicator="@color/primary"/>
+            app:tabTextColor="@color/grey"
+            app:tabSelectedTextColor="@color/black"
+            />
 
         <androidx.viewpager2.widget.ViewPager2
             android:saveEnabled="false"
