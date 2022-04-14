@@ -13,4 +13,9 @@
     <color name="bronze">#693905</color>
     <color name="silver">#B4B4B4</color>
     <color name="diamond">#81D9DD</color>
+
+    <color name="success">#00c581</color>
+    <color name="danger">#CA0B00</color>
+    <color name="danger_light">#ff4444</color>
+
 </resources>

@@ -9,7 +9,8 @@ import edu.bluejack21_2.guk.util.Crypt;
 public class Donation {
     public static String COLLECTION_NAME = "donations";
 
-    private String id, bankAccountHolder, bankAccountNumber, notes, proofPic, status = "pending";
+    private String id, bankAccountHolder, bankAccountNumber, notes, proofPic;
+    private int status = 0; // 0 -> pending, 1 -> approved, 2 -> rejected
     private int amount;
     private DocumentReference user;
 
@@ -38,11 +39,11 @@ public class Donation {
         return donation;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

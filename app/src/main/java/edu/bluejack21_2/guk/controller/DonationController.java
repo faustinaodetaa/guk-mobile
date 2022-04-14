@@ -26,7 +26,9 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class DonationController {
     public static void showAllDonations(DonationAdapter donationAdapter, ArrayList<Donation> donations){
-        Database.getDB().collection(Donation.COLLECTION_NAME).whereEqualTo("status", "pending").get().addOnCompleteListener(task -> {
+        Database.getDB().collection(Donation.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING)
+//                .whereEqualTo("status", "pending")
+                .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Donation donation = document.toObject(Donation.class);
@@ -38,18 +40,22 @@ public class DonationController {
         });
     }
     
-    public static void approveDonation(Context ctx, Donation donation){
+    public static void changeDonationStatus(Context ctx, Donation donation, boolean isApproved){
         HashMap<String, Object> data =  new HashMap<String, Object>();
-        data.put("status", "approved");
+        data.put("status", isApproved ? 1 : 2);
         Database.getDB().collection(Donation.COLLECTION_NAME).document(donation.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
-            data.clear();
-            int point = (int)(Math.ceil (donation.getAmount() / 100000.0) * 100);
-            Log.d("coba point", "approveDonation: " + point);
-            data.put("point", FieldValue.increment(point));
-            donation.getUser().update(data).addOnSuccessListener(unused -> {
+            if(isApproved){
+                data.clear();
+                int point = (int)(Math.ceil (donation.getAmount() / 100000.0 * 100.0));
+                data.put("point", FieldValue.increment(point));
+                donation.getUser().update(data).addOnSuccessListener(unused -> {
+                    ActivityHelper.refreshActivity((Activity) ctx);
+                    Toast.makeText(ctx, "Donation Approved!", Toast.LENGTH_LONG).show();
+                });
+            } else {
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Donation Approved!", Toast.LENGTH_LONG).show();
-            });
+                Toast.makeText(ctx, "Donation Rejected!", Toast.LENGTH_LONG).show();
+            }
         });
     }
 
