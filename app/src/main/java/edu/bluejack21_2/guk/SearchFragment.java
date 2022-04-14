@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ import edu.bluejack21_2.guk.model.Dog;
 
 
 public class SearchFragment extends Fragment {
+
+    private String[] searchMenu = {"Name", "Breed", "Age", "Gender"};
 
 
     public SearchFragment() {
@@ -38,6 +42,9 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        Spinner menus = view.findViewById(R.id.search_dropdown);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, searchMenu);
+        menus.setAdapter(adapter);
 
         RecyclerView recyclerView;
         DogAdapter dogAdapter;

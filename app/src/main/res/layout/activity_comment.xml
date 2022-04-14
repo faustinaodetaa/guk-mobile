@@ -66,10 +66,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingHorizontal="5dp">
             <EditText
                 android:id="@+id/comment_content"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Add a comment..."
                 android:orientation="vertical"
@@ -84,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Comment"
+                android:paddingHorizontal="5dp"
                 />
         </LinearLayout>
 
