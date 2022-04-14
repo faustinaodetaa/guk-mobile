@@ -127,4 +127,21 @@ public class DogController {
         });
     }
 
+    public static void getDogById(String id, FinishListener<Dog> listener){
+        Database.getDB().collection(Dog.COLLECTION_NAME).document(id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                Dog d = document.toObject(Dog.class);
+//                Log.d("coba", "getUserById: " + u.getIsDeleted());
+//                if(!u.getIsDeleted()){
+//                    User.CURRENT_USER = u;
+                d.setId(id);
+                if(listener != null)
+                    listener.onFinish(d, null);
+//                }
+            }
+
+        });
+    }
+
 }

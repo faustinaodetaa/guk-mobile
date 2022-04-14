@@ -6,10 +6,20 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.bluejack21_2.guk.HomeActivity;
+import edu.bluejack21_2.guk.adapter.AdoptionAdapter;
+import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.model.Adoption;
 import edu.bluejack21_2.guk.model.Dog;
+import edu.bluejack21_2.guk.model.Donation;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.ActivityHelper;
 import edu.bluejack21_2.guk.util.Database;
@@ -30,5 +40,37 @@ public class AdoptionController {
             Toast.makeText(ctx, "Error!", Toast.LENGTH_SHORT).show();
         });
         return true;
+    }
+
+    public static void changeAdoptionStatus(Context ctx, Adoption adoption, boolean isApproved){
+        HashMap<String, Object> data =  new HashMap<String, Object>();
+        data.put("status", isApproved ? 1 : 2);
+        Database.getDB().collection(Adoption.COLLECTION_NAME).document(adoption.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+            if(isApproved){
+                data.clear();
+                adoption.getUser().update(data).addOnSuccessListener(unused -> {
+                    ActivityHelper.refreshActivity((Activity) ctx);
+                    Toast.makeText(ctx, "Adoption Approved!", Toast.LENGTH_LONG).show();
+                });
+            } else {
+                ActivityHelper.refreshActivity((Activity) ctx);
+                Toast.makeText(ctx, "Adoption Rejected!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void showAllAdoptions(AdoptionAdapter adoptionAdapter, ArrayList<Adoption> adoptions){
+        Database.getDB().collection(Adoption.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING)
+//                .whereEqualTo("status", "pending")
+                .get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Adoption adoption = document.toObject(Adoption.class);
+                    adoption.setId(document.getId());
+                    adoptions.add(adoption);
+                    adoptionAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 }

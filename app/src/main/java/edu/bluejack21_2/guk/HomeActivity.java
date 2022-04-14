@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
 //    private HomeFragment homeFragment = new HomeFragment();
     private TabFragment homeTabFragment = new TabFragment(new HomeFragment(), new StoryFragment());
+    private TabFragment donateAdoptTabFragment = new TabFragment(new AdminDonateFragment(), new AdminAdoptFragment());
     private SearchFragment searchFragment = new SearchFragment();
     private AddDogFragment addDogFragment = new AddDogFragment();
     private AddStoryFragment addStoryFragment = new AddStoryFragment();
@@ -68,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         } else if(item.getItemId() == R.id.donate){
             toggleTitleBar(false);
             if(User.CURRENT_USER.getRole().equals("admin")){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, adminDonateFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, donateAdoptTabFragment).commit();
             } else {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, userDonateFragment).commit();
             }
