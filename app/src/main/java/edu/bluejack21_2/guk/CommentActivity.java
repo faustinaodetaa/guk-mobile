@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private TextView storyContentTxt, postComment;
     private EditText commentContentTxt;
-
+    private ImageView backIcon;
 
 
     @Override
@@ -34,6 +35,15 @@ public class CommentActivity extends AppCompatActivity {
         storyContentTxt = findViewById(R.id.comment_story_content);
         postComment = findViewById(R.id.comment_btn);
         commentContentTxt = findViewById(R.id.comment_content);
+        backIcon = findViewById(R.id.story_back_icon);
+
+        backIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(DogDetailActivity.this, HomeActivity.class));
+                finish();
+            }
+        });
 
         final Story story = (Story)getIntent().getParcelableExtra("story");
         Log.d("coba intent story", "a: " + story.getContent());
