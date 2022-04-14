@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="350dp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <ImageView
+                android:id="@+id/tnc_dialog_close"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:src="@drawable/close_x"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="guk's Terms and Condition"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" By installing, accessing or using any mobile apps, email newsletters and subscriptions, and other digital properties on which these terms are posted or referenced (together, “online services”), you are entering into a binding agreement with guk Company, which controls and operates the online services from its headquarters at 110 Beenus Alam Sutera. By accepting these terms, you also understand and consent to guk's Privacy Statement, which is incorporated into, and part of, this agreement. Our Privacy Statement describes how we collect, use and share information. By accepting these terms, you understand and agree that, as stated, you are waiving your right to resolve any dispute through other processes that could be available to you, such as court actions or administrative proceedings. It also means that you are waiving your rights to a trial by jury or to combine your dispute with others in a class action."
+                android:justificationMode="inter_word"
+                />
+
+            <CheckBox
+                android:id="@+id/tnc_agree"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I agree with the terms and condition"
+                />
+            <Button
+                android:id="@+id/tnc_adopt_dog_btn"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:text="ADOPT"
+                android:textColor="@color/white"
+                android:textFontWeight="800" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

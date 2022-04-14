@@ -18,10 +18,12 @@ import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.controller.StoryController;
 import edu.bluejack21_2.guk.model.Story;
 
-public class StoryFragment extends Fragment {
+public class StoryFragment extends CustomFragment {
 
     public StoryFragment() {
         // Required empty public constructor
+        super("Our Story");
+
     }
 
 

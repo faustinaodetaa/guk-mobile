@@ -16,10 +16,12 @@ import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Dog;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends CustomFragment {
+
 
     public HomeFragment() {
         // Required empty public constructor
+        super("Adopt Me");
     }
 
 

@@ -16,10 +16,11 @@ import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.controller.DonationController;
 import edu.bluejack21_2.guk.model.Donation;
 
-public class AdminDonateFragment extends Fragment {
+public class AdminDonateFragment extends CustomFragment {
 
     public AdminDonateFragment() {
         // Required empty public constructor
+        super("Donations");
     }
 
     @Override

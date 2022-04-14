@@ -142,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dolor eros, vehicula eget lectus a, eleifend euismod augue. Cras gravida commodo nunc, sit amet ultrices quam rhoncus sit amet. Aenean scelerisque purus in convallis bibendum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:justificationMode="inter_word"/>
 
             <Button
                 android:id="@+id/adopt_dog_btn"

@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -23,7 +25,9 @@ import java.util.UUID;
 import edu.bluejack21_2.guk.HomeActivity;
 import edu.bluejack21_2.guk.MainActivity;
 import edu.bluejack21_2.guk.adapter.DogAdapter;
+import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.Dog;
+import edu.bluejack21_2.guk.model.Donation;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.ActivityHelper;
 import edu.bluejack21_2.guk.util.Database;
@@ -111,4 +115,16 @@ public class DogController {
             Toast.makeText(ctx, "Dog updated successfully!", Toast.LENGTH_SHORT).show();
         });
     }
+
+    public static void changeDogStatus(Context ctx, Dog dog, String status){
+        HashMap<String, Object> data =  new HashMap<String, Object>();
+        data.put("status", status);
+        Database.getDB().collection(Dog.COLLECTION_NAME).document(dog.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+
+//                ActivityHelper.refreshActivity((Activity) ctx);
+//                Toast.makeText(ctx, "Adoption!", Toast.LENGTH_LONG).show();
+
+        });
+    }
+
 }

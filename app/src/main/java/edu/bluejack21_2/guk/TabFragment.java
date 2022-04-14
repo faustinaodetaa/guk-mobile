@@ -20,6 +20,13 @@ public class TabFragment extends Fragment {
     private ViewPager2 viewPager;
     private TabAdapter tabAdapter;
 
+    private CustomFragment fragment1, fragment2;
+
+    public TabFragment(CustomFragment fragment1, CustomFragment fragment2) {
+        this.fragment1 = fragment1;
+        this.fragment2 = fragment2;
+    }
+
     public TabFragment() {
         // Required empty public constructor
     }
@@ -39,11 +46,11 @@ public class TabFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layout);
         viewPager = view.findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Adopt Me"));
-        tabLayout.addTab(tabLayout.newTab().setText("Our Story"));
+        tabLayout.addTab(tabLayout.newTab().setText(fragment1.getName()));
+        tabLayout.addTab(tabLayout.newTab().setText(fragment2.getName()));
 
         FragmentManager fragmentManager = getChildFragmentManager();
-        tabAdapter = new TabAdapter(fragmentManager , getLifecycle());
+        tabAdapter = new TabAdapter(fragmentManager , getLifecycle(), fragment1, fragment2);
         viewPager.setAdapter(tabAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
