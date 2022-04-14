@@ -1,8 +1,11 @@
 package edu.bluejack21_2.guk.adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import edu.bluejack21_2.guk.CommentActivity;
+import edu.bluejack21_2.guk.DogDetailActivity;
 import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.controller.StoryController;
 import edu.bluejack21_2.guk.controller.UserController;
@@ -50,7 +55,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
         Story story = storyList.get(position);
 
-//        holder.username.setText(story.get);
         holder.contentTxt.setText(story.getContent());
 
         UserController.getUserById(story.getUser().getId(), (data, message) -> {
@@ -85,6 +89,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
         holder.likeIcon.setOnClickListener(view -> {
             StoryController.toggleLike(holder.likeIcon, story.getId());
+        });
+
+        holder.commentIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(context, CommentActivity.class);
+            Log.d("coba intent", "onClick: " + story.getContent());
+            intent.putExtra("story", story);
+            context.startActivity(intent);
+
         });
 
         Database.showImage(story.getPicture(), ((Activity)context), holder.picture );

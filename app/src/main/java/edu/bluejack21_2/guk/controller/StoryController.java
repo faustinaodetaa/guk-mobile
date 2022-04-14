@@ -9,16 +9,22 @@ import android.widget.Toast;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import edu.bluejack21_2.guk.R;
+import edu.bluejack21_2.guk.adapter.CommentAdapter;
 import edu.bluejack21_2.guk.adapter.StoryAdapter;
+import edu.bluejack21_2.guk.listener.FinishListener;
+import edu.bluejack21_2.guk.model.Comment;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.Story;
 import edu.bluejack21_2.guk.model.User;
@@ -83,4 +89,54 @@ public class StoryController {
 
 
     }
+
+
+    public static void getStoryById(String id, FinishListener<Story> listener){
+        Database.getDB().collection(Story.COLLECTION_NAME).document(id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                Story s = document.toObject(Story.class);
+                s.setId(id);
+                if(listener != null)
+                    listener.onFinish(s, null);
+            }
+        });
+    }
+
+    public static void showAllCommentsByStory(CommentAdapter commentAdapter, ArrayList<Comment> commentList, String storyId){
+        Database.getDB().collection(Story.COLLECTION_NAME).document(storyId).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot document =  task.getResult();
+                    Story story = document.toObject(Story.class);
+                    story.setId(document.getId());
+                    for(Map<String, Object> map : story.getComments()){
+                        Comment c = new Comment((String) map.get("content"), (DocumentReference) map.get("user"));
+
+                        commentList.add(c);
+                        commentAdapter.notifyDataSetChanged();
+                    }
+            }
+        });
+
+    }
+
+    public static void insertComment(Context ctx, String content, String storyId){
+        DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
+        HashMap<String, Object> comment = new HashMap<>();
+
+        comment.put("content", content);
+        comment.put("user", userRef);
+
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("comments", FieldValue.arrayUnion(comment));
+
+        Database.getDB().collection(Story.COLLECTION_NAME).document(storyId).update(map).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                ActivityHelper.refreshActivity((Activity) ctx);
+            }
+        });
+    }
+
+
 }

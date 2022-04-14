@@ -1,5 +1,8 @@
 package edu.bluejack21_2.guk.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 
@@ -9,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Story {
+public class Story implements Parcelable {
 
     public static final String COLLECTION_NAME = "stories";
 
@@ -27,6 +30,13 @@ public class Story {
         this.content = content;
         this.picture = picture;
         this.createdAt = createdAt;
+    }
+
+    protected Story(Parcel in){
+        this.createdAt = in.readTypedObject(Timestamp.CREATOR);
+        this.content = in.readString();
+        this.picture = in.readString();
+        this.id = in.readString();
     }
 
     public HashMap<String, Object> toMap() {
@@ -93,4 +103,29 @@ public class Story {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeTypedObject(this.createdAt, i);
+        parcel.writeString(this.content);
+        parcel.writeString(this.picture);
+        parcel.writeString(this.id);
+    }
+
+    public static final Parcelable.Creator<Story> CREATOR = new Parcelable.Creator<Story>() {
+        @Override
+        public Story createFromParcel(Parcel source) {
+            return new Story(source);
+        }
+
+        @Override
+        public Story[] newArray(int size) {
+            return new Story[size];
+        }
+    };
 }
