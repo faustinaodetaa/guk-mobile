@@ -35,14 +35,8 @@ public class CommentActivity extends AppCompatActivity {
         postComment = findViewById(R.id.comment_btn);
         commentContentTxt = findViewById(R.id.comment_content);
 
-
-
-
-
-
         final Story story = (Story)getIntent().getParcelableExtra("story");
         Log.d("coba intent story", "a: " + story.getContent());
-//        Log.d("coba intent2", "a: " + dog.getId());
         Log.d("coba intent story", "a: " + story.getId());
 
         postComment.setOnClickListener(view -> {
