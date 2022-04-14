@@ -18,7 +18,7 @@ public class Story implements Parcelable {
 
     private String id, content, picture;
     private DocumentReference user;
-    private List<Map<String, Object>> comments;
+    private List<Map<String, Object>> comments = new ArrayList<>();
     private List<DocumentReference> likes;
     private Timestamp createdAt;
     public Story(){

@@ -69,10 +69,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
 //            delete comment
         });
 
-//        holder.postComment.setOnClickListener(view -> {
-//            StoryController.insertComment(context, holder.commentContentTxt.getText(), );
-//        });
-
     }
 
     @Override
