@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -28,10 +30,17 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
     Context context;
 
     private ArrayList<Donation> donations;
+    private boolean isUser = false;
 
     public DonationAdapter(Context context, ArrayList<Donation> donations) {
         this.context = context;
         this.donations = donations;
+    }
+
+    public DonationAdapter(Context context, ArrayList<Donation> donations, boolean isUser) {
+        this.context = context;
+        this.donations = donations;
+        this.isUser = isUser;
     }
 
     @NonNull
@@ -47,8 +56,11 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
 
         StringBuilder builder = new StringBuilder();
         UserController.getUserById(donation.getUser().getId(), (data, message) -> {
-            builder.append("<b>" + data.getName() + "</b>");
-            builder.append(" donated ");
+            if(!isUser){
+                builder.append("<b>" + data.getName() + "</b> donated ");
+            } else {
+                builder.append("Donated ");
+            }
             String amountTxt = String.format("IDR %,d", donation.getAmount());
             builder.append("<b>" + amountTxt + "</b>");
             String text = builder.toString();
@@ -58,43 +70,58 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
             holder.descriptionTxt.setText(Html.fromHtml(text));
         });
 
+        if(!isUser){
+            holder.viewProofBtn.setOnClickListener(view -> {
+                final Dialog dialog = new Dialog(context);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.image_dialog);
 
-        holder.viewProofBtn.setOnClickListener(view -> {
-            final Dialog dialog = new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.image_dialog);
+                ImageView closeBtn = dialog.findViewById(R.id.image_dialog_close);
+                ImageView proofPic = dialog.findViewById(R.id.image_dialog_image);
 
-            ImageView closeBtn = dialog.findViewById(R.id.image_dialog_close);
-            ImageView proofPic = dialog.findViewById(R.id.image_dialog_image);
+                Database.showImage(donation.getProofPic(), (Activity) context, proofPic);
 
-            Database.showImage(donation.getProofPic(), (Activity) context, proofPic);
+                closeBtn.setOnClickListener(v -> {
+                    dialog.cancel();
+                });
 
-            closeBtn.setOnClickListener(v -> {
-                dialog.cancel();
+                dialog.show();
             });
 
-            dialog.show();
-        });
+            if(donation.getStatus() == 0){
+                holder.approveBtn.setOnClickListener(view -> {
+                    DonationController.changeDonationStatus(context, donation, true);
+                });
+                holder.rejectBtn.setOnClickListener(view -> {
+                    DonationController.changeDonationStatus(context, donation, false);
+                });
 
-        if(donation.getStatus() == 0){
-            holder.approveBtn.setOnClickListener(view -> {
-                DonationController.changeDonationStatus(context, donation, true);
-            });
-            holder.rejectBtn.setOnClickListener(view -> {
-                DonationController.changeDonationStatus(context, donation, false);
-            });
-
-        } else {
-            int color;
-            if(donation.getStatus() == 1){
-                color = R.color.success;
             } else {
-                color = R.color.danger_light;
+                holder.approveBtn.setVisibility(View.GONE);
+                holder.rejectBtn.setVisibility(View.GONE);
+
+                int marginInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, context.getResources().getDisplayMetrics());
+
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
+                params.setMargins(0, 0, marginInDp, 0);
+
+                holder.leftTxt.setLayoutParams(params);
             }
-            holder.background.setCardBackgroundColor(context.getColor(color));
-            holder.approveBtn.setVisibility(View.GONE);
-            holder.rejectBtn.setVisibility(View.GONE);
+        } else {
+            holder.action.setVisibility(View.GONE);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+
+            holder.leftTxt.setLayoutParams(params);
         }
+
+        int color = R.color.white;
+        if(donation.getStatus() == 1){
+            color = R.color.success;
+        } else if(donation.getStatus() == 2){
+            color = R.color.danger_light;
+        }
+        holder.background.setCardBackgroundColor(context.getColor(color));
 
     }
 
@@ -110,7 +137,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
         ImageView viewProofBtn;
         ImageView approveBtn, rejectBtn;
 
-        ViewGroup leftTxt;
+        ViewGroup leftTxt, action;
 
         public DonationViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,7 +149,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
             rejectBtn = itemView.findViewById(R.id.list_reject_btn);
 
             leftTxt = itemView.findViewById(R.id.list_description_container);
-
+            action = itemView.findViewById(R.id.list_action);
         }
     }
 }

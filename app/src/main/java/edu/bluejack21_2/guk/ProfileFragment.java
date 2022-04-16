@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import edu.bluejack21_2.guk.adapter.AdoptionAdapter;
+import edu.bluejack21_2.guk.adapter.DonationAdapter;
+import edu.bluejack21_2.guk.controller.AdoptionController;
+import edu.bluejack21_2.guk.controller.DonationController;
 import edu.bluejack21_2.guk.controller.UserController;
+import edu.bluejack21_2.guk.model.Adoption;
+import edu.bluejack21_2.guk.model.Donation;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
@@ -64,6 +74,33 @@ public class ProfileFragment extends Fragment {
             UserController.deleteAccount(User.CURRENT_USER.getId());
             UserController.logout(view.getContext());
         });
+
+
+        RecyclerView recyclerDonation, recyclerAdoption;
+        AdoptionAdapter adoptionAdapter;
+        DonationAdapter donationAdapter;
+
+        ArrayList<Adoption> adoptions;
+        ArrayList<Donation> donations;
+
+        recyclerDonation = view.findViewById(R.id.profile_donation_history);
+        recyclerDonation.setHasFixedSize(true);
+        recyclerDonation.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        recyclerAdoption = view.findViewById(R.id.profile_adoption_history);
+        recyclerAdoption.setHasFixedSize(true);
+        recyclerAdoption.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        donations = new ArrayList<>();
+        donationAdapter = new DonationAdapter(view.getContext(), donations, true);
+        recyclerDonation.setAdapter(donationAdapter);
+
+        adoptions = new ArrayList<>();
+        adoptionAdapter = new AdoptionAdapter(view.getContext(), adoptions, true);
+        recyclerAdoption.setAdapter(adoptionAdapter);
+
+        AdoptionController.showAllAdoptionsByUser(adoptionAdapter, adoptions);
+        DonationController.showAllDonationsByUser(donationAdapter, donations);
 
         return view;
     }

@@ -39,6 +39,24 @@ public class DonationController {
             }
         });
     }
+
+    public static void showAllDonationsByUser(DonationAdapter donationAdapter, ArrayList<Donation> donations){
+        DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
+
+        Database.getDB().collection(Donation.COLLECTION_NAME)
+                .whereEqualTo("user", userRef)
+                .orderBy("status", Query.Direction.ASCENDING)
+                .get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Donation donation = document.toObject(Donation.class);
+                    donation.setId(document.getId());
+                    donations.add(donation);
+                    donationAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
     
     public static void changeDonationStatus(Context ctx, Donation donation, boolean isApproved){
         HashMap<String, Object> data =  new HashMap<String, Object>();

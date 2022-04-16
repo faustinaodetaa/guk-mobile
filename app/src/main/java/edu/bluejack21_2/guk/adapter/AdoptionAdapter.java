@@ -28,14 +28,21 @@ import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.Adoption;
 import edu.bluejack21_2.guk.util.Database;
 
-public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder> {
+public class AdoptionAdapter extends RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder> {
     Context context;
 
     private ArrayList<Adoption> adoptions;
+    private boolean isUser = false;
 
     public AdoptionAdapter(Context context, ArrayList<Adoption> adoptions) {
         this.context = context;
         this.adoptions = adoptions;
+    }
+
+    public AdoptionAdapter(Context context, ArrayList<Adoption> adoptions, boolean isUser) {
+        this.context = context;
+        this.adoptions = adoptions;
+        this.isUser = isUser;
     }
 
     @NonNull
@@ -52,8 +59,12 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
 
         StringBuilder builder = new StringBuilder();
         UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
-            builder.append("<b>" + data.getName() + "</b>");
-            builder.append(" adopted ");
+            if(!isUser){
+                builder.append("<b>" + data.getName() + "</b> adopted ");
+            } else {
+                builder.append("Adopted ");
+            }
+
             DogController.getDogById(adoption.getDog().getId(), ((d, m) -> {
                 builder.append("<b>" + d.getName() + " the " + d.getBreed() + "</b>");
                 String text = builder.toString();
@@ -64,61 +75,70 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
             }));
         });
 
-        holder.viewProofBtn.setOnClickListener(view -> {
-            final Dialog dialog = new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.user_dialog);
+        if(!isUser){
+            holder.viewProofBtn.setOnClickListener(view -> {
+                final Dialog dialog = new Dialog(context);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.user_dialog);
 
-            ImageView closeBtn = dialog.findViewById(R.id.user_dialog_close);
-            ImageView userProfile = dialog.findViewById(R.id.dialog_user_profile_picture);
-            TextView userNameTxt  = dialog.findViewById(R.id.dialog_user_name);
-            TextView userEmailTxt = dialog.findViewById(R.id.dialog_user_email);
-            TextView userPhoneTxt= dialog.findViewById(R.id.dialog_user_phone);
-            TextView userAddressTxt = dialog.findViewById(R.id.dialog_user_address);;
+                ImageView closeBtn = dialog.findViewById(R.id.user_dialog_close);
+                ImageView userProfile = dialog.findViewById(R.id.dialog_user_profile_picture);
+                TextView userNameTxt  = dialog.findViewById(R.id.dialog_user_name);
+                TextView userEmailTxt = dialog.findViewById(R.id.dialog_user_email);
+                TextView userPhoneTxt= dialog.findViewById(R.id.dialog_user_phone);
+                TextView userAddressTxt = dialog.findViewById(R.id.dialog_user_address);;
 
-            UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
-                if(data != null){
-                    userNameTxt.setText("Name: " + data.getName());
-                    userEmailTxt.setText("Email: " + data.getEmail());
-                    userPhoneTxt.setText("Phone Number: " + data.getPhone());
-                    userAddressTxt.setText("Address: " + data.getAddress());
-                    Database.showImage(data.getProfilePicture(), (Activity) context, userProfile);
-                }
-            });
-            closeBtn.setOnClickListener(v -> {
-                dialog.cancel();
-            });
+                UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
+                    if(data != null){
+                        userNameTxt.setText("Name: " + data.getName());
+                        userEmailTxt.setText("Email: " + data.getEmail());
+                        userPhoneTxt.setText("Phone Number: " + data.getPhone());
+                        userAddressTxt.setText("Address: " + data.getAddress());
+                        Database.showImage(data.getProfilePicture(), (Activity) context, userProfile);
+                    }
+                });
+                closeBtn.setOnClickListener(v -> {
+                    dialog.cancel();
+                });
 
-            dialog.show();
-        });
-
-        if(adoption.getStatus() == 0){
-            holder.approveBtn.setOnClickListener(view -> {
-                AdoptionController.changeAdoptionStatus(context, adoption, true);
-            });
-            holder.rejectBtn.setOnClickListener(view -> {
-                AdoptionController.changeAdoptionStatus(context, adoption, false);
+                dialog.show();
             });
 
-        } else {
-            int color;
-            if(adoption.getStatus() == 1){
-                color = R.color.success;
+            if(adoption.getStatus() == 0){
+                holder.approveBtn.setOnClickListener(view -> {
+                    AdoptionController.changeAdoptionStatus(context, adoption, true);
+                });
+                holder.rejectBtn.setOnClickListener(view -> {
+                    AdoptionController.changeAdoptionStatus(context, adoption, false);
+                });
+
             } else {
+                holder.approveBtn.setVisibility(View.GONE);
+                holder.rejectBtn.setVisibility(View.GONE);
 
-                color = R.color.danger_light;
+                int marginInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, context.getResources().getDisplayMetrics());
+
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
+                params.setMargins(0, 0, marginInDp, 0);
+
+                holder.leftTxt.setLayoutParams(params);
             }
-            holder.adoptionCard.setCardBackgroundColor(context.getColor(color));
-            holder.approveBtn.setVisibility(View.GONE);
-            holder.rejectBtn.setVisibility(View.GONE);
-
-            int marginInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, context.getResources().getDisplayMetrics());
-
+        } else {
+            holder.action.setVisibility(View.GONE);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
-            params.setMargins(0, 0, marginInDp, 0);
+            params.setMargins(0, 0, 0, 0);
 
             holder.leftTxt.setLayoutParams(params);
         }
+
+        int color = R.color.white;
+        if(adoption.getStatus() == 1){
+            color = R.color.success;
+        } else if(adoption.getStatus() == 2){
+            color = R.color.danger_light;
+        }
+        holder.adoptionCard.setCardBackgroundColor(context.getColor(color));
+
 
     }
 
@@ -133,7 +153,7 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
         TextView descriptionTxt;
         ImageView viewProofBtn, approveBtn, rejectBtn;
 
-        FlexboxLayout leftTxt;
+        ViewGroup leftTxt, action;
 
         public AdoptionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +165,7 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
             rejectBtn = itemView.findViewById(R.id.list_reject_btn);
 
             leftTxt = itemView.findViewById(R.id.list_description_container);
+            action = itemView.findViewById(R.id.list_action);
 
         }
     }

@@ -79,4 +79,22 @@ public class AdoptionController {
             }
         });
     }
+
+    public static void showAllAdoptionsByUser(AdoptionAdapter adoptionAdapter, ArrayList<Adoption> adoptions){
+        DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
+
+        Database.getDB().collection(Adoption.COLLECTION_NAME)
+                .whereEqualTo("user", userRef)
+                .orderBy("status", Query.Direction.ASCENDING)
+                .get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Adoption adoption = document.toObject(Adoption.class);
+                    adoption.setId(document.getId());
+                    adoptions.add(adoption);
+                    adoptionAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
 }
