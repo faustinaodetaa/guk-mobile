@@ -75,7 +75,23 @@ public abstract class HistoryAdapter<T extends History> extends RecyclerView.Ada
 
                 holder.leftTxt.setLayoutParams(params);
             }
+            int color = R.color.white;
+            if(curr.getStatus() == 1){
+                color = R.color.success;
+            } else if(curr.getStatus() == 2){
+                color = R.color.danger_light;
+            }
+            holder.background.setCardBackgroundColor(context.getColor(color));
         } else {
+            int statusIcon = R.drawable.circle_pending;
+            if(curr.getStatus() == 1){
+                statusIcon = R.drawable.circle_check;
+            } else if(curr.getStatus() == 2){
+                statusIcon = R.drawable.circle_cross;
+            }
+            holder.leftStatusIcon.setImageDrawable(context.getDrawable(statusIcon));
+            holder.leftStatusIcon.setVisibility(View.VISIBLE);
+
             holder.action.setVisibility(View.GONE);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
             params.setMargins(0, 0, 0, 0);
@@ -83,13 +99,6 @@ public abstract class HistoryAdapter<T extends History> extends RecyclerView.Ada
             holder.leftTxt.setLayoutParams(params);
         }
 
-        int color = R.color.white;
-        if(curr.getStatus() == 1){
-            color = R.color.success;
-        } else if(curr.getStatus() == 2){
-            color = R.color.danger_light;
-        }
-        holder.background.setCardBackgroundColor(context.getColor(color));
     }
 
     protected abstract void changeStatus(Context context, T curr, boolean isApproved);
@@ -111,6 +120,8 @@ public abstract class HistoryAdapter<T extends History> extends RecyclerView.Ada
 
         ViewGroup leftTxt, action;
 
+        ImageView leftStatusIcon;
+
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -122,6 +133,8 @@ public abstract class HistoryAdapter<T extends History> extends RecyclerView.Ada
 
             leftTxt = itemView.findViewById(R.id.list_description_container);
             action = itemView.findViewById(R.id.list_action);
+
+            leftStatusIcon = itemView.findViewById(R.id.list_left_status);
         }
     }
 }
