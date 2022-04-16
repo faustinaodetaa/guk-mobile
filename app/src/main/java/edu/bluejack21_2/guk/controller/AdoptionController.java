@@ -46,22 +46,32 @@ public class AdoptionController {
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("status", isApproved ? 1 : 2);
         Database.getDB().collection(Adoption.COLLECTION_NAME).document(adoption.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+            String notif = "";
+
             if(isApproved){
+                notif = "Your adoption has been approved!";
+
                 DogController.changeDogStatus(ctx, adoption.getDog(), "Adopted");
 
-                data.clear();
+//                data.clear();
                 int point = 100;
-                data.put("point", FieldValue.increment(point));
-                adoption.getUser().update(data).addOnSuccessListener(unused -> {
-                    ActivityHelper.refreshActivity((Activity) ctx);
-                    Toast.makeText(ctx, "Adoption Approved!", Toast.LENGTH_LONG).show();
-                });
+//                data.put("point", FieldValue.increment(point));
+//                adoption.getUser().update(data).addOnSuccessListener(unused -> {
+//                });
+                UserController.increasePoint(adoption.getUser(), point);
+                ActivityHelper.refreshActivity((Activity) ctx);
+                Toast.makeText(ctx, "Adoption Approved!", Toast.LENGTH_LONG).show();
+
             } else {
+                notif = "Your adoption has been rejected!";
+
                 DogController.changeDogStatus(ctx, adoption.getDog(), "Unadopted");
 
                 ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, "Adoption Rejected!", Toast.LENGTH_LONG).show();
             }
+            NotificationController.insertNotification(notif, "adoption", adoption.getUser());
+
         });
     }
 

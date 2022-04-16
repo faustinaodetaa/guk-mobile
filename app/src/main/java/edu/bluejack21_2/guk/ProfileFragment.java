@@ -84,11 +84,12 @@ public class ProfileFragment extends Fragment {
         ArrayList<Donation> donations;
 
         recyclerDonation = view.findViewById(R.id.profile_donation_history);
-        recyclerDonation.setHasFixedSize(true);
+        recyclerDonation.setNestedScrollingEnabled(false);
+//        recyclerDonation.setHasFixedSize(false);
         recyclerDonation.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         recyclerAdoption = view.findViewById(R.id.profile_adoption_history);
-        recyclerAdoption.setHasFixedSize(true);
+        recyclerAdoption.setNestedScrollingEnabled(false);
         recyclerAdoption.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         donations = new ArrayList<>();

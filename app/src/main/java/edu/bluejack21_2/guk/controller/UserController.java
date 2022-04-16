@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
@@ -23,6 +25,7 @@ import edu.bluejack21_2.guk.MainActivity;
 import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
+import edu.bluejack21_2.guk.util.ActivityHelper;
 import edu.bluejack21_2.guk.util.Crypt;
 import edu.bluejack21_2.guk.util.Database;
 
@@ -164,6 +167,20 @@ public class UserController {
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("isDeleted", true);
         Database.getDB().collection(User.COLLECTION_NAME).document(id).set(data, SetOptions.merge());
+    }
+
+    public static void increasePoint(DocumentReference userRef, int point){
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            User user = documentSnapshot.toObject(User.class);
+            if(User.getBadgeColor(user.getPoint()) != User.getBadgeColor(user.getPoint() + point)){
+                NotificationController.insertNotification("You have earn a new badge!", "badge-" + (user.getPoint() + point), userRef);
+            }
+            HashMap<String, Object> data =  new HashMap<String, Object>();
+            data.put("point", FieldValue.increment(point));
+            userRef.update(data).addOnSuccessListener(unused -> {
+
+            });
+        });
     }
 
 }

@@ -19,6 +19,7 @@ import java.util.UUID;
 import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.Donation;
+import edu.bluejack21_2.guk.model.Notification;
 import edu.bluejack21_2.guk.model.Story;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.ActivityHelper;
@@ -62,18 +63,27 @@ public class DonationController {
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("status", isApproved ? 1 : 2);
         Database.getDB().collection(Donation.COLLECTION_NAME).document(donation.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+            String notif = "";
             if(isApproved){
-                data.clear();
+                notif = "Your donation has been approved!";
+
+//                data.clear();
                 int point = (int)(Math.ceil (donation.getAmount() / 100000.0 * 100.0));
-                data.put("point", FieldValue.increment(point));
-                donation.getUser().update(data).addOnSuccessListener(unused -> {
-                    ActivityHelper.refreshActivity((Activity) ctx);
-                    Toast.makeText(ctx, "Donation Approved!", Toast.LENGTH_LONG).show();
-                });
+//                data.put("point", FieldValue.increment(point));
+//                donation.getUser().update(data).addOnSuccessListener(unused -> {
+//                });
+                UserController.increasePoint(donation.getUser(), point);
+
+                ActivityHelper.refreshActivity((Activity) ctx);
+                Toast.makeText(ctx, "Donation Approved!", Toast.LENGTH_LONG).show();
             } else {
+                notif = "Your donation has been rejected!";
+
                 ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, "Donation Rejected!", Toast.LENGTH_LONG).show();
             }
+            NotificationController.insertNotification(notif, "donation", donation.getUser());
+
         });
     }
 
