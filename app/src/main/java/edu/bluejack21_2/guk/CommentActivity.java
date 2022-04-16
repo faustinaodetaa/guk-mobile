@@ -62,7 +62,7 @@ public class CommentActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         commentList = new ArrayList<>();
-        commentAdapter = new CommentAdapter(this, commentList);
+        commentAdapter = new CommentAdapter(this, commentList, story);
         recyclerView.setAdapter(commentAdapter);
 
         StoryController.showAllCommentsByStory(commentAdapter, commentList, story.getId());

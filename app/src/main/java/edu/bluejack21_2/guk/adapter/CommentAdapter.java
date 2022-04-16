@@ -37,10 +37,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
     Context context;
 
     private ArrayList<Comment> commentList;
+    private Story story;
 
-    public CommentAdapter(Context context, ArrayList<Comment> commentList){
+    public CommentAdapter(Context context, ArrayList<Comment> commentList, Story story){
         this.context = context;
         this.commentList = commentList;
+        this.story = story;
     }
 
     @NonNull
@@ -65,9 +67,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
             }
         });
 
+
         holder.deleteBtn.setOnClickListener(view -> {
-//            delete comment
+            Log.d("delete id", story.getId());
+            StoryController.deleteComment(context, comment.getContent(), story.getId());
         });
+
 
     }
 

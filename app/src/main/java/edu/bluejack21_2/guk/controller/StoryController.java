@@ -135,6 +135,7 @@ public class StoryController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("comments", FieldValue.arrayUnion(comment));
 
+
         Database.getDB().collection(Story.COLLECTION_NAME).document(storyId).update(map).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 ActivityHelper.refreshActivity((Activity) ctx);
@@ -142,14 +143,21 @@ public class StoryController {
         });
     }
 
-    public static void deleteComment(String id, int index){
-        HashMap<String, Object> data = new HashMap<>();
-        Database.getDB().collection(Story.COLLECTION_NAME).document(id).update("comments", FieldValue.arrayRemove(index)).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d("Deleted", "Success delete comment");
-                }
+    public static void deleteComment(Context ctx, String content, String storyId){
+        DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
+        HashMap<String, Object> comment = new HashMap<>();
+
+        comment.put("content", content);
+        comment.put("user", userRef);
+
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("comments", FieldValue.arrayRemove(comment));
+
+
+        Database.getDB().collection(Story.COLLECTION_NAME).document(storyId).update(map).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                ActivityHelper.refreshActivity((Activity) ctx);
             }
         });
     }
