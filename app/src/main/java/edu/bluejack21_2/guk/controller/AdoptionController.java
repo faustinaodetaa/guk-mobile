@@ -26,9 +26,9 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class AdoptionController {
     public static boolean insertAdoption(Context ctx, Dog dog){
-        DogController.changeDogStatus(ctx, dog, "Pending");
         DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
         DocumentReference dogRef = Database.getDB().collection(Dog.COLLECTION_NAME).document(dog.getId());
+        DogController.changeDogStatus(ctx, dogRef, "Pending");
         Adoption adoption = new Adoption(userRef, dogRef);
         Database.getDB().collection(Adoption.COLLECTION_NAME).add(adoption.toMap()).addOnSuccessListener(documentReference -> {
             Toast.makeText(ctx, "Thank you for your Adoption! Please wait for our admin to check and review your adoption.", Toast.LENGTH_LONG).show();
@@ -47,12 +47,18 @@ public class AdoptionController {
         data.put("status", isApproved ? 1 : 2);
         Database.getDB().collection(Adoption.COLLECTION_NAME).document(adoption.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
             if(isApproved){
+                DogController.changeDogStatus(ctx, adoption.getDog(), "Adopted");
+
                 data.clear();
+                int point = 100;
+                data.put("point", FieldValue.increment(point));
                 adoption.getUser().update(data).addOnSuccessListener(unused -> {
                     ActivityHelper.refreshActivity((Activity) ctx);
                     Toast.makeText(ctx, "Adoption Approved!", Toast.LENGTH_LONG).show();
                 });
             } else {
+                DogController.changeDogStatus(ctx, adoption.getDog(), "Unadopted");
+
                 ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, "Adoption Rejected!", Toast.LENGTH_LONG).show();
             }

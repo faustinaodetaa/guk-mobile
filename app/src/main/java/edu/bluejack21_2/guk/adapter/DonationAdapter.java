@@ -37,7 +37,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
     @NonNull
     @Override
     public DonationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.donation_template,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.list_template,parent,false);
         return new DonationViewHolder(v);
     }
 
@@ -45,12 +45,19 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
     public void onBindViewHolder(@NonNull DonationViewHolder holder, int position) {
         Donation donation = donations.get(position);
 
+        StringBuilder builder = new StringBuilder();
         UserController.getUserById(donation.getUser().getId(), (data, message) -> {
-            holder.titleNameTxt.setText(data.getName());
+            builder.append("<b>" + data.getName() + "</b>");
+            builder.append(" donated ");
+            String amountTxt = String.format("IDR %,d", donation.getAmount());
+            builder.append("<b>" + amountTxt + "</b>");
+            String text = builder.toString();
+            if(donation.getStatus() == 2){
+                text = "<s>" + text + "</s>";
+            }
+            holder.descriptionTxt.setText(Html.fromHtml(text));
         });
 
-        String amountTxt = String.format("IDR %,d", donation.getAmount());
-        holder.titleAmountTxt.setText(amountTxt);
 
         holder.viewProofBtn.setOnClickListener(view -> {
             final Dialog dialog = new Dialog(context);
@@ -82,7 +89,6 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
             if(donation.getStatus() == 1){
                 color = R.color.success;
             } else {
-                holder.titleAmountTxt.setText(Html.fromHtml("<s>" + amountTxt + "</s>"));
                 color = R.color.danger_light;
             }
             holder.background.setCardBackgroundColor(context.getColor(color));
@@ -100,19 +106,22 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
     public class DonationViewHolder extends RecyclerView.ViewHolder {
 
         CardView background;
-        TextView titleNameTxt, titleAmountTxt;
+        TextView descriptionTxt;
         ImageView viewProofBtn;
         ImageView approveBtn, rejectBtn;
+
+        ViewGroup leftTxt;
 
         public DonationViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            background = itemView.findViewById(R.id.donation_card);
-            titleNameTxt = itemView.findViewById(R.id.donate_title_name_txt);
-            titleAmountTxt = itemView.findViewById(R.id.donate_title_amount_txt);
-            viewProofBtn = itemView.findViewById(R.id.donate_view_proof_btn);
-            approveBtn = itemView.findViewById(R.id.donate_approve_btn);
-            rejectBtn = itemView.findViewById(R.id.donate_reject_btn);
+            background = itemView.findViewById(R.id.list_card_template);
+            descriptionTxt = itemView.findViewById(R.id.list_description_txt);
+            viewProofBtn = itemView.findViewById(R.id.list_view_btn);
+            approveBtn = itemView.findViewById(R.id.list_approve_btn);
+            rejectBtn = itemView.findViewById(R.id.list_reject_btn);
+
+            leftTxt = itemView.findViewById(R.id.list_description_container);
 
         }
     }

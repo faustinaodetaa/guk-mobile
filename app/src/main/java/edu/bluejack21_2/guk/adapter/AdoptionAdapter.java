@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +14,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentReference;
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 
 import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.controller.AdoptionController;
 import edu.bluejack21_2.guk.controller.DogController;
-import edu.bluejack21_2.guk.controller.DonationController;
 import edu.bluejack21_2.guk.controller.UserController;
 import edu.bluejack21_2.guk.model.Adoption;
-import edu.bluejack21_2.guk.model.Donation;
 import edu.bluejack21_2.guk.util.Database;
 
 public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.AdoptionViewHolder> {
@@ -41,7 +41,7 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
     @NonNull
     @Override
     public AdoptionAdapter.AdoptionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adoption_template,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.list_template,parent,false);
         return new AdoptionAdapter.AdoptionViewHolder(v);
     }
 
@@ -49,14 +49,20 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
     public void onBindViewHolder(@NonNull AdoptionAdapter.AdoptionViewHolder holder, int position) {
         Adoption adoption = adoptions.get(position);
 
+
+        StringBuilder builder = new StringBuilder();
         UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
-            holder.titleNameTxt.setText(data.getName());
+            builder.append("<b>" + data.getName() + "</b>");
+            builder.append(" adopted ");
+            DogController.getDogById(adoption.getDog().getId(), ((d, m) -> {
+                builder.append("<b>" + d.getName() + " the " + d.getBreed() + "</b>");
+                String text = builder.toString();
+                if(adoption.getStatus() == 2){
+                    text = "<s>" + text + "</s>";
+                }
+                holder.descriptionTxt.setText(Html.fromHtml(text));
+            }));
         });
-
-        DogController.getDogById(adoption.getDog().getId(), ((data, message) -> {
-            holder.titleDogTxt.setText(data.getName() + " the " + data.getBreed());
-        }));
-
 
         holder.viewProofBtn.setOnClickListener(view -> {
             final Dialog dialog = new Dialog(context);
@@ -99,11 +105,19 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
             if(adoption.getStatus() == 1){
                 color = R.color.success;
             } else {
+
                 color = R.color.danger_light;
             }
             holder.adoptionCard.setCardBackgroundColor(context.getColor(color));
             holder.approveBtn.setVisibility(View.GONE);
             holder.rejectBtn.setVisibility(View.GONE);
+
+            int marginInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, context.getResources().getDisplayMetrics());
+
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) holder.leftTxt.getLayoutParams();
+            params.setMargins(0, 0, marginInDp, 0);
+
+            holder.leftTxt.setLayoutParams(params);
         }
 
     }
@@ -116,20 +130,21 @@ public class AdoptionAdapter  extends RecyclerView.Adapter<AdoptionAdapter.Adopt
     public class AdoptionViewHolder extends RecyclerView.ViewHolder {
 
         CardView adoptionCard;
-        TextView titleNameTxt, titleDogTxt, testing;
+        TextView descriptionTxt;
         ImageView viewProofBtn, approveBtn, rejectBtn;
+
+        FlexboxLayout leftTxt;
 
         public AdoptionViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            adoptionCard = itemView.findViewById(R.id.adoption_card);
-            titleNameTxt = itemView.findViewById(R.id.adopt_title_name_txt);
-            titleDogTxt = itemView.findViewById(R.id.adopt_title_dog_txt);
-            viewProofBtn = itemView.findViewById(R.id.adopt_view_proof_btn);
-            approveBtn = itemView.findViewById(R.id.adopt_approve_btn);
-            rejectBtn = itemView.findViewById(R.id.adopt_reject_btn);
+            adoptionCard = itemView.findViewById(R.id.list_card_template);
+            descriptionTxt = itemView.findViewById(R.id.list_description_txt);
+            viewProofBtn = itemView.findViewById(R.id.list_view_btn);
+            approveBtn = itemView.findViewById(R.id.list_approve_btn);
+            rejectBtn = itemView.findViewById(R.id.list_reject_btn);
 
-
+            leftTxt = itemView.findViewById(R.id.list_description_container);
 
         }
     }

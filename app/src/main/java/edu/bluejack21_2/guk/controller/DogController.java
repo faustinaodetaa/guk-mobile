@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
@@ -116,10 +117,10 @@ public class DogController {
         });
     }
 
-    public static void changeDogStatus(Context ctx, Dog dog, String status){
+    public static void changeDogStatus(Context ctx, DocumentReference dog, String status){
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("status", status);
-        Database.getDB().collection(Dog.COLLECTION_NAME).document(dog.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
+        dog.set(data, SetOptions.merge()).addOnSuccessListener(u -> {
 
 //                ActivityHelper.refreshActivity((Activity) ctx);
 //                Toast.makeText(ctx, "Adoption!", Toast.LENGTH_LONG).show();
