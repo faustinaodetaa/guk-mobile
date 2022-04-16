@@ -43,7 +43,7 @@ public class User {
         return user;
     }
 
-    public int getBadgeColor(){
+    public static int getBadgeColor(int point){
         if(point < 500){
             return R.color.bronze;
         } else if(point < 1000){

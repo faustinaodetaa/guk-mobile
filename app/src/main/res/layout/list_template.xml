@@ -23,17 +23,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:flexWrap="wrap"
             android:layout_width="match_parent"
             android:layout_marginRight="85dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:alignItems="center">
             <ImageView
                 android:visibility="gone"
                 android:id="@+id/list_left_status"
                 android:layout_marginRight="5dp"
                 android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_height="50dp"
                 android:src="@drawable/circle_pending" />
             <TextView
                 android:id="@+id/list_description_txt"

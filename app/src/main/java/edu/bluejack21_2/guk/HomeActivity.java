@@ -3,10 +3,12 @@ package edu.bluejack21_2.guk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import edu.bluejack21_2.guk.model.User;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     private TextView welcomeTxt;
+    private ImageView notificationBtn;
 
     private LinearLayout topTitleBar;
 
@@ -40,6 +43,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         welcomeTxt = findViewById(R.id.home_welcome_txt);
         String txt = "Hello, <b style=\"font-weight: 800;\">" + User.CURRENT_USER.getName() + "</b> !";
         welcomeTxt.setText(Html.fromHtml(txt));
+
+        notificationBtn = findViewById(R.id.notification_btn);
+        notificationBtn.setOnClickListener(view -> {
+            startActivity(new Intent(this, NotificationActivity.class));
+        });
 
         topTitleBar = findViewById(R.id.top_title_bar);
 

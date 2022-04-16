@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
         nameTxt.setText(User.CURRENT_USER.getName());
         pointTxt.setText(String.format("%,d Points", User.CURRENT_USER.getPoint()));
 
-        ImageViewCompat.setImageTintList(profileBadge, ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), User.CURRENT_USER.getBadgeColor())));
+        ImageViewCompat.setImageTintList(profileBadge, ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), User.getBadgeColor(User.CURRENT_USER.getPoint()))));
 
 //        Log.d("coba", "onCreateView: " + User.CURRENT_USER.getProfilePicture());
         Database.showImage(User.CURRENT_USER.getProfilePicture(), ((Activity)view.getContext()), profilePic);

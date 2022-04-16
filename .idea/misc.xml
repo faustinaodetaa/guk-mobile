@@ -15,7 +15,7 @@
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_dog_detail.xml" value="0.25" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_home.xml" value="0.1388888888888889" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_notification.xml" value="0.1671875" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_notification.xml" value="0.1" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_register.xml" value="0.20729166666666668" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_tab.xml" value="0.1" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_update_dog.xml" value="0.33" />
@@ -24,6 +24,7 @@
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/donation_template.xml" value="0.25" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_add_dog.xml" value="0.25" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_add_story.xml" value="0.19293478260869565" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_admin_adopt.xml" value="0.146875" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_admin_donate.xml" value="0.21195652173913043" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_admin_donate_page.xml" value="1.5" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/fragment_home.xml" value="0.1" />

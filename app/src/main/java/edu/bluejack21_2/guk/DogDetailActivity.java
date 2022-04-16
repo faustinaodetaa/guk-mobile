@@ -62,8 +62,8 @@ public class DogDetailActivity extends AppCompatActivity {
         });
 
         final Dog dog = (Dog)getIntent().getParcelableExtra("dog");
-        Log.d("coba intent2", "a: " + dog.getName());
-        Log.d("coba intent2", "a: " + dog.getId());
+//        Log.d("coba intent2", "a: " + dog.getName());
+//        Log.d("coba intent2", "a: " + dog.getId());
 
         adoptDogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +97,7 @@ public class DogDetailActivity extends AppCompatActivity {
         deleteDogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("ini dog id", dog.getId());
+//                Log.d("ini dog id", dog.getId());
 
                 DogController.deleteDog(dog.getId());
                 startActivity(new Intent(DogDetailActivity.this, HomeActivity.class));
@@ -108,7 +108,7 @@ public class DogDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DogDetailActivity.this, UpdateDogActivity.class);
-                Log.d("coba intent update", "onClick: " + dog.getName());
+//                Log.d("coba intent update", "onClick: " + dog.getName());
 
                 intent.putExtra("dog", dog);
                 startActivity(intent);
