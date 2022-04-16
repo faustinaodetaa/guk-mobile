@@ -155,7 +155,7 @@ public class DogController {
                     Dog dog = document.toObject(Dog.class);
                     dog.setId(document.getId());
 
-                    if(dog.getName().contains(name)){
+                    if(dog.getName().toLowerCase().contains(name.toLowerCase())){
                         dogList.add(dog);
                         dogAdapter.notifyDataSetChanged();
                     }
@@ -172,7 +172,7 @@ public class DogController {
                     Dog dog = document.toObject(Dog.class);
                     dog.setId(document.getId());
 
-                    if(dog.getBreed().contains(breed)){
+                    if(dog.getBreed().toLowerCase().contains(breed.toLowerCase())){
                         dogList.add(dog);
                         dogAdapter.notifyDataSetChanged();
                     }

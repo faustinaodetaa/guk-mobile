@@ -31,8 +31,6 @@ public class SearchFragment extends Fragment {
     private String[] searchMenu = {"Name", "Breed", "Age", "Gender"};
     private EditText searchTxt;
     private ImageView searchIcon;
-//    private ArrayList<Dog> list;
-
 
     public SearchFragment() {
         // Required empty public constructor
@@ -70,12 +68,8 @@ public class SearchFragment extends Fragment {
         dogAdapter = new DogAdapter(view.getContext(), dogList);
         recyclerView.setAdapter(dogAdapter);
 
-//        DogController.showDogsByName(dogAdapter, dogList, "anjink");
-
         searchTxt = view.findViewById(R.id.search_content_txt);
         searchIcon = view.findViewById(R.id.search_bar_button);
-
-
 
         searchIcon.setOnClickListener(view1 -> {
             String keyword = searchTxt.getText().toString();
@@ -94,23 +88,6 @@ public class SearchFragment extends Fragment {
             Log.d("testing", selectedFilter);
 
         });
-
-
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-////                if(dogList.contains(query)){
-//////                    adapter.getFilter()
-////                }
-//                DogController.showDogsByName(dogAdapter, dogList, query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                return false;
-//            }
-//        });
 
         return view;
     }
