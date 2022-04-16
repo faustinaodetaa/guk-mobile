@@ -6,10 +6,17 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.ActivityOptions;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
         checkIsLoggedIn();
 
         setContentView(R.layout.activity_main);
@@ -131,8 +139,34 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         }
     }
 
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "GukChannel";
+            String description = "";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("General", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     private void showHomePageAndSaveData(User data) {
         User.CURRENT_USER = data;
+
+       Notification notification = new NotificationCompat.Builder(this, "General")
+                .setSmallIcon(R.drawable.ic_main_logo)
+                .setContentTitle("Login Success")
+                .setContentText("Hello, " + data.getName() + "!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .build();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(notificationManager!=null)
+            notificationManager.notify(1, notification);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
 //        Log.d("user_id", "showHomePageAndSaveData: " + data.getId());
