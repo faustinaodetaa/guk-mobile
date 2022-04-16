@@ -73,6 +73,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
             StoryController.deleteComment(context, comment.getContent(), story.getId());
         });
 
+        if(User.CURRENT_USER.getId().equals(comment.getUser().getId()) ){
+            holder.deleteBtn.setVisibility(View.VISIBLE);
+        }else{
+            holder.deleteBtn.setVisibility(View.GONE);
+        }
 
     }
 
