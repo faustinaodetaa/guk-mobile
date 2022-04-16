@@ -158,12 +158,12 @@
             <EditText
                 android:id="@+id/register_address_txt"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
                 android:background="@drawable/input_text"
-                android:gravity="top"
                 android:hint="Example Street 123"
                 android:textColorHint="@color/grey"
+                android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:layout_height="100dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:textColor="@color/black" />
