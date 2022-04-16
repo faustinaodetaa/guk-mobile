@@ -20,6 +20,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -144,5 +146,78 @@ public class DogController {
 
         });
     }
+
+    public static void showDogsByName(DogAdapter dogAdapter, ArrayList<Dog> dogList, String name) {
+       dogList.clear();
+        Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Dog dog = document.toObject(Dog.class);
+                    dog.setId(document.getId());
+
+                    if(dog.getName().contains(name)){
+                        dogList.add(dog);
+                        dogAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
+    public static void showDogsByBreed(DogAdapter dogAdapter, ArrayList<Dog> dogList, String breed) {
+        dogList.clear();
+        Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Dog dog = document.toObject(Dog.class);
+                    dog.setId(document.getId());
+
+                    if(dog.getBreed().contains(breed)){
+                        dogList.add(dog);
+                        dogAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
+    public static void showDogsByAge(DogAdapter dogAdapter, ArrayList<Dog> dogList, String age) {
+        dogList.clear();
+        Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Dog dog = document.toObject(Dog.class);
+                    dog.setId(document.getId());
+
+                    String yyyy = dog.getDob().toDate().toString().substring(30,34);
+                    Integer temp = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(yyyy);
+
+                    if(temp.toString().equals(age)){
+                        dogList.add(dog);
+                        dogAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
+    public static void showDogsByGender(DogAdapter dogAdapter, ArrayList<Dog> dogList, String gender) {
+        dogList.clear();
+        Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    Dog dog = document.toObject(Dog.class);
+                    dog.setId(document.getId());
+
+                    if(dog.getGender().equalsIgnoreCase(gender)){
+                        dogList.add(dog);
+                        dogAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
+
 
 }

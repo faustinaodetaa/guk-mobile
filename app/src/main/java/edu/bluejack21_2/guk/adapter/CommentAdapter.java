@@ -79,9 +79,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
 
     class CommentsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView userNameTxt, contentTxt, postComment;
-
-        EditText commentContentTxt;
+        TextView userNameTxt, contentTxt;
 
         CardView commentCard;
 

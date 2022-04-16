@@ -7,6 +7,10 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -134,6 +138,18 @@ public class StoryController {
         Database.getDB().collection(Story.COLLECTION_NAME).document(storyId).update(map).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 ActivityHelper.refreshActivity((Activity) ctx);
+            }
+        });
+    }
+
+    public static void deleteComment(String id, int index){
+        HashMap<String, Object> data = new HashMap<>();
+        Database.getDB().collection(Story.COLLECTION_NAME).document(id).update("comments", FieldValue.arrayRemove(index)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d("Deleted", "Success delete comment");
+                }
             }
         });
     }
