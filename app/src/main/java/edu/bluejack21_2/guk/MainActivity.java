@@ -152,8 +152,21 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
 
     private void showHomePageAndSaveData(User data) {
         User.CURRENT_USER = data;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor editor = prefs.edit();
 
-       Notification notification = new NotificationCompat.Builder(this, "General")
+        editor.putString("user_id", data.getId());
+        editor.commit();
+        Intent i = new Intent(this, HomeActivity.class);
+
+        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this, roundedBg, "rounded-bg").toBundle());
+        finish();
+
+        prefs = getSharedPreferences("edu.bluejack21_2.guk", Context.MODE_PRIVATE);
+        if(prefs.contains("push_notification") && prefs.getString("push_notification", null).equals("Disable")){
+            return;
+        }
+        Notification notification = new NotificationCompat.Builder(this, "General")
                 .setSmallIcon(R.drawable.ic_main_logo)
                 .setContentTitle("Login Success")
                 .setContentText("Hello, " + data.getName() + "!")
@@ -163,18 +176,9 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        if(notificationManager!=null)
+        if(notificationManager!=null) {
             notificationManager.notify(1, notification);
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        SharedPreferences.Editor editor = prefs.edit();
-//        Log.d("user_id", "showHomePageAndSaveData: " + data.getId());
-        editor.putString("user_id", data.getId());
-        editor.commit();
-        Intent i = new Intent(this, HomeActivity.class);
-//        Intent i = new Intent(this, TabActivity.class);
-        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this, roundedBg, "rounded-bg").toBundle());
-        finish();
+        }
     }
 
     private void checkIsLoggedIn() {

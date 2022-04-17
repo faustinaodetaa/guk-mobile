@@ -21,7 +21,7 @@ import edu.bluejack21_2.guk.util.ActivityHelper;
 public class SettingActivity extends BaseActivity {
 
     private ImageView backBtn;
-    private Spinner fontSpinner;
+    private Spinner fontSpinner, notificationSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +34,51 @@ public class SettingActivity extends BaseActivity {
             finish();
         });
 
+        SharedPreferences prefs = getSharedPreferences("edu.bluejack21_2.guk", Context.MODE_PRIVATE);
+
         fontSpinner = findViewById(R.id.setting_font_dropdown);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+        ArrayAdapter<String> fontAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 new String[]{"Small", "Normal", "Large"});
-        fontSpinner.setAdapter(adapter);
+        fontSpinner.setAdapter(fontAdapter);
 
-        SharedPreferences prefs = getSharedPreferences("edu.bluejack21_2.guk", Context.MODE_PRIVATE);
         String current = "Normal";
         if (prefs.contains("font_size")) {
             current = prefs.getString("font_size", null);
         }
-        fontSpinner.setSelection(adapter.getPosition(current));
+        fontSpinner.setSelection(fontAdapter.getPosition(current));
 
         fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                Log.d("coba", "onItemSelected: " + adapter.getItem(i));
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("font_size", adapter.getItem(i));
+                editor.putString("font_size", fontAdapter.getItem(i));
+                editor.commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        notificationSpinner = findViewById(R.id.setting_notification_dropdown);
+        ArrayAdapter<String> notificationAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                new String[]{"Enable", "Disable"});
+        notificationSpinner.setAdapter(notificationAdapter);
+
+        current = "Enable";
+        if (prefs.contains("push_notification")) {
+            current = prefs.getString("push_notification", null);
+        }
+        notificationSpinner.setSelection(notificationAdapter.getPosition(current));
+
+        notificationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("push_notification", notificationAdapter.getItem(i));
                 editor.commit();
             }
 

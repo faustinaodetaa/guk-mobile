@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -24,15 +23,15 @@ public class BaseActivity extends AppCompatActivity {
                 scale = 1.25f;
             }
         }
-        adjustFontScale(getResources().getConfiguration(), scale);
+        changeFontSize(getResources().getConfiguration(), scale);
     }
 
-    public void adjustFontScale(Configuration configuration, float scale) {
-        configuration.fontScale = scale;
+    public void changeFontSize(Configuration config, float scale) {
+        config.fontScale = scale;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
-        metrics.scaledDensity = configuration.fontScale * metrics.density;
-        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+        metrics.scaledDensity = config.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(config, metrics);
     }
 }
