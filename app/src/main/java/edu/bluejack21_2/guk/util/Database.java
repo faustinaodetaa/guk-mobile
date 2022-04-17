@@ -82,15 +82,12 @@ public class Database {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     ref.getDownloadUrl().addOnSuccessListener(uri -> {
-                                        Log.d("cobadownload", "uploadImage: " + uri.toString());
                                         if(listener != null)
                                             listener.onFinish(uri.toString(), null);
                                     }).addOnFailureListener(e -> {
                                         e.printStackTrace();
-                                        Log.d("cobadownload2", "uploadImage: " + e.getMessage());
                                     });
                                     progressDialog.dismiss();
-//                                    Toast.makeText(ctx,"Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                 }
                             })
 
@@ -109,14 +106,6 @@ public class Database {
                                     progressDialog.setMessage("Uploaded " + (int) progress + "%");
                                 }
                             });
-//            ref.getDownloadUrl().addOnSuccessListener(uri -> {
-//                Log.d("cobadownload", "uploadImage: " + uri.toString());
-//                if(listener != null)
-//                    listener.onFinish(uri.toString(), null);
-//            }).addOnFailureListener(e -> {
-//                e.printStackTrace();
-//                Log.d("cobadownload2", "uploadImage: " + e.getMessage());
-//            });
         }
     }
 }

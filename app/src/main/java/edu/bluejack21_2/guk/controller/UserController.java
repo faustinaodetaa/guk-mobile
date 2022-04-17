@@ -91,7 +91,7 @@ public class UserController {
                 });
     }
 
-    public static boolean insertUser(AppCompatActivity ctx, String name, String email, String password, String confirmPassword, String phone, String address, Uri filePath){
+    public static void insertUser(Context ctx, String name, String email, String password, String confirmPassword, String phone, String address, Uri filePath, FinishListener<Boolean> listener){
 
         String errorMsg = "";
         if(name.isEmpty()){
@@ -108,32 +108,40 @@ public class UserController {
             errorMsg = "Address must be filled!";
         } else if(filePath == null){
             errorMsg = "Profile picture must be chosen!";
+        } else {
+            getUserByEmail(email, (data, message) -> {
+                if(data != null){
+                    if(listener != null)
+                        listener.onFinish(false, "Email already existed!");
+                } else {
+                    String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
+                    String fileName = "images/user/" + UUID.randomUUID().toString() + "." + extension;
+
+
+                    Database.uploadImage(filePath, fileName, ctx, (d, m) -> {
+                        User user = new User(email, name, password, address, phone, d, 0);
+
+                        Database.getDB().collection(User.COLLECTION_NAME)
+                                .add(user.toMap())
+                                .addOnSuccessListener(documentReference -> {
+                                    if(listener != null)
+                                        listener.onFinish(true, "Register success!");
+                                })
+                                .addOnFailureListener(e -> {
+                                    if(listener != null)
+                                        listener.onFinish(false, "Register fail!");
+                                });
+
+                    });
+
+                }
+            });
         }
 
         if(!errorMsg.isEmpty()){
-            Toast.makeText(ctx,errorMsg, Toast.LENGTH_SHORT).show();
-            return false;
+            if(listener != null)
+                listener.onFinish(false, errorMsg);
         }
-
-        String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
-        String fileName = "images/user/" + UUID.randomUUID().toString() + "." + extension;
-
-
-        Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
-            User user = new User(email, name, password, address, phone, data, 0);
-
-            Database.getDB().collection(User.COLLECTION_NAME)
-                    .add(user.toMap())
-                    .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(ctx,"Register success!", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(ctx,"Register fail!", Toast.LENGTH_SHORT).show();
-                    });
-
-        });
-
-        return true;
     }
 
     public static void getUserById(String id, FinishListener<User> listener){

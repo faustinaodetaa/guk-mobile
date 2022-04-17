@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -78,9 +79,13 @@ public class RegisterActivity extends AppCompatActivity {
             String phoneNumber = phoneTxt.getText().toString();
             String address = addressTxt.getText().toString();
 
-            if(UserController.insertUser(this, name, email, password, confirmPassword, phoneNumber, address, filePath)){
-                startActivity(new Intent(this, MainActivity.class));
-            }
+            UserController.insertUser(this, name, email, password, confirmPassword, phoneNumber, address, filePath, (data, message) -> {
+                if(data != null && data){
+                    startActivity(new Intent(this, MainActivity.class));
+                } else {
+                    Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 
