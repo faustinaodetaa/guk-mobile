@@ -23,6 +23,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,19 +43,17 @@ import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
 public class MainActivity extends AppCompatActivity implements FinishListener<User> {
-    //    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
-//    private boolean showOneTapUI = true;
     private TextView registerLink;
     private EditText emailTxt, passwordTxt;
     private Button loginBtn, googleLoginBtn;
-//    private SignInClient oneTapClient;
-//    private BeginSignInRequest signInRequest;
 
     private GoogleSignInClient googleSignInClient;
 
     private LinearLayout roundedBg;
 
-    String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
+    private String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
+
+    private ImageView titleLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
 
         setContentView(R.layout.activity_main);
 
-//    GoogleSignIn
         googleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestScopes(new Scope(Scopes.DRIVE_APPFOLDER)).requestServerAuthCode(client_webId).requestIdToken(client_webId).build());
         emailTxt = findViewById(R.id.login_email_txt);
         passwordTxt = findViewById(R.id.login_password_txt);
@@ -73,9 +71,10 @@ public class MainActivity extends AppCompatActivity implements FinishListener<Us
         googleLoginBtn = findViewById(R.id.google_login_btn);
 
         roundedBg = findViewById(R.id.login_rounded_bg);
+        titleLogo = findViewById(R.id.title_logo);
 
         registerLink.setOnClickListener(view -> {
-            startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class), ActivityOptions.makeSceneTransitionAnimation(this, titleLogo, "title-logo").toBundle());
         });
 
         loginBtn.setOnClickListener(view -> {

@@ -93,7 +93,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
         holder.commentIcon.setOnClickListener(view -> {
             Intent intent = new Intent(context, CommentActivity.class);
-            Log.d("coba intent", "onClick: " + story.getContent());
+//            Log.d("coba intent", "onClick: " + story.getContent());
             intent.putExtra("story", story);
             context.startActivity(intent);
 
