@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import edu.bluejack21_2.guk.controller.UserController;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 
     private Button registerBtn;
     private CardView choosePicBtn;

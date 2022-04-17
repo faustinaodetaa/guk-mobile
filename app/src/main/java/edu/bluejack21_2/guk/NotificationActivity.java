@@ -16,7 +16,7 @@ import edu.bluejack21_2.guk.controller.NotificationController;
 import edu.bluejack21_2.guk.model.Adoption;
 import edu.bluejack21_2.guk.model.Notification;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

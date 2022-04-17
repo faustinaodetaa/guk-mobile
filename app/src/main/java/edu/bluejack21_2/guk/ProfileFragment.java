@@ -1,6 +1,8 @@
 package edu.bluejack21_2.guk;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -33,7 +35,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView nameTxt, pointTxt;
     private ImageView profilePic, profileBadge;
-    private Button logoutBtn, deleteAccountBtn;
+    private Button logoutBtn, deleteAccountBtn, settingsBtn;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -57,6 +59,7 @@ public class ProfileFragment extends Fragment {
 
         logoutBtn = view.findViewById(R.id.logout_btn);
         deleteAccountBtn = view.findViewById(R.id.delete_account_btn);
+        settingsBtn = view.findViewById(R.id.setting_btn);
 
         nameTxt.setText(User.CURRENT_USER.getName());
         pointTxt.setText(String.format("%,d Points", User.CURRENT_USER.getPoint()));
@@ -73,6 +76,12 @@ public class ProfileFragment extends Fragment {
         deleteAccountBtn.setOnClickListener(v -> {
             UserController.deleteAccount(User.CURRENT_USER.getId());
             UserController.logout(view.getContext());
+        });
+
+        settingsBtn.setOnClickListener(v -> {
+            Intent i = new Intent(view.getContext(), SettingActivity.class);
+            view.getContext().startActivity(i, ActivityOptions.makeSceneTransitionAnimation(((Activity)view.getContext()), ((Activity)view.getContext()).findViewById(R.id.bottomNavigationView), "rounded-bg").toBundle());
+            ((Activity) view.getContext()).finish();
         });
 
 

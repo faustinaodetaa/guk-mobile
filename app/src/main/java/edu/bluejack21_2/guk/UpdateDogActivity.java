@@ -24,7 +24,7 @@ import java.util.Date;
 import edu.bluejack21_2.guk.controller.DogController;
 import edu.bluejack21_2.guk.model.Dog;
 
-public class UpdateDogActivity extends AppCompatActivity {
+public class UpdateDogActivity extends BaseActivity {
 
     private Button updateDogBtn;
     private EditText nameTxt, breedTxt, descriptionTxt;

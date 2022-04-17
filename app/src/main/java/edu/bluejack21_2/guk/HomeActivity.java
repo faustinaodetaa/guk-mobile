@@ -19,7 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.bluejack21_2.guk.model.User;
 
-public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private TextView welcomeTxt;
     private ImageView notificationBtn;
 
@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adjustFontScale(getResources().getConfiguration(), 1);
         setContentView(R.layout.activity_home);
 
         welcomeTxt = findViewById(R.id.home_welcome_txt);
@@ -60,14 +59,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.home);
     }
 
-    public void adjustFontScale(Configuration configuration, float scale) {
-        configuration.fontScale = scale;
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(metrics);
-        metrics.scaledDensity = configuration.fontScale * metrics.density;
-        getBaseContext().getResources().updateConfiguration(configuration, metrics);
-    }
+//
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

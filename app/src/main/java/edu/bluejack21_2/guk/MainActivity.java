@@ -42,7 +42,7 @@ import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
-public class MainActivity extends AppCompatActivity implements FinishListener<User> {
+public class MainActivity extends BaseActivity implements FinishListener<User> {
     private TextView registerLink;
     private EditText emailTxt, passwordTxt;
     private Button loginBtn, googleLoginBtn;

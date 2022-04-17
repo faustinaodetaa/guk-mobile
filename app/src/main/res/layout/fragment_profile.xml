@@ -82,10 +82,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profile_donation_history"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -99,6 +100,15 @@
 
         <Button
             android:layout_marginTop="50dp"
+            android:id="@+id/setting_btn"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textFontWeight="600"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:text="SETTINGS"/>
+        <Button
             android:id="@+id/logout_btn"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"

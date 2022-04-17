@@ -25,7 +25,7 @@ import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
-public class DogDetailActivity extends AppCompatActivity {
+public class DogDetailActivity extends BaseActivity {
 
     private Button adoptDogBtn, deleteDogBtn, updateDogBtn;
     private TextView nameTxt, breedTxt, dobTxt, descriptionTxt, rescuedDateTxt, statusTxt;

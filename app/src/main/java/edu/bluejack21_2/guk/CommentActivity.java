@@ -20,7 +20,7 @@ import edu.bluejack21_2.guk.model.Comment;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.Story;
 
-public class CommentActivity extends AppCompatActivity {
+public class CommentActivity extends BaseActivity {
 
     private TextView storyContentTxt, postComment;
     private EditText commentContentTxt;
