@@ -37,6 +37,7 @@
         </LinearLayout>
 
         <TextView
+            android:transitionName="story-content"
             android:id="@+id/comment_story_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

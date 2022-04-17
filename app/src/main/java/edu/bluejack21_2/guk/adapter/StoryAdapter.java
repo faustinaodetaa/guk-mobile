@@ -95,7 +95,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
             Intent intent = new Intent(context, CommentActivity.class);
 //            Log.d("coba intent", "onClick: " + story.getContent());
             intent.putExtra("story", story);
-            context.startActivity(intent);
+            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.contentTxt, "story-content").toBundle());
 
         });
 
