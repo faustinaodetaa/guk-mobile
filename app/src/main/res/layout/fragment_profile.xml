@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:padding="10dp"
-            android:text="Your Latest Activity"/>
+            android:text="@string/profile_latest_activity"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
