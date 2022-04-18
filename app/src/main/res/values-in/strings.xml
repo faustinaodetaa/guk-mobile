@@ -2,9 +2,12 @@
     <string name="app_name">guk indo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="greetings">Halo, </string>
 
-<!--    Comment-->
+    <string name="greetings">Halo, </string>
+    <string name="login_success">Login Sukses</string>
+
+
+    <!--    Comment-->
     <string name="comment_back">Cerita Kita</string>
     <string name="add_comment_hint">Tambahkan sebuah komentar...</string>
     <string name="comment_button">Komentar</string>
@@ -68,6 +71,7 @@
 
     <!--    Search-->
     <string name="search">Cari Disini...</string>
+    <string name="age">Umur</string>
 
     <!--    Donation-->
     <string name="donation_matters">Donasi Anda Berharga!</string>
@@ -79,8 +83,7 @@
     <string name="notes">Catatan Tambahan</string>
     <string name="notes_hint">Tolong selamatkan anjing-anjing ini!</string>
     <string name="donate">Donasi</string>
-    <string name="donated">Mendonasikan </string>
-    <string name="donated_lowercase">mendonasikan </string>
+
 
 
     <!--    View All Comments-->
@@ -98,7 +101,16 @@
     <string name="user_phone">Nomor Handphone: </string>
 
 <!--Tabs-->
-    <string name="adopt_me">Adopsi Aku</string>
+    <string name="adopt_me_title">Adopsi Aku</string>
+    <string name="our_story_title">Cerita Kita</string>
+    <string name="donations_title">Donasi</string>
+    <string name="adoptions_title">Adopsi</string>
+
+<!--    History-->
+    <string name="donated">Mendonasikan </string>
+    <string name="donated_lowercase"> mendonasikan </string>
+    <string name="adopted">Mengadopsi </string>
+    <string name="adopted_lowercase"> mengadopsi </string>
 
 
 </resources>

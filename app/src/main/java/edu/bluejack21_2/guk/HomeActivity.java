@@ -28,15 +28,16 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     private BottomNavigationView bottomNavigationView;
 
     //    private HomeFragment homeFragment = new HomeFragment();
-    private TabFragment homeTabFragment = new TabFragment(new HomeFragment(), new StoryFragment());
-    private TabFragment donateAdoptTabFragment = new TabFragment(new AdminDonateFragment(), new AdminAdoptFragment());
+//    private TabFragment homeTabFragment = new TabFragment(new HomeFragment(), new StoryFragment());
+    // private TabFragment donateAdoptTabFragment = new TabFragment(new AdminDonateFragment(), new AdminAdoptFragment("getString(R.string.adopt_me_title))"));
+    private TabFragment donateAdoptTabFragment, homeTabFragment;
     private SearchFragment searchFragment = new SearchFragment();
     private AddDogFragment addDogFragment = new AddDogFragment();
     private AddStoryFragment addStoryFragment = new AddStoryFragment();
     private UserDonateFragment userDonateFragment = new UserDonateFragment();
-    private AdminDonateFragment adminDonateFragment = new AdminDonateFragment();
+//    private AdminDonateFragment adminDonateFragment = new AdminDonateFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
-    private StoryFragment storyFragment = new StoryFragment();
+//    private StoryFragment storyFragment = new StoryFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         setContentView(R.layout.activity_home);
 
         welcomeTxt = findViewById(R.id.home_welcome_txt);
-        String txt = "Hello, <b style=\"font-weight: 800;\">" + User.CURRENT_USER.getName() + "</b> !";
+        String txt = getString(R.string.greetings) + " <b style=\"font-weight: 800;\">" + User.CURRENT_USER.getName() + "</b> !";
         welcomeTxt.setText(Html.fromHtml(txt));
 
         notificationBtn = findViewById(R.id.notification_btn);
@@ -55,6 +56,9 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         topTitleBar = findViewById(R.id.top_title_bar);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        donateAdoptTabFragment = new TabFragment(new AdminDonateFragment(getString(R.string.donations_title)), new AdminAdoptFragment(getString(R.string.adoptions_title)));
+        homeTabFragment = new TabFragment(new HomeFragment(getString(R.string.adopt_me_title)), new StoryFragment(getString(R.string.our_story_title)));
+
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
     }

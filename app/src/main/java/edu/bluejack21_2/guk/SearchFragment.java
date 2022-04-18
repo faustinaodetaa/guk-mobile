@@ -28,7 +28,7 @@ import edu.bluejack21_2.guk.model.Dog;
 
 public class SearchFragment extends Fragment {
 
-    private String[] searchMenu = {"Name", "Breed", "Age", "Gender"};
+    private String[] searchMenu;
     private EditText searchTxt;
     private ImageView searchIcon;
 
@@ -42,13 +42,11 @@ public class SearchFragment extends Fragment {
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        searchMenu = new String[]{getString(R.string.name), getString(R.string.breed), getString(R.string.age), getString(R.string.gender)};
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         Spinner menus = view.findViewById(R.id.search_dropdown);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, searchMenu);

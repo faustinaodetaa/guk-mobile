@@ -59,6 +59,7 @@ public class UpdateDogActivity extends BaseActivity {
             public void onClick(View view) {
                 finish();
             }
+
         });
 
         Dog dog = new Dog();
@@ -66,6 +67,7 @@ public class UpdateDogActivity extends BaseActivity {
         dog = (Dog)getIntent().getParcelableExtra("dog");
         Log.d("coba intent3", "a: " + dog.getName());
         Log.d("coba intent3", "a: " + dog.getId());
+        Log.d("coba string", "a: " + getString(R.string.adopt_me_title));
 
         String dogId = dog.getId();
 

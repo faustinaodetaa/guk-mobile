@@ -18,9 +18,9 @@ import edu.bluejack21_2.guk.model.Donation;
 
 public class AdminDonateFragment extends CustomFragment {
 
-    public AdminDonateFragment() {
+    public AdminDonateFragment(String name) {
         // Required empty public constructor
-        super("Donations");
+        super(name);
     }
 
     @Override

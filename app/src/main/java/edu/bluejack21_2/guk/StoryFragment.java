@@ -20,9 +20,9 @@ import edu.bluejack21_2.guk.model.Story;
 
 public class StoryFragment extends CustomFragment {
 
-    public StoryFragment() {
+    public StoryFragment(String name) {
         // Required empty public constructor
-        super("Our Story");
+        super(name);
 
     }
 

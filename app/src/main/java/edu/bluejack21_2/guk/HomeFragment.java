@@ -19,9 +19,9 @@ import edu.bluejack21_2.guk.model.Dog;
 public class HomeFragment extends CustomFragment {
 
 
-    public HomeFragment() {
+    public HomeFragment(String name) {
         // Required empty public constructor
-        super("Adopt Me");
+        super(name);
     }
 
 

@@ -20,11 +20,9 @@ import edu.bluejack21_2.guk.model.Adoption;
 public class AdminAdoptFragment extends CustomFragment {
 
 
-    public AdminAdoptFragment() {
+    public AdminAdoptFragment(String name) {
         // Required empty public constructor
-//        super(String.valueOf(R.string.adopt_me));
-        super("Adoptions");
-
+        super(name);
     }
 
     @Override

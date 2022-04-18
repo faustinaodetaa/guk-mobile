@@ -22,7 +22,7 @@ import edu.bluejack21_2.guk.model.History;
 
 public abstract class HistoryAdapter<T extends History> extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
-    private Context context;
+    protected Context context;
     private ArrayList<T> list;
     protected boolean isUser = false;
 

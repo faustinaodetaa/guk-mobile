@@ -3,7 +3,7 @@ package edu.bluejack21_2.guk;
 import androidx.fragment.app.Fragment;
 
 public class CustomFragment extends Fragment {
-    private String name;
+    private String name = "";
 
     public CustomFragment() {
     }

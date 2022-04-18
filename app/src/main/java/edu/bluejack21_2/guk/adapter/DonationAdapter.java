@@ -54,11 +54,14 @@ public class DonationAdapter extends HistoryAdapter<Donation>{
         Donation donation = curr;
 
         StringBuilder builder = new StringBuilder();
+        String donated = context.getResources().getString(R.string.donated);
+        String donatedLowercase = context.getResources().getString(R.string.donated_lowercase);
+
         UserController.getUserById(donation.getUser().getId(), (data, message) -> {
             if(!isUser){
-                builder.append("<b>" + data.getName() + "</b> donated ");
+                builder.append("<b>" + data.getName() + "</b> " + donatedLowercase + " ");
             } else {
-                builder.append("Donated ");
+                builder.append(donated + " ");
             }
             String amountTxt = String.format("IDR %,d", donation.getAmount());
             builder.append("<b>" + amountTxt + "</b>");

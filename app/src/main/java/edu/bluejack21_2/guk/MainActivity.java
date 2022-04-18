@@ -168,8 +168,8 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
         }
         Notification notification = new NotificationCompat.Builder(this, "General")
                 .setSmallIcon(R.drawable.ic_main_logo)
-                .setContentTitle("Login Success")
-                .setContentText("Hello, " + data.getName() + "!")
+                .setContentTitle(getString(R.string.login_success))
+                .setContentText(getString(R.string.greetings) + " " + data.getName() + "!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 

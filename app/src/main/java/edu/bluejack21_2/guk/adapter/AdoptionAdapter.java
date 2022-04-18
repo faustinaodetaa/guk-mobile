@@ -78,11 +78,14 @@ public class AdoptionAdapter extends HistoryAdapter<Adoption> {
         Adoption adoption = curr;
 
         StringBuilder builder = new StringBuilder();
+        String adopted = context.getResources().getString(R.string.adopted);
+        String adoptedLowercase = context.getResources().getString(R.string.adopted_lowercase);
+
         UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
             if(!isUser){
-                builder.append("<b>" + data.getName() + "</b> adopted ");
+                builder.append("<b>" + data.getName() + "</b> " + adoptedLowercase + " ");
             } else {
-                builder.append("Adopted ");
+                builder.append(adopted + " ");
             }
 
             DogController.getDogById(adoption.getDog().getId(), ((d, m) -> {
