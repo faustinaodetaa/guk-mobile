@@ -59,10 +59,10 @@ public class AdoptionAdapter extends HistoryAdapter<Adoption> {
 
         UserController.getUserById(adoption.getUser().getId(), (data, message) -> {
             if(data != null){
-                userNameTxt.setText("Name: " + data.getName());
+                userNameTxt.setText(data.getName());
                 userEmailTxt.setText("Email: " + data.getEmail());
-                userPhoneTxt.setText("Phone Number: " + data.getPhone());
-                userAddressTxt.setText("Address: " + data.getAddress());
+                userPhoneTxt.setText(data.getPhone());
+                userAddressTxt.setText(data.getAddress());
                 Database.showImage(data.getProfilePicture(), (Activity) context, userProfile);
             }
         });

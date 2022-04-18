@@ -22,7 +22,9 @@ public class AdminAdoptFragment extends CustomFragment {
 
     public AdminAdoptFragment() {
         // Required empty public constructor
+//        super(String.valueOf(R.string.adopt_me));
         super("Adoptions");
+
     }
 
     @Override

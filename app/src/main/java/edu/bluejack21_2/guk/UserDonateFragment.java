@@ -54,8 +54,9 @@ public class UserDonateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_donate, container, false);
 
         message = view.findViewById(R.id.donate_prompt_message);
-        String txt = "What a privilege to be here on the planet to contribute your unique donation to these homeless dogs.<br/>You can donate to: <b>604 123 1234</b> (BCA)";
-        message.setText(Html.fromHtml(txt));
+//        String txt = "What a privilege to be here on the planet to contribute your unique donation to these homeless dogs.<br/>You can donate to: <b>604 123 1234</b> (BCA)";
+        message.setText(R.string.prompt);
+
 
         bankHolderTxt = view.findViewById(R.id.donate_name_txt);
         bankNumberTxt = view.findViewById(R.id.donate_number_txt);

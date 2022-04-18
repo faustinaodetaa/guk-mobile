@@ -3,7 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="greetings">Halo, </string>
-    <string name="profile_latest_activity">Aktivitas Terakhir Anda</string>
 
 <!--    Comment-->
     <string name="comment_back">Cerita Kita</string>
@@ -37,14 +36,69 @@
     <string name="hint_address">Jl. Contoh 123</string>
     <string name="register_button">DAFTAR</string>
 
+    <!--    Settings-->
+    <string name="settings">Pengaturan</string>
+    <string name="font_size">Ukuran tulisan</string>
+    <string name="push_notification">Notifikasi</string>
+
+<!--Update Dog-->
+    <string name="update_dog">Perbaharui Anjing</string>
+    <string name="breed">Jenis</string>
+    <string name="description">Deskripsi</string>
+    <string name="description_hint">Anjingnya lucu banget</string>
+    <string name="dob">Tanggal Lahir</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="male">Laki-Laki</string>
+    <string name="female">Perempuan</string>
+
+<!--    Add Dog-->
+    <string name="add_dog">Tambah Anjing</string>
+    <string name="picture">Gambar</string>
+
+    <!--    Add Story-->
+    <string name="add_your_story">Tambahkan Cerita Anda</string>
+    <string name="content">Konten</string>
+    <string name="content_hint">Ekspresikan cerita anda disini...</string>
+    <string name="add_story">Tambahkan Cerita</string>
+
+    <!--    Profile-->
+    <string name="profile_latest_activity">Aktivitas Terakhir Anda</string>
+    <string name="logout">Keluar</string>
+    <string name="delete_account">Hapus Akun</string>
+
+    <!--    Search-->
+    <string name="search">Cari Disini...</string>
+
+    <!--    Donation-->
+    <string name="donation_matters">Donasi Anda Berharga!</string>
+    <string name="prompt">Sebuah kehormatan dapat berada di planet ini untuk berkontribusi dengan donasi unik kalian kepada para anjing terlantar ini. <br/>Anda dapat berdonasi ke: <b>604 123 1234</b> (BCA)</string>
+    <string name="bank_account_holder">Pemegang Akun Bank</string>
+    <string name="bank_account_number">Nomor Akun Bank</string>
+    <string name="donation_amount">Jumlah Donasi (IDR)</string>
+    <string name="proof">Unggah Bukti Pembayaran</string>
+    <string name="notes">Catatan Tambahan</string>
+    <string name="notes_hint">Tolong selamatkan anjing-anjing ini!</string>
+    <string name="donate">Donasi</string>
+    <string name="donated">Mendonasikan </string>
+    <string name="donated_lowercase">mendonasikan </string>
 
 
+    <!--    View All Comments-->
+    <string name="view_all_comments">Lihat Seluruh Komentar</string>
 
+    <!--    TnC-->
+    <string name="guk_tnc">Syarat dan Ketentuan guk</string>
+    <string name="tnc_content">Dengan menginstal, mengakses, atau menggunakan aplikasi seluler, buletin email dan langganan, dan properti digital lainnya di mana persyaratan ini diposting atau dirujuk (bersama-sama, "layanan online"), Anda menandatangani perjanjian yang mengikat dengan Guk Company, yang mengontrol dan mengoperasikan layanan online dari kantor pusatnya di 110 Beenus Alam Sutera. Dengan menerima persyaratan ini, Anda juga memahami dan menyetujui Pernyataan Privasi guk, yang dimasukkan ke dalam, dan bagian dari, perjanjian ini. Pernyataan Privasi kami menjelaskan cara kami mengumpulkan, menggunakan, dan berbagi informasi. Dengan menerima persyaratan ini, Anda memahami dan menyetujui bahwa, sebagaimana dinyatakan, Anda melepaskan hak Anda untuk menyelesaikan sengketa apa pun melalui proses lain yang mungkin tersedia untuk Anda, seperti tindakan pengadilan atau proses administratif. Ini juga berarti bahwa Anda melepaskan hak Anda untuk diadili oleh juri atau untuk menggabungkan perselisihan Anda dengan orang lain dalam gugatan kelompok.</string>
+    <string name="tnc_agree">Saya setuju dengan syarat dan ketentuan yang berlaku</string>
 
+<!--    User Dialog-->
+    <string name="user_data">Data Pengguna</string>
+    <string name="user_name">Nama: </string>
+    <string name="user_address">Alamat: </string>
+    <string name="user_phone">Nomor Handphone: </string>
 
-
-
-
+<!--Tabs-->
+    <string name="adopt_me">Adopsi Aku</string>
 
 
 </resources>

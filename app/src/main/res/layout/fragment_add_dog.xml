@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Dog"
+            android:text="@string/add_dog"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textAllCaps="true"
@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Breed"
+                    android:text="@string/breed"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -91,7 +91,7 @@
                     android:layout_height="100dp"
                     android:background="@drawable/input_text"
                     android:gravity="top"
-                    android:hint="This dog is so cute"
+                    android:hint="@string/description_hint"
                     android:textColorHint="@color/grey"
                     android:inputType="text|textMultiLine"
                     android:paddingHorizontal="10dp"
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Date Of Birth"
+                    android:text="@string/dob"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -128,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Gender"
+                    android:text="@string/gender"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -147,7 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="Female" />
+                        android:text="@string/female" />
 
                     <RadioButton
                         android:buttonTint="@color/black"
@@ -156,14 +156,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="Male" />
+                        android:text="@string/male" />
 
                 </RadioGroup>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Picture"
+                    android:text="@string/picture"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -187,7 +187,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:backgroundTint="@color/black"
-                    android:text="ADD DOG"
+                    android:text="@string/add_dog"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textFontWeight="800" />
             </LinearLayout>

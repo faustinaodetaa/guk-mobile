@@ -63,12 +63,15 @@
                         app:tint="@color/primary"
                         android:src="@drawable/ic_badge_crown"/>
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/profile_user_points"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="_ Points"/>
+
+                    <TextView
+                        android:id="@+id/profile_user_points"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="_ Points"/>
+
+
             </LinearLayout>
         </LinearLayout>
         <TextView
@@ -107,7 +110,8 @@
             android:textFontWeight="600"
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
-            android:text="SETTINGS"/>
+            android:textAllCaps="true"
+            android:text="@string/settings"/>
         <Button
             android:id="@+id/logout_btn"
             android:layout_marginHorizontal="20dp"
@@ -116,7 +120,8 @@
             android:textFontWeight="600"
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
-            android:text="LOGOUT"/>
+            android:textAllCaps="true"
+            android:text="@string/logout"/>
         <Button
             android:id="@+id/delete_account_btn"
             android:layout_marginHorizontal="20dp"
@@ -125,7 +130,8 @@
             android:textFontWeight="600"
             android:textColor="@color/black"
             android:backgroundTint="@color/danger_light"
-            android:text="Delete Account"/>
+            android:textAllCaps="true"
+            android:text="@string/delete_account"/>
     </LinearLayout>
 </ScrollView>
 </FrameLayout>

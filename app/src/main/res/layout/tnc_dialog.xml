@@ -24,12 +24,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="guk's Terms and Condition"
+                android:text="@string/guk_tnc"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" By installing, accessing or using any mobile apps, email newsletters and subscriptions, and other digital properties on which these terms are posted or referenced (together, “online services”), you are entering into a binding agreement with guk Company, which controls and operates the online services from its headquarters at 110 Beenus Alam Sutera. By accepting these terms, you also understand and consent to guk's Privacy Statement, which is incorporated into, and part of, this agreement. Our Privacy Statement describes how we collect, use and share information. By accepting these terms, you understand and agree that, as stated, you are waiving your right to resolve any dispute through other processes that could be available to you, such as court actions or administrative proceedings. It also means that you are waiving your rights to a trial by jury or to combine your dispute with others in a class action."
+                android:text="@string/tnc_content"
                 android:justificationMode="inter_word"
                 />
 
@@ -39,7 +39,7 @@
                 android:buttonTint="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I agree with the terms and condition"
+                android:text="@string/tnc_agree"
                 />
             <Button
                 android:id="@+id/tnc_adopt_dog_btn"
@@ -47,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
-                android:text="ADOPT"
+                android:text="@string/adopt_button"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textFontWeight="800" />
 

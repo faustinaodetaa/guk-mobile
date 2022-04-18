@@ -24,12 +24,15 @@
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1675925925925926" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/drawable/back_arrow.xml" value="0.1" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/drawable/back_arrow_black.xml" value="0.1" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/drawable/rounded_edge.xml" value="0.1915" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/drawable/tab_layout_style.xml" value="0.1915" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_comment.xml" value="0.2" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_dog_detail.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_home.xml" value="0.2595108695652174" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_notification.xml" value="0.1778537836682343" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_setting.xml" value="0.4" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_tab.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_update_dog.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/activity_update_dog2.xml" value="0.14673913043478262" />
@@ -47,8 +50,10 @@
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/fragment_search.xml" value="0.2958477508650519" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/fragment_story.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/fragment_tab.xml" value="0.19880290722530997" />
-        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/fragment_user_donate.xml" value="0.10969494358545759" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/fragment_user_donate.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/image_dialog.xml" value="0.264" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/list_template.xml" value="0.4" />
+        <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/notification_template.xml" value="0.264" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/story_template.xml" value="0.271286231884058" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/tnc_dialog.xml" value="0.17815049864007254" />
         <entry key="..\:/ASLAB/FA/TPA/4. Mobile/guk/guk-mobile/app/src/main/res/layout/user_dialog.xml" value="0.4" />

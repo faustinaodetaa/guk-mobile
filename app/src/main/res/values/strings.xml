@@ -3,7 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="greetings">Hello, </string>
-    <string name="profile_latest_activity">Your Latest Activity</string>
 
 <!--    Comment-->
     <string name="comment_back">Our Story</string>
@@ -36,6 +35,69 @@
     <string name="address">Address</string>
     <string name="hint_address">Example Street 123</string>
     <string name="register_button">REGISTER</string>
+
+<!--    Settings-->
+    <string name="settings">Settings</string>
+    <string name="font_size">Font Size</string>
+    <string name="push_notification">Push Notification</string>
+
+<!--    Update Dog-->
+    <string name="update_dog">Update Dog</string>
+    <string name="breed">Breed</string>
+    <string name="description">Description</string>
+    <string name="description_hint">This dog is so cute</string>
+    <string name="dob">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+<!--    Add Dog-->
+    <string name="add_dog">Add Dog</string>
+    <string name="picture">Picture</string>
+
+<!--    Add Story-->
+    <string name="add_your_story">Add Your Story</string>
+    <string name="content">Content</string>
+    <string name="content_hint">Express your story here...</string>
+    <string name="add_story">Add Story</string>
+
+<!--    Profile-->
+    <string name="profile_latest_activity">Your Latest Activity</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
+
+<!--    Search-->
+    <string name="search">Search Here...</string>
+
+<!--    Donation-->
+    <string name="donation_matters">Your Donation Matters!</string>
+    <string name="prompt">What a privilege to be here on the planet to contribute your unique donation to these homeless dogs.<br/>You can donate to: <b>604 123 1234</b> (BCA)</string>
+    <string name="bank_account_holder">Bank Account Holder</string>
+    <string name="bank_account_number">Bank Account Number</string>
+    <string name="donation_amount">Donation Amount (IDR)</string>
+    <string name="proof">Upload Payment Proof</string>
+    <string name="notes">Additional Notes</string>
+    <string name="notes_hint">Please save this dogs!</string>
+    <string name="donate">Donate</string>
+    <string name="donated">Donated </string>
+    <string name="donated_lowercase">donated </string>
+
+<!--    Story Template-->
+    <string name="view_all_comments">View All Comments</string>
+
+<!--    TnC-->
+    <string name="guk_tnc">guk\'s Terms and Condition</string>
+    <string name="tnc_content">By installing, accessing or using any mobile apps, email newsletters and subscriptions, and other digital properties on which these terms are posted or referenced (together, “online services”), you are entering into a binding agreement with guk Company, which controls and operates the online services from its headquarters at 110 Beenus Alam Sutera. By accepting these terms, you also understand and consent to guk\'s Privacy Statement, which is incorporated into, and part of, this agreement. Our Privacy Statement describes how we collect, use and share information. By accepting these terms, you understand and agree that, as stated, you are waiving your right to resolve any dispute through other processes that could be available to you, such as court actions or administrative proceedings. It also means that you are waiving your rights to a trial by jury or to combine your dispute with others in a class action.</string>
+    <string name="tnc_agree">I agree with the terms and condition</string>
+
+<!--    User Dialog-->
+    <string name="user_data">User\'s Data</string>
+    <string name="user_name">Name: </string>
+    <string name="user_address">Address: </string>
+    <string name="user_phone">Phone Number: </string>
+
+<!--    Tabs-->
+    <string name="adopt_me">Adopt Me</string>
 
 
 </resources>

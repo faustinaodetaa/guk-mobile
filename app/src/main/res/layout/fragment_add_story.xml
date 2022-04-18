@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Your Story"
+                android:text="@string/add_your_story"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Content"
+                    android:text="@string/content"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -59,7 +59,7 @@
                     android:id="@+id/add_story_content_txt"
                     android:layout_width="match_parent"
                     android:background="@drawable/input_text"
-                    android:hint="Express your story here..."
+                    android:hint="@string/content_hint"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
                     android:gravity="top"
@@ -74,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:backgroundTint="@color/black"
-                    android:text="ADD STORY"
+                    android:text="@string/add_story"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textFontWeight="800" />
             </LinearLayout>
