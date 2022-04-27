@@ -1,5 +1,13 @@
 package edu.bluejack21_2.guk.model;
 
+import android.content.Context;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.Scope;
+
 import java.util.HashMap;
 
 import edu.bluejack21_2.guk.R;
@@ -10,6 +18,8 @@ public class User {
 
     public static final String COLLECTION_NAME = "users";
 
+    private static GoogleSignInClient googleSignInClient;
+
     private String id, email, name, password, address, phone, profilePicture;
     private String role = "";
     private boolean isDeleted = false;
@@ -17,6 +27,14 @@ public class User {
 
     public User() {
 
+    }
+
+    public static GoogleSignInClient getGoogleClient(Context ctx){
+        if(googleSignInClient == null){
+            String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
+            googleSignInClient = GoogleSignIn.getClient(ctx, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestScopes(new Scope(Scopes.DRIVE_APPFOLDER)).requestServerAuthCode(client_webId).requestIdToken(client_webId).build());
+        }
+        return googleSignInClient;
     }
 
     public User(String email, String name, String password, String address, String phone, String profilePicture, int point) {

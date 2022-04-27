@@ -47,11 +47,10 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
     private EditText emailTxt, passwordTxt;
     private Button loginBtn, googleLoginBtn;
 
-    private GoogleSignInClient googleSignInClient;
+//    private GoogleSignInClient googleSignInClient;
 
     private LinearLayout roundedBg;
 
-    private String client_webId = "798408453919-lcjvkil6547t34l2fk0av3d777mf98bd.apps.googleusercontent.com";
 
     private ImageView titleLogo;
 
@@ -63,7 +62,7 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
 
         setContentView(R.layout.activity_main);
 
-        googleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestScopes(new Scope(Scopes.DRIVE_APPFOLDER)).requestServerAuthCode(client_webId).requestIdToken(client_webId).build());
+//        googleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestScopes(new Scope(Scopes.DRIVE_APPFOLDER)).requestServerAuthCode(client_webId).requestIdToken(client_webId).build());
         emailTxt = findViewById(R.id.login_email_txt);
         passwordTxt = findViewById(R.id.login_password_txt);
         loginBtn = findViewById(R.id.login_btn);
@@ -93,7 +92,7 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
                             try {
                                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                                Log.d("dapet", account.getServerAuthCode());
+//                                Log.d("dapet", account.getServerAuthCode());
                                 String email = account.getEmail();
                                 String name = account.getDisplayName();
                                 String picture = account.getPhotoUrl().toString();
@@ -123,7 +122,8 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
                 });
 
         googleLoginBtn.setOnClickListener(view -> {
-            Intent intent = googleSignInClient.getSignInIntent();
+//            Intent intent = googleSignInClient.getSignInIntent();
+            Intent intent = User.getGoogleClient(this).getSignInIntent();
 //            startActivityForResult(intent, 100);
             resultLauncher.launch(intent);
         });

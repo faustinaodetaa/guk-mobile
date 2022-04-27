@@ -166,6 +166,9 @@ public class UserController {
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.commit();
+
+        User.getGoogleClient(ctx).signOut();
+
         Intent i = new Intent(ctx, MainActivity.class);
         ctx.startActivity(i, ActivityOptions.makeSceneTransitionAnimation(((Activity)ctx), ((Activity)ctx).findViewById(R.id.bottomNavigationView), "rounded-bg").toBundle());
         ((Activity)ctx).finish();
