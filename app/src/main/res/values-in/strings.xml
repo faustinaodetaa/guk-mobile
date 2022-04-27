@@ -158,4 +158,5 @@
     <string name="gender_error_msg">Jenis kelamin harus diisi!</string>
     <string name="bank_number_error_msg">Nomor akun bank harus diisi!</string>
     <string name="donation_amount_error_msg">Jumlah donasi harus diisi!</string>
+    <string name="story_content_error_msg">Konten harus diisi!</string>
 </resources>

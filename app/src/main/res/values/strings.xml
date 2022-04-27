@@ -153,5 +153,6 @@
     <string name="gender_error_msg">Gender must be filled!</string>
     <string name="bank_number_error_msg">Bank Account Number must be filled!</string>
     <string name="donation_amount_error_msg">Donation amount must be filled!</string>
+    <string name="story_content_error_msg">Content must be filled!</string>
 
 </resources>

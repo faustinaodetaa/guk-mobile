@@ -73,6 +73,21 @@ public class StoryController {
     }
 
     public static void insertStory(Context ctx, String content, Uri filePath, Timestamp createdAt){
+        String errorMsg = "";
+
+        if(content.isEmpty()){
+            errorMsg = ctx.getString(R.string.story_content_error_msg);
+        } else if(filePath == null){
+            errorMsg = ctx.getString(R.string.picture_error_msg);
+        }
+
+
+
+        if(!errorMsg.isEmpty()){
+            Toast.makeText(ctx, errorMsg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
 
         String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
