@@ -66,11 +66,13 @@ public class DogController {
             errorMsg = ctx.getString(R.string.description_error_msg);
         }else if(gender.isEmpty()){
             errorMsg = ctx.getString(R.string.gender_error_msg);
+        } else if(filePath == null){
+            errorMsg = ctx.getString(R.string.picture_error_msg);
         }
 
         if(!errorMsg.isEmpty()){
-//            Toast.makeText(ctx, errorMsg, Toast.LENGTH_SHORT).show();
-            Log.d("msg", errorMsg);
+            Toast.makeText(ctx, errorMsg, Toast.LENGTH_SHORT).show();
+//            Log.d("msg", errorMsg);
             return false;
         }
 

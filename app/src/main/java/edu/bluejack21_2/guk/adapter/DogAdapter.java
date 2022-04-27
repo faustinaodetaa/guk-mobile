@@ -63,10 +63,10 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         String dd = dob.toString().substring(8,10);
         String yyyy = dob.toString().substring(30,34);
         Integer age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(yyyy);
-        Log.d("age", age.toString());
-
-        Log.d("bday", mon+dd+yyyy);
-        Log.d("bday", dob.toString());
+//        Log.d("age", age.toString());
+//
+//        Log.d("bday", mon+dd+yyyy);
+//        Log.d("bday", dob.toString());
         holder.name.setText(dog.getName());
         holder.genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
 
@@ -79,7 +79,7 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DogDetailActivity.class);
-                Log.d("coba intent", "onClick: " + dog.getName());
+//                Log.d("coba intent", "onClick: " + dog.getName());
                 intent.putExtra("dog", dog);
                 context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), holder.picture, "image-trans").toBundle());
             }
