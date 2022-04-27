@@ -130,5 +130,10 @@
     <string name="uploaded">Terunggah</string>
     <string name="upload_failed">Mengunggah gambar gagal</string>
 
-
+    <!--    Notification-->
+    <string name="notif_donation">Donasi anda telah </string>
+    <string name="notif_adoption">Adopsi anda telah </string>
+    <string name="notif_approved">diterima!</string>
+    <string name="notif_rejected">ditolak!</string>
+    <string name="notif_badge">Anda menerima badge baru!</string>
 </resources>

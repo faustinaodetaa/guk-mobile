@@ -20,8 +20,8 @@ import edu.bluejack21_2.guk.model.User;
 import edu.bluejack21_2.guk.util.Database;
 
 public class NotificationController {
-    public static void insertNotification(String content, String type, DocumentReference user){
-        Notification notification = new Notification(content, type, Timestamp.now(), user);
+    public static void insertNotification(int status, String type, DocumentReference user){
+        Notification notification = new Notification(status, type, Timestamp.now(), user);
         Database.getDB().collection(Notification.COLLECTION_NAME).add(notification.toMap()).addOnSuccessListener(documentReference -> {
 
         });

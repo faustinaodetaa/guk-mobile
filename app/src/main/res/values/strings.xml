@@ -127,5 +127,11 @@
     <string name="uploaded">Uploaded</string>
     <string name="upload_failed">Image upload failed</string>
 
+<!--    Notification-->
+    <string name="notif_donation">Your donation has been </string>
+    <string name="notif_adoption">Your adoption has been </string>
+    <string name="notif_approved">approved!</string>
+    <string name="notif_rejected">rejected!</string>
+    <string name="notif_badge">You have earn a new badge!</string>
 
 </resources>

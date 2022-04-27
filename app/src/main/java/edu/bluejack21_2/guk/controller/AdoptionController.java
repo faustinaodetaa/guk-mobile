@@ -48,11 +48,11 @@ public class AdoptionController {
         HashMap<String, Object> data =  new HashMap<String, Object>();
         data.put("status", isApproved ? 1 : 2);
         Database.getDB().collection(Adoption.COLLECTION_NAME).document(adoption.getId()).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
-            String notif = "";
-
+//            String notif = "";
+            int status = 0;
             if(isApproved){
-                notif = "Your adoption has been approved!";
-
+//                notif = "Your adoption has been approved!";
+                status = 1;
                 DogController.changeDogStatus(ctx, adoption.getDog(), "Adopted");
 
 //                data.clear();
@@ -65,14 +65,15 @@ public class AdoptionController {
                 Toast.makeText(ctx, ctx.getString(R.string.adoption_approved), Toast.LENGTH_LONG).show();
 
             } else {
-                notif = "Your adoption has been rejected!";
+//                notif = "Your adoption has been rejected!";
+                status = 2;
 
                 DogController.changeDogStatus(ctx, adoption.getDog(), "Unadopted");
 
                 ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, ctx.getString(R.string.adoption_rejected), Toast.LENGTH_LONG).show();
             }
-            NotificationController.insertNotification(notif, "adoption", adoption.getUser());
+            NotificationController.insertNotification(status, "adoption", adoption.getUser());
 
         });
     }

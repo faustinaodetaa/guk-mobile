@@ -8,7 +8,8 @@ import java.util.HashMap;
 public class Notification {
     public static final String COLLECTION_NAME = "notifications";
 
-    private String id, content, type;
+    private String id, type;
+    private int status = 0;
     private Timestamp createdAt;
     private DocumentReference user;
 
@@ -16,8 +17,8 @@ public class Notification {
 
     }
 
-    public Notification(String content, String type, Timestamp createdAt, DocumentReference user) {
-        this.content = content;
+    public Notification(int status, String type, Timestamp createdAt, DocumentReference user) {
+        this.status = status;
         this.type = type;
         this.createdAt = createdAt;
         this.user = user;
@@ -25,7 +26,7 @@ public class Notification {
 
     public HashMap<String, Object> toMap() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("content", content);
+        map.put("status", status);
         map.put("type", type);
         map.put("user", user);
         map.put("createdAt", createdAt);
@@ -49,12 +50,12 @@ public class Notification {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public int getStatus() {
+        return status;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Timestamp getCreatedAt() {

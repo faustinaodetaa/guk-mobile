@@ -184,7 +184,7 @@ public class UserController {
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             User user = documentSnapshot.toObject(User.class);
             if(User.getBadgeColor(user.getPoint()) != User.getBadgeColor(user.getPoint() + point)){
-                NotificationController.insertNotification("You have earn a new badge!", "badge-" + (user.getPoint() + point), userRef);
+                NotificationController.insertNotification(1, "badge-" + (user.getPoint() + point), userRef);
             }
             HashMap<String, Object> data =  new HashMap<String, Object>();
             data.put("point", FieldValue.increment(point));
