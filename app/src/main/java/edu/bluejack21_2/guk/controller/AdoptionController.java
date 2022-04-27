@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
@@ -30,7 +31,7 @@ public class AdoptionController {
         DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
         DocumentReference dogRef = Database.getDB().collection(Dog.COLLECTION_NAME).document(dog.getId());
         DogController.changeDogStatus(ctx, dogRef, "Pending");
-        Adoption adoption = new Adoption(userRef, dogRef);
+        Adoption adoption = new Adoption(userRef, dogRef, Timestamp.now());
         Database.getDB().collection(Adoption.COLLECTION_NAME).add(adoption.toMap()).addOnSuccessListener(documentReference -> {
             Toast.makeText(ctx, ctx.getString(R.string.thank_you_adoption), Toast.LENGTH_LONG).show();
             ((Activity) ctx).finish();
@@ -77,7 +78,7 @@ public class AdoptionController {
     }
 
     public static void showAllAdoptions(AdoptionAdapter adoptionAdapter, ArrayList<Adoption> adoptions){
-        Database.getDB().collection(Adoption.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING)
+        Database.getDB().collection(Adoption.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
 //                .whereEqualTo("status", "pending")
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -96,7 +97,7 @@ public class AdoptionController {
 
         Database.getDB().collection(Adoption.COLLECTION_NAME)
                 .whereEqualTo("user", userRef)
-                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){

@@ -1,5 +1,6 @@
 package edu.bluejack21_2.guk.model;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
@@ -11,18 +12,21 @@ public class Donation extends History{
 
     private String bankAccountHolder, bankAccountNumber, notes, proofPic;
     private int amount;
+    private Timestamp createdAt;
 
     public Donation(){
 
     }
 
-    public Donation(String bankAccountHolder, String bankAccountNumber, int amount, String notes, String proofPic, DocumentReference user) {
+    public Donation(String bankAccountHolder, String bankAccountNumber, int amount, String notes, String proofPic, DocumentReference user, Timestamp createdAt) {
         super(user);
         this.bankAccountHolder = bankAccountHolder;
         this.bankAccountNumber = bankAccountNumber;
         this.amount = amount;
         this.notes = notes;
         this.proofPic = proofPic;
+        this.createdAt = createdAt;
+
     }
 
     public HashMap<String, Object> toMap() {
@@ -34,8 +38,17 @@ public class Donation extends History{
         donation.put("proofPic", proofPic);
         donation.put("user", user);
         donation.put("status", status);
+        donation.put("createdAt", createdAt);
 
         return donation;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public int getAmount() {

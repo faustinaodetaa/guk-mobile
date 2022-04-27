@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
@@ -27,7 +28,7 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class DonationController {
     public static void showAllDonations(DonationAdapter donationAdapter, ArrayList<Donation> donations){
-        Database.getDB().collection(Donation.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING)
+        Database.getDB().collection(Donation.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
 //                .whereEqualTo("status", "pending")
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -46,7 +47,7 @@ public class DonationController {
 
         Database.getDB().collection(Donation.COLLECTION_NAME)
                 .whereEqualTo("user", userRef)
-                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
@@ -120,7 +121,7 @@ public class DonationController {
 
         Database.uploadImage(filePath, fileName, ctx, (data, message) -> {
             DocumentReference userRef = Database.getDB().collection(User.COLLECTION_NAME).document(User.CURRENT_USER.getId());
-            Donation donation = new Donation(bankAccountHolder, bankAccountNumber, Integer.parseInt(amountStr), notes, data, userRef);
+            Donation donation = new Donation(bankAccountHolder, bankAccountNumber, Integer.parseInt(amountStr), notes, data, userRef, Timestamp.now());
             Database.getDB().collection(Donation.COLLECTION_NAME).add(donation.toMap()).addOnSuccessListener(documentReference -> {
                 ActivityHelper.refreshActivity((Activity) ctx);
                 Toast.makeText(ctx, "Thank you for your Donation! Please wait for our admin to check and review your donation.", Toast.LENGTH_LONG).show();
