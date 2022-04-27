@@ -20,21 +20,31 @@ import edu.bluejack21_2.guk.util.ActivityHelper;
 
 public class SettingActivity extends BaseActivity {
 
+    private Button saveBtn;
     private ImageView backBtn;
     private Spinner fontSpinner, notificationSpinner;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        prefs = getSharedPreferences("edu.bluejack21_2.guk", Context.MODE_PRIVATE);
+        editor = prefs.edit();
+
         backBtn = findViewById(R.id.setting_back_icon);
         backBtn.setOnClickListener(view -> {
-            startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.setting_bg), "rounded-bg").toBundle());
             finish();
         });
 
-        SharedPreferences prefs = getSharedPreferences("edu.bluejack21_2.guk", Context.MODE_PRIVATE);
+        saveBtn = findViewById(R.id.setting_save_btn);
+        saveBtn.setOnClickListener(view -> {
+            editor.commit();
+            startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.setting_bg), "rounded-bg").toBundle());
+            finish();
+        });
 
         fontSpinner = findViewById(R.id.setting_font_dropdown);
         ArrayAdapter<String> fontAdapter = new ArrayAdapter<>(this,
@@ -51,9 +61,8 @@ public class SettingActivity extends BaseActivity {
         fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("font_size", fontAdapter.getItem(i));
-                editor.commit();
+//                editor.commit();
             }
 
             @Override
@@ -77,9 +86,8 @@ public class SettingActivity extends BaseActivity {
         notificationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("push_notification", notificationAdapter.getItem(i));
-                editor.commit();
+//                editor.commit();
             }
 
             @Override

@@ -168,4 +168,5 @@
     <string name="silver">Perak</string>
     <string name="gold">Emas</string>
     <string name="diamond">Berlian</string>
+    <string name="save_settings">Simpan Pengaturan</string>
 </resources>

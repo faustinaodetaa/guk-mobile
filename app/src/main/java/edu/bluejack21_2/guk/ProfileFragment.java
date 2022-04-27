@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment {
         settingsBtn.setOnClickListener(v -> {
             Intent i = new Intent(view.getContext(), SettingActivity.class);
             view.getContext().startActivity(i, ActivityOptions.makeSceneTransitionAnimation(((Activity)view.getContext()), ((Activity)view.getContext()).findViewById(R.id.bottomNavigationView), "rounded-bg").toBundle());
-            ((Activity) view.getContext()).finish();
+//            ((Activity) view.getContext()).finish();
         });
 
         profileBadge.setOnClickListener(v -> {

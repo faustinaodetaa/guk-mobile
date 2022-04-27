@@ -87,6 +87,17 @@
                     android:layout_height="match_parent"
                     />
             </LinearLayout>
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/setting_save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:text="@string/save_settings"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textFontWeight="800" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
