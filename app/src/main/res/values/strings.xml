@@ -134,4 +134,24 @@
     <string name="notif_rejected">rejected!</string>
     <string name="notif_badge">You have earn a new badge!</string>
 
+    <!--    Donation-->
+    <string name="donation_approved" >Donation approved!</string>
+    <string name="donation_rejected">Donation Rejected!</string>
+    <string name="donation_insert">Thank you for your Donation! Please wait for our admin to check and review your donation.</string>
+    <string name="story_inserted">Story added successfully!</string>
+    <string name="register_success">Register success!</string>
+    <string name="register_fail">Register fail!</string>
+    <string name="name_error_msg">Name must be filled!</string>
+    <string name="email_error_msg">Email must be filled!</string>
+    <string name="password_error_msg">Password must be filled!</string>
+    <string name="confirm_password_error_msg">Password and Confirm Password must be the same!</string>
+    <string name="phone_error_msg">Phone number must be filled!</string>
+    <string name="address_error_msg">Address must be filled!</string>
+    <string name="picture_error_msg">Picture must be chosen!</string>
+    <string name="login_fail">Incorrect Credential!</string>
+    <string name="description_error_msg">Description must be filled!</string>
+    <string name="gender_error_msg">Gender must be filled!</string>
+    <string name="bank_number_error_msg">Bank Account Number must be filled!</string>
+    <string name="donation_amount_error_msg">Donation amount must be filled!</string>
+
 </resources>

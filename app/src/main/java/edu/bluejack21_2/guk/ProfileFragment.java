@@ -33,7 +33,7 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class ProfileFragment extends Fragment {
 
-    private TextView nameTxt, pointTxt;
+    private TextView nameTxt, pointTxt, donationTitleTxt, adoptionTitleTxt;
     private ImageView profilePic, profileBadge;
     private Button logoutBtn, deleteAccountBtn, settingsBtn;
 
@@ -60,6 +60,10 @@ public class ProfileFragment extends Fragment {
         logoutBtn = view.findViewById(R.id.logout_btn);
         deleteAccountBtn = view.findViewById(R.id.delete_account_btn);
         settingsBtn = view.findViewById(R.id.setting_btn);
+
+        donationTitleTxt = view.findViewById(R.id.profile_donation_title);
+        adoptionTitleTxt = view.findViewById(R.id.profile_adoption_title);
+
 
         nameTxt.setText(User.CURRENT_USER.getName());
         pointTxt.setText(String.format("%,d Points", User.CURRENT_USER.getPoint()));
@@ -114,8 +118,12 @@ public class ProfileFragment extends Fragment {
 
         if(User.CURRENT_USER.getRole().equals("admin")){
             deleteAccountBtn.setVisibility(View.GONE);
+            adoptionTitleTxt.setVisibility(View.GONE);
+            donationTitleTxt.setVisibility(View.GONE);
         } else {
             deleteAccountBtn.setVisibility(View.VISIBLE);
+            adoptionTitleTxt.setVisibility(View.VISIBLE);
+            donationTitleTxt.setVisibility(View.VISIBLE);
         }
 
         return view;

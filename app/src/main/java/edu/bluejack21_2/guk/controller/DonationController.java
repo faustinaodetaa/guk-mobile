@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.model.Dog;
 import edu.bluejack21_2.guk.model.Donation;
@@ -78,13 +79,13 @@ public class DonationController {
                 UserController.increasePoint(donation.getUser(), point);
 
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Donation Approved!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, ctx.getString(R.string.donation_approved), Toast.LENGTH_LONG).show();
             } else {
 //                notif = "Your donation has been rejected!";
                 status = 2;
 
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Donation Rejected!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, ctx.getString(R.string.donation_rejected), Toast.LENGTH_LONG).show();
             }
             NotificationController.insertNotification(status, "donation", donation.getUser());
 
@@ -96,18 +97,18 @@ public class DonationController {
 
         int amount = 0;
         if(bankAccountHolder.isEmpty()){
-            errorMsg = "Bank Account Holder name must be filled!";
+            errorMsg = ctx.getString(R.string.name_error_msg);
         } else if(bankAccountNumber.isEmpty()){
-            errorMsg = "Bank Account Number must be filled!";
+            errorMsg = ctx.getString(R.string.bank_number_error_msg);
         } else if(amountStr.isEmpty()) {
-            errorMsg = "Donation amount must be filled!";
+            errorMsg = ctx.getString(R.string.donation_amount_error_msg);
         } else if(filePath == null){
-            errorMsg = "Please upload your donation proof!";
+            errorMsg = ctx.getString(R.string.picture_error_msg);
         } else {
             try{
                 amount = Integer.parseInt(amountStr);
             } catch (Exception e){
-                errorMsg = "Donation amount must be numeric!";
+                errorMsg = ctx.getString(R.string.donation_amount_error_msg);
             }
         }
 
@@ -127,7 +128,7 @@ public class DonationController {
             Donation donation = new Donation(bankAccountHolder, bankAccountNumber, Integer.parseInt(amountStr), notes, data, userRef, Timestamp.now());
             Database.getDB().collection(Donation.COLLECTION_NAME).add(donation.toMap()).addOnSuccessListener(documentReference -> {
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Thank you for your Donation! Please wait for our admin to check and review your donation.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, ctx.getString(R.string.donation_insert), Toast.LENGTH_LONG).show();
 
             }).addOnFailureListener(e -> {
                 Toast.makeText(ctx, "Error!", Toast.LENGTH_SHORT).show();

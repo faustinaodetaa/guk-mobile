@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="greetings">Halo, </string>
-    <string name="login_success">Login Sukses</string>
+    <string name="login_success">Login Berhasil</string>
 
 
     <!--    Comment-->
@@ -56,8 +56,8 @@
     <string name="description_hint">Anjingnya lucu banget</string>
     <string name="dob">Tanggal Lahir</string>
     <string name="gender">Jenis Kelamin</string>
-    <string name="male">Laki-Laki</string>
-    <string name="female">Perempuan</string>
+    <string name="male">Jantan</string>
+    <string name="female">Betina</string>
 
 <!--    Add Dog-->
     <string name="add_dog">Tambah Anjing</string>
@@ -136,4 +136,26 @@
     <string name="notif_approved">diterima!</string>
     <string name="notif_rejected">ditolak!</string>
     <string name="notif_badge">Anda menerima badge baru!</string>
+
+<!--    Donation-->
+    <string name="donation_approved" >Donasi diterima!</string>
+    <string name="donation_rejected">Donasi ditolak!</string>
+    <string name="donation_insert">Terima kasih atas donasi anda! Mohon tunggu admin kami untuk melihat donasi anda.</string>
+    <string name="story_inserted">Cerita berhasil ditambahkan!</string>
+    <string name="register_success">Daftar akun berhasil!</string>
+    <string name="register_fail">Daftar akun gagal!</string>
+
+
+    <string name="name_error_msg">Nama harus diisi!</string>
+    <string name="email_error_msg">Email harus diisi!</string>
+    <string name="password_error_msg">Kata sandi harus diisi!</string>
+    <string name="confirm_password_error_msg">Kata sandi dan konfirmasi kata sandi harus sama!</string>
+    <string name="phone_error_msg">Nomor handphone harus diisi!</string>
+    <string name="address_error_msg">Alamat harus diisi!</string>
+    <string name="picture_error_msg">Foto harus dipilih!</string>
+    <string name="login_fail">Kredensial salah!</string>
+    <string name="description_error_msg">Deskripsi harus diisi!</string>
+    <string name="gender_error_msg">Jenis kelamin harus diisi!</string>
+    <string name="bank_number_error_msg">Nomor akun bank harus diisi!</string>
+    <string name="donation_amount_error_msg">Jumlah donasi harus diisi!</string>
 </resources>

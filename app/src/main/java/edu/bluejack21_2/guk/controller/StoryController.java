@@ -82,7 +82,7 @@ public class StoryController {
             Story story = new Story(userRef, content, data, createdAt);
             Database.getDB().collection(Story.COLLECTION_NAME).add(story.toMap()).addOnSuccessListener(documentReference -> {
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Story added successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, ctx.getString(R.string.story_inserted), Toast.LENGTH_SHORT).show();
 
             }).addOnFailureListener(e -> {
                 Log.d("msg", "error insert");

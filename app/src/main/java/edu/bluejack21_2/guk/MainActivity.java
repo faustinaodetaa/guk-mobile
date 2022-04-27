@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements FinishListener<User> {
             String email = emailTxt.getText().toString();
             String password = passwordTxt.getText().toString();
 
-            User.CURRENT_USER = UserController.auth(this, email, password);
+            User.CURRENT_USER = UserController.auth(this,this, email, password);
         });
 
 

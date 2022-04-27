@@ -61,11 +61,11 @@ public class DogController {
     public static boolean insertDog(Context ctx, String name, String breed, String description, Timestamp dob, Timestamp rescuedDate, String gender, String status, Uri filePath){
         String errorMsg = "";
         if(name.isEmpty()){
-            errorMsg = "Name must be filled!";
+            errorMsg = ctx.getString(R.string.name_error_msg);
         }else if(description.isEmpty()){
-            errorMsg = "Description must be filled!";
+            errorMsg = ctx.getString(R.string.description_error_msg);
         }else if(gender.isEmpty()){
-            errorMsg = "Gender must be filled!";
+            errorMsg = ctx.getString(R.string.gender_error_msg);
         }
 
         if(!errorMsg.isEmpty()){
@@ -100,7 +100,7 @@ public class DogController {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Log.d("Deleted", "Success delete dog");
+//                    Log.d("Deleted", "Success delete dog");
                 }
             }
         });

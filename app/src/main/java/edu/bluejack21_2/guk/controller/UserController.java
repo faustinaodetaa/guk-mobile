@@ -33,13 +33,13 @@ public class UserController {
 
 //    public static final String COLLECTION_NAME = "dogs";
 
-    public static User auth(FinishListener<User> listener, String email, String password){
+    public static User auth(Context ctx, FinishListener<User> listener, String email, String password){
         String errorMsg = "";
 
         if(email.isEmpty()){
-            errorMsg = "Email must be filled!";
+            errorMsg = ctx.getString(R.string.email_error_msg);
         } else if(password.isEmpty()){
-            errorMsg = "Password must be filled!";
+            errorMsg = ctx.getString(R.string.password_error_msg);
         }
 
         if(!errorMsg.isEmpty()){
@@ -59,16 +59,16 @@ public class UserController {
                                 u.setId(document.getId());
                                 User.CURRENT_USER = u;
                                 if(listener != null)
-                                    listener.onFinish(u, "Login Success");
+                                    listener.onFinish(u, ctx.getString(R.string.login_success));
 //                                Toast.makeText(ctx, "Login Success!", Toast.LENGTH_SHORT).show();
                             } else {
                                 if(listener != null)
-                                    listener.onFinish(null, "Incorrect Credential!");
+                                    listener.onFinish(null, ctx.getString(R.string.login_fail));
                             }
                         }
                     } else {
                         if(listener != null)
-                            listener.onFinish(null, "Incorrect Credential!");
+                            listener.onFinish(null, ctx.getString(R.string.login_fail));
                     }
                 });
         return User.CURRENT_USER;
@@ -95,24 +95,24 @@ public class UserController {
 
         String errorMsg = "";
         if(name.isEmpty()){
-            errorMsg = "Name must be filled!";
+            errorMsg = ctx.getString(R.string.name_error_msg);
         } else if(email.isEmpty()){
-            errorMsg = "Email must be filled!";
+            errorMsg = ctx.getString(R.string.email_error_msg);
         } else if(password.isEmpty()){
-            errorMsg = "Password must be filled!";
+            errorMsg = ctx.getString(R.string.password_error_msg);
         } else if(!password.equals(confirmPassword)){
-            errorMsg = "Password and Confirm Password must be the same!";
+            errorMsg = ctx.getString(R.string.confirm_password_error_msg);
         } else if(phone.isEmpty()){
-            errorMsg = "Phone number must be filled!";
+            errorMsg = ctx.getString(R.string.phone_error_msg);
         } else if(address.isEmpty()){
-            errorMsg = "Address must be filled!";
+            errorMsg = ctx.getString(R.string.address_error_msg);
         } else if(filePath == null){
-            errorMsg = "Profile picture must be chosen!";
+            errorMsg = ctx.getString(R.string.picture_error_msg);
         } else {
             getUserByEmail(email, (data, message) -> {
                 if(data != null){
                     if(listener != null)
-                        listener.onFinish(false, "Email already existed!");
+                        listener.onFinish(false, ctx.getString(R.string.register_fail));
                 } else {
                     String extension = filePath.toString().substring(filePath.toString().lastIndexOf(".") + 1);
                     String fileName = "images/user/" + UUID.randomUUID().toString() + "." + extension;
@@ -125,11 +125,11 @@ public class UserController {
                                 .add(user.toMap())
                                 .addOnSuccessListener(documentReference -> {
                                     if(listener != null)
-                                        listener.onFinish(true, "Register success!");
+                                        listener.onFinish(true, ctx.getString(R.string.register_success));
                                 })
                                 .addOnFailureListener(e -> {
                                     if(listener != null)
-                                        listener.onFinish(false, "Register fail!");
+                                        listener.onFinish(false, ctx.getString(R.string.register_fail));
                                 });
 
                     });
@@ -149,7 +149,7 @@ public class UserController {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 User u = document.toObject(User.class);
-                Log.d("coba", "getUserById: " + u.getIsDeleted());
+//                Log.d("coba", "getUserById: " + u.getIsDeleted());
 //                if(!u.getIsDeleted()){
 //                    User.CURRENT_USER = u;
                     u.setId(id);
