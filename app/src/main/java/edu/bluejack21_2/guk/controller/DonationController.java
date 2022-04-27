@@ -29,7 +29,9 @@ import edu.bluejack21_2.guk.util.Database;
 
 public class DonationController {
     public static void showAllDonations(DonationAdapter donationAdapter, ArrayList<Donation> donations){
-        Database.getDB().collection(Donation.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
+        Database.getDB().collection(Donation.COLLECTION_NAME)
+//                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
 //                .whereEqualTo("status", "pending")
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -48,7 +50,8 @@ public class DonationController {
 
         Database.getDB().collection(Donation.COLLECTION_NAME)
                 .whereEqualTo("user", userRef)
-                .orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
+//                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){

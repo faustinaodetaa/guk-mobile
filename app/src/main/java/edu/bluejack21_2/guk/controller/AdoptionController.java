@@ -79,7 +79,9 @@ public class AdoptionController {
     }
 
     public static void showAllAdoptions(AdoptionAdapter adoptionAdapter, ArrayList<Adoption> adoptions){
-        Database.getDB().collection(Adoption.COLLECTION_NAME).orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
+        Database.getDB().collection(Adoption.COLLECTION_NAME)
+//                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
 //                .whereEqualTo("status", "pending")
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -98,7 +100,8 @@ public class AdoptionController {
 
         Database.getDB().collection(Adoption.COLLECTION_NAME)
                 .whereEqualTo("user", userRef)
-                .orderBy("status", Query.Direction.ASCENDING).orderBy("createdAt", Query.Direction.DESCENDING)
+//                .orderBy("status", Query.Direction.ASCENDING)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){

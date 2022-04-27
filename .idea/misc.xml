@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/back_arrow.xml" value="0.142" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/back_arrow_black.xml" value="0.142" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/black_rounded.xml" value="0.1545" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/cake.xml" value="0.142" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/card_shape.xml" value="0.1685" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/circle_border.xml" value="0.142" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/input_text.xml" value="0.1545" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/nav_item_color_state.xml" value="0.1" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/nav_item_shape_state.xml" value="0.142" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/rounded_edge.xml" value="0.1545" />
+        <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/drawable/tab_layout_style.xml" value="0.142" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/font/fonts.xml" value="0.25462962962962965" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/font/poppins.xml" value="0.24564102564102563" />
         <entry key="..\:/0.BINUS/ASLAB/TPA/MOBILE/guk/app/src/main/res/layout/activity_dog_detail.xml" value="0.19293478260869565" />
