@@ -92,11 +92,11 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
         });
 
         holder.commentIcon.setOnClickListener(view -> {
-            Intent intent = new Intent(context, CommentActivity.class);
-//            Log.d("coba intent", "onClick: " + story.getContent());
-            intent.putExtra("story", story);
-            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.contentTxt, "story-content").toBundle());
+            openCommentActivity(holder, story);
+        });
 
+        holder.viewAllCommentsTxt.setOnClickListener(view -> {
+            openCommentActivity(holder, story);
         });
 
         Database.showImage(story.getPicture(), ((Activity)context), holder.picture );
@@ -104,6 +104,12 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
 
    }
+
+    private void openCommentActivity(@NonNull StoriesViewholder holder, Story story) {
+        Intent intent = new Intent(context, CommentActivity.class);
+        intent.putExtra("story", story);
+        context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.contentTxt, "story-content").toBundle());
+    }
 
     @Override
     public int getItemCount() {
@@ -113,13 +119,15 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoriesViewh
 
     class StoriesViewholder extends RecyclerView.ViewHolder {
 
-        TextView userNameTxt, contentTxt, topCommentTxt1, topCommentTxt2;
+        TextView userNameTxt, contentTxt, topCommentTxt1, topCommentTxt2, viewAllCommentsTxt;
         ImageView picture, commentIcon, likeIcon;
         CardView storyCard;
 
         public StoriesViewholder(@NonNull View itemView)
         {
             super(itemView);
+
+            viewAllCommentsTxt = itemView.findViewById(R.id.story_view_comment_txt);
 
             userNameTxt = itemView.findViewById(R.id.story_user_name);
             contentTxt = itemView.findViewById(R.id.story_content);
