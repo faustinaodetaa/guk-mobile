@@ -73,18 +73,17 @@
                      />
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.flexbox.FlexboxLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:alignItems="center"
-                app:justifyContent="space_between">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                android:layout_marginTop="10dp">
 
                     <TextView
+                        android:maxWidth="200dp"
+                        android:layout_marginRight="138dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         android:id="@+id/detail_dog_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -93,22 +92,27 @@
                         android:textFontWeight="800"
                         android:textSize="20sp" />
 
-                    <ImageView
-                        android:id="@+id/detail_gender_icon"
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/gender_male" />
-                </LinearLayout>
+                <ImageView
+                    app:layout_constraintLeft_toRightOf="@id/detail_dog_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/detail_gender_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/gender_male" />
 
                 <TextView
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/detail_dog_status"
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:text="Status"
+                    android:textAlignment="viewEnd"
+                    android:text="Unadopted"
                     android:textColor="@color/primary" />
-            </com.google.android.flexbox.FlexboxLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/detail_dog_breed"
