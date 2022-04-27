@@ -88,6 +88,10 @@ public class ProfileFragment extends Fragment {
             ((Activity) view.getContext()).finish();
         });
 
+        profileBadge.setOnClickListener(v -> {
+            view.getContext().startActivity(new Intent(view.getContext(), BadgeActivity.class));
+        });
+
 
         RecyclerView recyclerDonation, recyclerAdoption;
         AdoptionAdapter adoptionAdapter;

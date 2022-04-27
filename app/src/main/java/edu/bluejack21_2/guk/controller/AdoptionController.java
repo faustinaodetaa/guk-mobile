@@ -36,7 +36,9 @@ public class AdoptionController {
             Toast.makeText(ctx, ctx.getString(R.string.thank_you_adoption), Toast.LENGTH_LONG).show();
             ((Activity) ctx).finish();
 //            ActivityHelper.refreshActivity((Activity) ctx);
-            ctx.startActivity(new Intent(ctx, HomeActivity.class));
+            Intent i = new Intent(ctx, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            ctx.startActivity(i);
 
         }).addOnFailureListener(e -> {
             Toast.makeText(ctx, "Error!", Toast.LENGTH_SHORT).show();
