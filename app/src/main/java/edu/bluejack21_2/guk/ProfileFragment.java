@@ -112,6 +112,12 @@ public class ProfileFragment extends Fragment {
         AdoptionController.showAllAdoptionsByUser(adoptionAdapter, adoptions);
         DonationController.showAllDonationsByUser(donationAdapter, donations);
 
+        if(User.CURRENT_USER.getRole().equals("admin")){
+            deleteAccountBtn.setVisibility(View.GONE);
+        } else {
+            deleteAccountBtn.setVisibility(View.VISIBLE);
+        }
+
         return view;
     }
 }
