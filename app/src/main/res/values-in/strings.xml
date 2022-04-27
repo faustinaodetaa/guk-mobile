@@ -9,10 +9,15 @@
 
     <!--    Comment-->
     <string name="comment_back">Cerita Kita</string>
-    <string name="add_comment_hint">Tambahkan sebuah komentar...</string>
+    <string name="add_comment_hint">Tambah komentar...</string>
     <string name="comment_button">Komentar</string>
 
-<!--    Dog Detail-->
+    <!--    Home-->
+    <string name="years_old"> tahun</string>
+    <string name="recent_tag">Baru</string>
+
+
+    <!--    Dog Detail-->
     <string name="adopt_me_back">Adopsi Aku</string>
     <string name="adopt_button">ADOPSI</string>
     <string name="update_button">PERBAHARUI</string>
@@ -111,6 +116,18 @@
     <string name="donated_lowercase"> mendonasikan </string>
     <string name="adopted">Mengadopsi </string>
     <string name="adopted_lowercase"> mengadopsi </string>
+
+<!--    Toast-->
+    <string name="thank_you_adoption">Terima kasih atas adopsi anda! Mohon tunggu admin kami untuk melihat permintaan adopsi anda.</string>
+    <string name="adoption_approved">Adopsi Disetujui!</string>
+    <string name="adoption_rejected">Adopsi Ditolak!</string>
+    <string name="add_dog_toast">Anjing berhasil ditambahkan!</string>
+    <string name="update_dog_toast">Anjing berhasil diperbaharui!</string>
+
+    <!--    Upload-->
+    <string name="uploading">Mengunggah...</string>
+    <string name="uploaded">Terunggah</string>
+    <string name="upload_failed">Mengunggah gambar gagal</string>
 
 
 </resources>

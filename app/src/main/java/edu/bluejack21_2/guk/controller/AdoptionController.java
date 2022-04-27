@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.bluejack21_2.guk.HomeActivity;
+import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.adapter.AdoptionAdapter;
 import edu.bluejack21_2.guk.adapter.DonationAdapter;
 import edu.bluejack21_2.guk.model.Adoption;
@@ -31,7 +32,7 @@ public class AdoptionController {
         DogController.changeDogStatus(ctx, dogRef, "Pending");
         Adoption adoption = new Adoption(userRef, dogRef);
         Database.getDB().collection(Adoption.COLLECTION_NAME).add(adoption.toMap()).addOnSuccessListener(documentReference -> {
-            Toast.makeText(ctx, "Thank you for your Adoption! Please wait for our admin to check and review your adoption.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, ctx.getString(R.string.thank_you_adoption), Toast.LENGTH_LONG).show();
             ((Activity) ctx).finish();
 //            ActivityHelper.refreshActivity((Activity) ctx);
             ctx.startActivity(new Intent(ctx, HomeActivity.class));
@@ -60,7 +61,7 @@ public class AdoptionController {
 //                });
                 UserController.increasePoint(adoption.getUser(), point);
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Adoption Approved!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, ctx.getString(R.string.adoption_approved), Toast.LENGTH_LONG).show();
 
             } else {
                 notif = "Your adoption has been rejected!";
@@ -68,7 +69,7 @@ public class AdoptionController {
                 DogController.changeDogStatus(ctx, adoption.getDog(), "Unadopted");
 
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Adoption Rejected!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, ctx.getString(R.string.adoption_rejected), Toast.LENGTH_LONG).show();
             }
             NotificationController.insertNotification(notif, "adoption", adoption.getUser());
 

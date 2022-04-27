@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import edu.bluejack21_2.guk.HomeActivity;
 import edu.bluejack21_2.guk.MainActivity;
+import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.adapter.DogAdapter;
 import edu.bluejack21_2.guk.listener.FinishListener;
 import edu.bluejack21_2.guk.model.Dog;
@@ -81,10 +82,10 @@ public class DogController {
             Dog dog = new Dog(name, breed, description, dob, gender, rescuedDate, status, data);
             Database.getDB().collection(Dog.COLLECTION_NAME).add(dog.toMap()).addOnSuccessListener(documentReference -> {
                 ActivityHelper.refreshActivity((Activity) ctx);
-                Toast.makeText(ctx, "Dog added successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, ctx.getString(R.string.add_dog_toast), Toast.LENGTH_SHORT).show();
 
             }).addOnFailureListener(e -> {
-                Log.d("msg", "error insert");
+                Log.d("msg", "error");
             });
 
         });
@@ -115,7 +116,7 @@ public class DogController {
         Database.getDB().collection(Dog.COLLECTION_NAME).document(id).set(data, SetOptions.merge()).addOnSuccessListener(u -> {
             ((Activity)ctx).finish();
             ((Activity)ctx).startActivity(new Intent(((Activity)ctx), HomeActivity.class));
-            Toast.makeText(ctx, "Dog updated successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.update_dog_toast), Toast.LENGTH_SHORT).show();
         });
     }
 

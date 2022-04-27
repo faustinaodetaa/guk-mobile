@@ -70,13 +70,13 @@ public class SearchFragment extends Fragment {
         searchIcon.setOnClickListener(view1 -> {
             String keyword = searchTxt.getText().toString();
             String selectedFilter = menus.getSelectedItem().toString();
-            if(selectedFilter.equals("Name")){
+            if(selectedFilter.equals("Name") || selectedFilter.equals("Nama")){
                 DogController.showDogsByName(dogAdapter, dogList, keyword);
-            }else if(selectedFilter.equals("Breed")){
+            }else if(selectedFilter.equals("Breed") || selectedFilter.equals("Jenis")){
                 DogController.showDogsByBreed(dogAdapter, dogList, keyword);
-            }else if(selectedFilter.equals("Gender")){
+            }else if(selectedFilter.equals("Gender") || selectedFilter.equals("Jenis Kelamin")){
                 DogController.showDogsByGender(dogAdapter, dogList, keyword);
-            }else if(selectedFilter.equals("Age")){
+            }else if(selectedFilter.equals("Age") || selectedFilter.equals("Umur")){
                 DogController.showDogsByAge(dogAdapter, dogList, keyword);
             }
 

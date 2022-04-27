@@ -11,6 +11,10 @@
     <string name="add_comment_hint">Add a comment...</string>
     <string name="comment_button">Comment</string>
 
+<!--    Home-->
+    <string name="years_old"> years old</string>
+    <string name="recent_tag">Recent</string>
+
 <!--    Dog Detail-->
     <string name="adopt_me_back">Adopt Me</string>
     <string name="adopt_button">ADOPT</string>
@@ -110,6 +114,17 @@
     <string name="adopted">Adopted </string>
     <string name="adopted_lowercase"> adopted </string>
 
+<!--    Toast-->
+    <string name="thank_you_adoption">Thank you for your Adoption! Please wait for our admin to check and review your adoption.</string>
+    <string name="adoption_approved">Adoption Approved!</string>
+    <string name="adoption_rejected">Adoption Rejected!</string>
+    <string name="add_dog_toast">Dog added successfully!</string>
+    <string name="update_dog_toast">Dog updated successfully!</string>
+
+<!--    Upload-->
+    <string name="uploading">Uploading...</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="upload_failed">Image upload failed</string>
 
 
 </resources>

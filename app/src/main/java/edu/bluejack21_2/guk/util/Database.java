@@ -22,6 +22,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import edu.bluejack21_2.guk.R;
 import edu.bluejack21_2.guk.listener.FinishListener;
 
 public class Database {
@@ -71,7 +72,7 @@ public class Database {
         StorageReference storageReference = storage.getReference();
         if (filePath != null) {
             ProgressDialog progressDialog = new ProgressDialog(ctx);
-            progressDialog.setTitle("Uploading...");
+            progressDialog.setTitle(ctx.getString(R.string.uploading));
             progressDialog.show();
 
             StorageReference ref = storageReference.child(fileName);
@@ -95,7 +96,7 @@ public class Database {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(ctx,"Image upload Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ctx,ctx.getString(R.string.upload_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(
@@ -103,7 +104,7 @@ public class Database {
                                 @Override
                                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                                    progressDialog.setMessage(ctx.getString(R.string.uploaded) + " " + (int) progress + "%");
                                 }
                             });
         }

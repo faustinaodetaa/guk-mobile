@@ -70,7 +70,9 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
         holder.name.setText(dog.getName());
         holder.genderIcon.setImageResource(dog.getGender().equals("Male") ? R.drawable.gender_male : R.drawable.gender_female);
 
-        holder.dob.setText(age + " years old");
+        String yearsold = context.getString(R.string.years_old);
+        holder.dob.setText(age + " " + yearsold);
+
         holder.breed.setText(dog.getBreed());
 
         holder.dogCard.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +94,9 @@ public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewholder>{
 //        Log.d("datecompare", "onBindViewHolder: "  + threeDaysAgo.toString() + " -> " + today.toString());
         if(rescuedDate.getTime() <= today.getTime() && threeDaysAgo.getTime() <= rescuedDate.getTime()){
             holder.recentTag.setVisibility(View.VISIBLE);
+        } else{
+            holder.recentTag.setVisibility(View.GONE);
+
         }
 
 //        try {
