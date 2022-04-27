@@ -25,7 +25,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textFontWeight="600"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/add_story_choose_btn"
@@ -53,7 +53,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/content"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/add_story_content_txt"

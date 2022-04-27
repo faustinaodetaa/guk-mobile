@@ -48,7 +48,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textFontWeight="600"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
 
             <ScrollView
@@ -69,7 +69,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/name"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/update_dog_name"
@@ -88,7 +88,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/breed"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/update_dog_breed"
@@ -107,7 +107,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/description"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/update_dog_description"
@@ -128,7 +128,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/dob"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <DatePicker
                         android:id="@+id/update_dog_dob"
@@ -146,7 +146,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/gender"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <RadioGroup
                         android:id="@+id/update_gender_rb"

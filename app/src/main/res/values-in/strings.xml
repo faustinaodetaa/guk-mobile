@@ -159,4 +159,13 @@
     <string name="bank_number_error_msg">Nomor akun bank harus diisi!</string>
     <string name="donation_amount_error_msg">Jumlah donasi harus diisi!</string>
     <string name="story_content_error_msg">Konten harus diisi!</string>
+
+
+    <string name="badge">Lencana</string>
+    <string name="about_badge_and_points">Tentang Lencana dan Poin</string>
+    <string name="badge_point_description">Anda akan menerima 100 poin setiap kalo anda mengadopsi seekor anjing atau berdonasi sebesar IDR 100.000. (Anda akan menerima poinnya setelah Admin telah menyetujuinya)</string>
+    <string name="bronze">Perunggu</string>
+    <string name="silver">Perak</string>
+    <string name="gold">Emas</string>
+    <string name="diamond">Berlian</string>
 </resources>

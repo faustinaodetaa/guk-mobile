@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adopt Me"
+            android:text="@string/adopt_me_back"
             android:textColor="@color/primary"
             android:textFontWeight="600" />
 
@@ -91,7 +91,7 @@
                         android:text="Name"
                         android:textColor="@color/white"
                         android:textFontWeight="800"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <ImageView
                         android:id="@+id/detail_gender_icon"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="Breed"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
 
             <Button
                 android:id="@+id/adopt_dog_btn"
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/white"
@@ -157,7 +157,7 @@
 
             <Button
                 android:id="@+id/update_dog_btn"
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/white"
@@ -167,7 +167,7 @@
 
             <Button
                 android:id="@+id/delete_dog_btn"
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/white"

@@ -154,5 +154,12 @@
     <string name="bank_number_error_msg">Bank Account Number must be filled!</string>
     <string name="donation_amount_error_msg">Donation amount must be filled!</string>
     <string name="story_content_error_msg">Content must be filled!</string>
+    <string name="badge">Badge</string>
+    <string name="about_badge_and_points">About Badge and Points</string>
+    <string name="badge_point_description">You will receive 100 points everytime you adopted a dog or everytime you donated IDR 100.000. (You will receive the points after Admin has approved your action)</string>
+    <string name="bronze">Bronze</string>
+    <string name="silver">Silver</string>
+    <string name="gold">Gold</string>
+    <string name="diamond">Diamond</string>
 
 </resources>

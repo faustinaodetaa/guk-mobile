@@ -47,7 +47,7 @@
                 android:text="@string/upload_profile"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_name_txt"
@@ -75,7 +75,7 @@
                 android:text="Email"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_email_txt"
@@ -95,7 +95,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/password"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_password_txt"
@@ -115,7 +115,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/confirm_password"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_confirm_password_txt"
@@ -135,7 +135,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/phone_number"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_phone_txt"
@@ -155,7 +155,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/register_address_txt"
