@@ -70,7 +70,8 @@
     <string name="add_story">Tambahkan Cerita</string>
 
     <!--    Profile-->
-    <string name="profile_latest_activity">Aktivitas Terakhir Anda</string>
+    <string name="profile_adoption">Adopsi Anda</string>
+    <string name="profile_donation">Donasi Anda</string>
     <string name="logout">Keluar</string>
     <string name="delete_account">Hapus Akun</string>
 

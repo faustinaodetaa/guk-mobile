@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:padding="10dp"
-            android:text="@string/profile_latest_activity"/>
+            android:text="@string/profile_donation"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -91,7 +91,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </RelativeLayout>
-
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:text="@string/profile_adoption"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

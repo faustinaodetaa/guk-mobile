@@ -68,7 +68,8 @@
     <string name="add_story">Add Story</string>
 
 <!--    Profile-->
-    <string name="profile_latest_activity">Your Latest Activity</string>
+    <string name="profile_adoption">Your Adoptions</string>
+    <string name="profile_donation">Your Donations</string>
     <string name="logout">Logout</string>
     <string name="delete_account">Delete Account</string>
 
