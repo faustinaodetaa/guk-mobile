@@ -152,6 +152,7 @@ public class DogController {
 
     public static void showDogsByName(DogAdapter dogAdapter, ArrayList<Dog> dogList, String name) {
        dogList.clear();
+
         Database.getDB().collection(Dog.COLLECTION_NAME).whereEqualTo("status", "Unadopted").orderBy("rescuedDate", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 for (QueryDocumentSnapshot document : task.getResult()){
@@ -160,10 +161,10 @@ public class DogController {
 
                     if(dog.getName().toLowerCase().contains(name.toLowerCase())){
                         dogList.add(dog);
-                        dogAdapter.notifyDataSetChanged();
                     }
                 }
             }
+            dogAdapter.notifyDataSetChanged();
         });
     }
 
@@ -177,10 +178,10 @@ public class DogController {
 
                     if(dog.getBreed().toLowerCase().contains(breed.toLowerCase())){
                         dogList.add(dog);
-                        dogAdapter.notifyDataSetChanged();
                     }
                 }
             }
+            dogAdapter.notifyDataSetChanged();
         });
     }
 
@@ -197,10 +198,10 @@ public class DogController {
 
                     if(temp.toString().equals(age)){
                         dogList.add(dog);
-                        dogAdapter.notifyDataSetChanged();
                     }
                 }
             }
+            dogAdapter.notifyDataSetChanged();
         });
     }
 
@@ -211,13 +212,21 @@ public class DogController {
                 for (QueryDocumentSnapshot document : task.getResult()){
                     Dog dog = document.toObject(Dog.class);
                     dog.setId(document.getId());
+                    if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("jantan")){
+                        if(dog.getGender().equalsIgnoreCase("male")){
 
-                    if(dog.getGender().equalsIgnoreCase(gender)){
-                        dogList.add(dog);
-                        dogAdapter.notifyDataSetChanged();
+                            dogList.add(dog);
+                        }
+                    }else if(gender.equalsIgnoreCase("female") || gender.equalsIgnoreCase("betina")){
+                        if(dog.getGender().equalsIgnoreCase("female")){
+
+                            dogList.add(dog);
+                        }
                     }
+
                 }
             }
+            dogAdapter.notifyDataSetChanged();
         });
     }
 
