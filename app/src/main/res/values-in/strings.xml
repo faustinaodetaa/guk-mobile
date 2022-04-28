@@ -99,6 +99,7 @@
     <string name="guk_tnc">Syarat dan Ketentuan guk</string>
     <string name="tnc_content">Dengan menginstal, mengakses, atau menggunakan aplikasi seluler, buletin email dan langganan, dan properti digital lainnya di mana persyaratan ini diposting atau dirujuk (bersama-sama, "layanan online"), Anda menandatangani perjanjian yang mengikat dengan Guk Company, yang mengontrol dan mengoperasikan layanan online dari kantor pusatnya di 110 Beenus Alam Sutera. Dengan menerima persyaratan ini, Anda juga memahami dan menyetujui Pernyataan Privasi guk, yang dimasukkan ke dalam, dan bagian dari, perjanjian ini. Pernyataan Privasi kami menjelaskan cara kami mengumpulkan, menggunakan, dan berbagi informasi. Dengan menerima persyaratan ini, Anda memahami dan menyetujui bahwa, sebagaimana dinyatakan, Anda melepaskan hak Anda untuk menyelesaikan sengketa apa pun melalui proses lain yang mungkin tersedia untuk Anda, seperti tindakan pengadilan atau proses administratif. Ini juga berarti bahwa Anda melepaskan hak Anda untuk diadili oleh juri atau untuk menggabungkan perselisihan Anda dengan orang lain dalam gugatan kelompok.</string>
     <string name="tnc_agree">Saya setuju dengan syarat dan ketentuan yang berlaku</string>
+    <string name="tnc_error_msg">Anda harus setuju dengan syarat dan ketentuan yang berlaku</string>
 
 <!--    User Dialog-->
     <string name="user_data">Data Pengguna</string>

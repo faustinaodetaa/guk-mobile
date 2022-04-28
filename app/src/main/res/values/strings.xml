@@ -96,6 +96,8 @@
     <string name="guk_tnc">guk\'s Terms and Condition</string>
     <string name="tnc_content">By installing, accessing or using any mobile apps, email newsletters and subscriptions, and other digital properties on which these terms are posted or referenced (together, “online services”), you are entering into a binding agreement with guk Company, which controls and operates the online services from its headquarters at 110 Beenus Alam Sutera. By accepting these terms, you also understand and consent to guk\'s Privacy Statement, which is incorporated into, and part of, this agreement. Our Privacy Statement describes how we collect, use and share information. By accepting these terms, you understand and agree that, as stated, you are waiving your right to resolve any dispute through other processes that could be available to you, such as court actions or administrative proceedings. It also means that you are waiving your rights to a trial by jury or to combine your dispute with others in a class action.</string>
     <string name="tnc_agree">I agree with the terms and condition</string>
+    <string name="tnc_error_msg">You must agree with the terms and condition!</string>
+
 
     <!--    User Dialog-->
     <string name="user_data">User\'s Data</string>

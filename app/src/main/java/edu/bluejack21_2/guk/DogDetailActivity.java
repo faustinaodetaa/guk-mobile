@@ -81,7 +81,7 @@ public class DogDetailActivity extends BaseActivity {
                 });
                 tncAdoptDogBtn.setOnClickListener(v -> {
                     if(!tncCheckBox.isChecked()){
-                        Toast.makeText(DogDetailActivity.this, "You must agree with the tnc!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DogDetailActivity.this, getString(R.string.tnc_error_msg), Toast.LENGTH_SHORT).show();
                     }else{
 //                        Toast.makeText(DogDetailActivity.this, "agreed", Toast.LENGTH_SHORT).show();
                         AdoptionController.insertAdoption(DogDetailActivity.this, dog);
