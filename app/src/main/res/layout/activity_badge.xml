@@ -79,11 +79,21 @@
                         android:textFontWeight="600"
                         android:textSize="16sp"
                         android:text="@string/bronze"/>
-                    <TextView
-                        android:textColor="@color/white"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Minimum Point: 0"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/minimum_point"/>
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 0"/>
+                    </LinearLayout>
+
 
 
                 </LinearLayout>
@@ -116,11 +126,21 @@
                         android:textFontWeight="600"
                         android:textSize="16sp"
                         android:text="@string/silver"/>
-                    <TextView
-                        android:textColor="@color/white"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Minimum Point: 500"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/minimum_point"/>
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 500"/>
+                    </LinearLayout>
+
 
 
                 </LinearLayout>
@@ -153,11 +173,21 @@
                         android:textFontWeight="600"
                         android:textSize="16sp"
                         android:text="@string/gold"/>
-                    <TextView
-                        android:textColor="@color/white"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Minimum Point: 1000"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/minimum_point"/>
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 1000"/>
+                    </LinearLayout>
+
 
 
                 </LinearLayout>
@@ -190,11 +220,21 @@
                         android:textFontWeight="600"
                         android:textSize="16sp"
                         android:text="@string/diamond"/>
-                    <TextView
-                        android:textColor="@color/white"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Minimum Point: 3000"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/minimum_point"/>
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 3000"/>
+                    </LinearLayout>
+
 
 
                 </LinearLayout>

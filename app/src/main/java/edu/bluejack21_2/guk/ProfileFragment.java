@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
 
         nameTxt.setText(User.CURRENT_USER.getName());
-        pointTxt.setText(String.format("%,d Points", User.CURRENT_USER.getPoint()));
+        pointTxt.setText(String.format("%,d %s ", User.CURRENT_USER.getPoint(), getString(R.string.points)));
 
         ImageViewCompat.setImageTintList(profileBadge, ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), User.getBadgeColor(User.CURRENT_USER.getPoint()))));
 

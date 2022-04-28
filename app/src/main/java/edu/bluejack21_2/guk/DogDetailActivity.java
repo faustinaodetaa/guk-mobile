@@ -137,7 +137,7 @@ public class DogDetailActivity extends BaseActivity {
         dobTxt.setText(dob);
         descriptionTxt.setText(dog.getDescription());
         rescuedDateTxt.setText(rescuedDate);
-        statusTxt.setText(dog.getStatus());
+        statusTxt.setText(getString(R.string.unadopted));
 
         Database.showImage(dog.getPicture(), this, dogIcon);
 

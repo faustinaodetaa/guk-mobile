@@ -22,8 +22,10 @@
     <string name="adopt_button">ADOPSI</string>
     <string name="update_button">PERBAHARUI</string>
     <string name="delete_button">HAPUS</string>
+    <string name="unadopted">Belum Diadopsi</string>
 
-<!--    Main-->
+
+    <!--    Main-->
     <string name="email">Email</string>
     <string name="hint_email">contoh@mail.com</string>
     <string name="password">Kata Sandi</string>
@@ -43,6 +45,9 @@
     <string name="address">Alamat</string>
     <string name="hint_address">Jl. Contoh 123</string>
     <string name="register_button">DAFTAR</string>
+    <string name="points">Poin</string>
+    <string name="minimum_point">Poin Minimum:</string>
+
 
     <!--    Settings-->
     <string name="settings">Pengaturan</string>
