@@ -1,7 +1,8 @@
 # guk-mobile
 
 Preview:
-![Uploading Frame 2.png…]()
+![Frame 2](https://user-images.githubusercontent.com/86879174/170740481-3eececc9-7e06-4343-ae24-1513c04fc731.png)
+
 
 Pages:
 | | | |
